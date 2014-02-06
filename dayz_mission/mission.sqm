@@ -1298,18 +1298,18 @@ class Mission
 	};
 	class Sensors
 	{
-		items=5;
+		items=12;
 		class Item0
 		{
 			position[]={6325.6772,304.99033,7807.7412};
-			a=100;
-			b=100;
+			a=400;
+			b=400;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonestary";
-			expCond="(player distance zonestary) < 100;";
+			expCond="(player distance zonestary) < 400;";
 			expActiv="TitleText[""Now entering trader city Stary"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Stary"";";
 			expDesactiv="TitleText[""Now leaving trader city Stary"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
 			class Effects
@@ -1319,14 +1319,14 @@ class Mission
 		class Item1
 		{
 			position[]={4063.4226,365.00577,11664.19};
-			a=100;
-			b=100;
+			a=400;
+			b=400;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonebash";
-			expCond="(player distance zonebash) < 100;";
+			expCond="(player distance zonebash) < 400;";
 			expActiv="TitleText[""Now entering trader city Bash"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Bash"";";
 			expDesactiv="TitleText[""Now leaving trader city Bash"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
 			class Effects
@@ -1336,14 +1336,14 @@ class Mission
 		class Item2
 		{
 			position[]={11447.472,317.26886,11364.504};
-			a=100;
-			b=100;
+			a=400;
+			b=400;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zoneklen";
-			expCond="(player distance zoneklen) < 100;";
+			expCond="(player distance zoneklen) < 400;";
 			expActiv="TitleText[""Now entering trader city Klen"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Klen"";";
 			expDesactiv="TitleText[""Now leaving trader city Klen"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
 			class Effects
@@ -1353,14 +1353,14 @@ class Mission
 		class Item3
 		{
 			position[]={1606.6443,289.70795,7803.5156};
-			a=100;
-			b=100;
+			a=300;
+			b=300;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonebandit";
-			expCond="(player distance zonebandit) < 100;";
+			expCond="(player distance zonebandit) < 300;";
 			expActiv="canbuild = false; inTraderCity = ""Bandit Trader"";";
 			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
 			class Effects
@@ -1370,16 +1370,135 @@ class Mission
 		class Item4
 		{
 			position[]={12944.227,210.19823,12766.889};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonehero";
-			expCond="(player distance zonehero) < 100;";
+			expCond="(player distance zonehero) < 200;";
 			expActiv="canbuild = false; inTraderCity = ""Hero Trader"";";
 			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
+			class Effects
+			{
+			};
+		};		
+		class Item5
+		{
+			position[]={12060.471,158.85699,12638.533};
+			a=30;
+			b=30;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="zoneair";
+			expCond="(player distance zoneair) < 30;";
+			expActiv="canbuild = false; inTraderCity = ""Any"";";
+			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
+			class Effects
+			{
+			};
+		};
+		class Item6
+		{
+			position[]={6325.6772,304.99033,7807.7412};
+			a=410;
+			b=410;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzonestary";
+			expCond="(player distance deadzonestary) < 410;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true";
+			class Effects
+			{
+			};
+		};
+		class Item7
+		{
+			position[]={4063.4226,365.00577,11664.19};
+			a=410;
+			b=410;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzonebash";
+			expCond="(player distance deadzonebash) < 410;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true;";
+			class Effects
+			{
+			};
+		};
+		class Item8
+		{
+			position[]={11447.472,317.26886,11364.504};
+			a=410;
+			b=410;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzoneklen";
+			expCond="(player distance deadzoneklen) < 410;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true;";
+			class Effects
+			{
+			};
+		};
+		class Item9
+		{
+			position[]={1606.6443,289.70795,7803.5156};
+			a=310;
+			b=310;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzonebandit";
+			expCond="(player distance deadzonebandit) < 310;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true;";
+			class Effects
+			{
+			};
+		};
+		class Item10
+		{
+			position[]={12944.227,210.19823,12766.889};
+			a=210;
+			b=210;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzonehero";
+			expCond="(player distance deadzonehero) < 210;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true;";
+			class Effects
+			{
+			};
+		};		
+		class Item11
+		{
+			position[]={12060.471,158.85699,12638.533};
+			a=40;
+			b=40;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="deadzoneair";
+			expCond="(player distance deadzoneair) < 40;";
+			expActiv="canshoot = false;";
+			expDesactiv="canshoot = true;";
 			class Effects
 			{
 			};
