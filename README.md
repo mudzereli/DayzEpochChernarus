@@ -1,6 +1,6 @@
-DayzEpochChernarus1031
+DayzEpochChernarus104
 ======================
-###### DAYZ_MISSION and DAYZ_SERVER PBOs for EPOCH CHERNARUS 1.3.0.1
+###### DAYZ_MISSION and DAYZ_SERVER PBOs for EPOCH CHERNARUS 1.0.4
 
 
 LIST OF IMPLEMENTED FEATURES
