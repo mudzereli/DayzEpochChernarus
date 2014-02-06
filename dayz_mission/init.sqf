@@ -7,7 +7,7 @@ cutText ["","BLACK OUT"];
 enableSaving [false, false];
 
 //REALLY IMPORTANT VALUES
-dayZ_instance =	11;					//The instance
+dayZ_instance =	1742;					//The instance
 dayzHiveRequest = [];
 initialized = false;
 dayz_previousID = 0;
@@ -15,18 +15,19 @@ dayz_previousID = 0;
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];
 //disable radio messages to be heard and shown in the left lower corner of the screen
-enableRadio false;
+enableRadio true;
 // May prevent "how are you civillian?" messages from NPC
 enableSentences false;
 
 // DayZ Epoch config
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
-
-MaxVehicleLimit = 300; // Default = 50
-MaxDynamicDebris = 500; // Default = 100
+MaxHeliCrashes= 5; // Default = 5
+MaxVehicleLimit = 600; // Default = 50
+MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
-dayz_maxLocalZombies = 30; // Default = 30 
+dayz_maxLocalZombies = 15; // Default = 30
+DZE_teleport = [99999,99999,99999,99999,99999]; 
 
 dayz_paraSpawn = false;
 
@@ -78,20 +79,29 @@ if (!isDedicated) then {
 	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
-	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-	
-	//anti Hack
-	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+	//_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
+	_playerMonitor = 	[] execVM "overwrites\player_monitor.sqf";	
 
 	//Lights
 	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 	
 };
 
-#include "\z\addons\dayz_code\system\REsec.sqf"
-
 //Start Dynamic Weather
 execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
-
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
+
+call compile preprocessFileLineNumbers "addons\newspawn\init.sqf";
+call compile preprocessFileLineNumbers "addons\bloodbag\init.sqf";
+call compile preprocessFileLineNumbers "addons\buildings\init.sqf";
+call compile preprocessFileLineNumbers "addons\buildplus\init.sqf";
+call compile preprocessFileLineNumbers "addons\refuel\init.sqf";
+call compile preprocessFileLineNumbers "addons\safezones\init.sqf";
+call compile preprocessFileLineNumbers "addons\suicide\init.sqf";
+call compile preprocessFileLineNumbers "addons\keyhandler\init.sqf";
+call compile preprocessFileLineNumbers "addons\missions\init.sqf";
+call compile preprocessFileLineNumbers "addons\takeclothes\init.sqf";
+call compile preprocessFileLineNumbers "addons\craftvehicles\init.sqf";
+call compile preprocessFileLineNumbers "addons\zombietruck\init.sqf";
+[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf"; 
