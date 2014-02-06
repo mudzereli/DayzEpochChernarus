@@ -1,0 +1,360 @@
+- Update Epoch Through DayZ Commander
+- Copy @DAYZ, @DAYZ_EPOCH, @DAYZ_EPOCH_SERVER To DAYZ SERVER FOLDER
+- Download Newest Server File From Website: http://dayzepoch.com/
+- Unzip Files Into DAYZ SERVER FOLDER
+- Create New GITHUB REPOSITORY FOLDER (i.e. DayzEpochChernarus103)
+- Copy .GITIGNORE, .GITATTRIBUTES, _BUILD_KILL_RUN.bat, _KILL.bat, =CLIENT_LOG.lnk, =SERVER_LOG.lnk, README.txt, UPDATE.txt To GITHUB REPOSITORY FOLDER
+- Update _BUILD_KILL_RUN.bat SOURCE_PATH To Reflect GITHUB REPOSITORY FOLDER
+- Switch Server & Obtain New Default DAYZ_SERVER And DAYZ_MISSION PBOs
+- Unpack PBO Into GITHUB REPOSITORY FOLDER
+- COMMIT Base Files To Github
+- Drop ADDONS Into DAYZ_MISSION FOLDER From OLD DAYZ_MISSION FOLDER
+- Update DAYZ_MISSION > description.ext
+	HEAD
+	+#include "addons\R3F_ARTY_AND_LOG\desc_rsct_include.h"
+	REPLACE
+	-loadScreen = "\z\addons\dayz_code\gui\dayz_logo_ca.paa";
+	+loadScreen = "addons\loadscreen\loadscreen.jpg";
+- Update DAYZ_MISSION > init.sqf OPTIONS
+	REPLACE
+	+enableRadio true;
+	+MaxVehicleLimit = 400; // Default = 50
+	+dayz_maxLocalZombies = 15; // Default = 30 
+	+DZE_teleport = [99999,99999,99999,99999,99999];
+	+DZE_BuildingLimit = 9999; //Default = 150, decides how many objects can be built on the server before allowing any others to be built. Change value for more buildings.
+- Update DAYZ_MISSION > init.sqf REMOVE ANTIHACK - For Admin Tools / AntiHack
+	REPLACE
+	//[] execVM "ATPExclusion\antihack.sqf";
+- Update DAYZ_MISSION > init.sqf SWITCH PLAYER_MONITOR - For Loadout Fix
+	REPLACE
+	-	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
+	+	_playerMonitor = 	[] execVM "addons\loadoutfix\player_monitor.sqf";	
+- Update DAYZ_MISSION > init.sqf LOAD ADDONS
+	TAIL
+	+[] execVM "addons\newspawn\init.sqf";
+	+[] execVM "addons\bloodbag\init.sqf";
+	+[] execVM "addons\buildings\init.sqf";
+	+[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf"; 
+	+[] execVM "addons\refuel\init.sqf";
+	+[] execVM "addons\safezones\safezone.sqf";
+	+[] execVM "addons\suicide\init.sqf";
+	+[] execVM "addons\keyhandler\init.sqf";
+	+[] execVM "addons\missions\init.sqf";
+	+[] execVM "addons\takeclothes\init.sqf";
+- Compare DAYZ_MISSION > ADDONS > LOADOUTFIX > player_monitor.sqf With DAYZ_CODE > SYSTEM > player_monitor.sqf To See If Update Required
+	- If Update Required, Replace Code That Loads FSM To Load DAYZ_MISSION > ADDONS > LOADOUTFIX > player_monitor.fsm
+- Compare DAYZ_MISSION > ADDONS > LOADOUTFIX > player_monitor.fsm With DAYZ_CODE > SYSTEM > player_monitor.fsm To See If Update Required
+	- If Update Required, Replace And Comment Out Code For Loading Items Onto Players (Approx Line # 780)
+- Compare DAYZ_MISSION > mission.sqm With Old mission.sqm To See If Update Required
+	- If Update Required, Replace File With One From Code And Follow These Steps:
+		old	new	
+		...	...	@@ -1298,7 +1298,7 @@ class Mission
+		1298	1298	 	};
+		1299	1299	 	class Sensors
+		1300	1300	 	{
+		1301		-		items=5;
+			1301	+		items=6;
+		1302	1302	 		class Item0
+		1303	1303	 		{
+		1304	1304	 			position[]={6325.6772,304.99033,7807.7412};
+		1305		-			a=100;
+		1306		-			b=100;
+			1305	+			a=400;
+			1306	+			b=400;
+		1307	1307	 			activationBy="WEST";
+		1308	1308	 			repeating=1;
+		1309	1309	 			interruptable=1;
+		1310	1310	 			age="UNKNOWN";
+		1311	1311	 			name="zonestary";
+		1312		-			expCond="(player distance zonestary) < 100;";
+			1312	+			expCond="(player distance zonestary) < 400;";
+		1313	1313	 			expActiv="TitleText[""Now entering trader city Stary"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Stary"";";
+		1314	1314	 			expDesactiv="TitleText[""Now leaving trader city Stary"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
+		1315	1315	 			class Effects
+		...	...	@@ -1319,14 +1319,14 @@ class Mission
+		1319	1319	 		class Item1
+		1320	1320	 		{
+		1321	1321	 			position[]={4063.4226,365.00577,11664.19};
+		1322		-			a=100;
+		1323		-			b=100;
+			1322	+			a=400;
+			1323	+			b=400;
+		1324	1324	 			activationBy="WEST";
+		1325	1325	 			repeating=1;
+		1326	1326	 			interruptable=1;
+		1327	1327	 			age="UNKNOWN";
+		1328	1328	 			name="zonebash";
+		1329		-			expCond="(player distance zonebash) < 100;";
+			1329	+			expCond="(player distance zonebash) < 400;";
+		1330	1330	 			expActiv="TitleText[""Now entering trader city Bash"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Bash"";";
+		1331	1331	 			expDesactiv="TitleText[""Now leaving trader city Bash"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
+		1332	1332	 			class Effects
+		...	...	@@ -1336,14 +1336,14 @@ class Mission
+		1336	1336	 		class Item2
+		1337	1337	 		{
+		1338	1338	 			position[]={11447.472,317.26886,11364.504};
+		1339		-			a=100;
+		1340		-			b=100;
+			1339	+			a=400;
+			1340	+			b=400;
+		1341	1341	 			activationBy="WEST";
+		1342	1342	 			repeating=1;
+		1343	1343	 			interruptable=1;
+		1344	1344	 			age="UNKNOWN";
+		1345	1345	 			name="zoneklen";
+		1346		-			expCond="(player distance zoneklen) < 100;";
+			1346	+			expCond="(player distance zoneklen) < 400;";
+		1347	1347	 			expActiv="TitleText[""Now entering trader city Klen"",""PLAIN DOWN""]; canbuild = false; inTraderCity = ""Klen"";";
+		1348	1348	 			expDesactiv="TitleText[""Now leaving trader city Klen"",""PLAIN DOWN""]; canbuild = true; inTraderCity = ""Any"";";
+		1349	1349	 			class Effects
+		...	...	@@ -1353,14 +1353,14 @@ class Mission
+		1353	1353	 		class Item3
+		1354	1354	 		{
+		1355	1355	 			position[]={1606.6443,289.70795,7803.5156};
+		1356		-			a=100;
+		1357		-			b=100;
+			1356	+			a=300;
+			1357	+			b=300;
+		1358	1358	 			activationBy="WEST";
+		1359	1359	 			repeating=1;
+		1360	1360	 			interruptable=1;
+		1361	1361	 			age="UNKNOWN";
+		1362	1362	 			name="zonebandit";
+		1363		-			expCond="(player distance zonebandit) < 100;";
+			1363	+			expCond="(player distance zonebandit) < 300;";
+		1364	1364	 			expActiv="canbuild = false; inTraderCity = ""Bandit Trader"";";
+		1365	1365	 			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
+		1366	1366	 			class Effects
+		...	...	@@ -1370,19 +1370,36 @@ class Mission
+		1370	1370	 		class Item4
+		1371	1371	 		{
+		1372	1372	 			position[]={12944.227,210.19823,12766.889};
+		1373		-			a=100;
+		1374		-			b=100;
+			1373	+			a=300;
+			1374	+			b=300;
+		1375	1375	 			activationBy="WEST";
+		1376	1376	 			repeating=1;
+		1377	1377	 			interruptable=1;
+		1378	1378	 			age="UNKNOWN";
+		1379	1379	 			name="zonehero";
+		1380		-			expCond="(player distance zonehero) < 100;";
+			1380	+			expCond="(player distance zonehero) < 300;";
+		1381	1381	 			expActiv="canbuild = false; inTraderCity = ""Hero Trader"";";
+		1382	1382	 			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
+		1383	1383	 			class Effects
+		1384	1384	 			{
+		1385	1385	 			};
+			1386	+		};		
+			1387	+		class Item5
+			1388	+		{
+			1389	+			position[]={12060.471,158.85699,12638.533};
+			1390	+			a=50;
+			1391	+			b=50;
+			1392	+			activationBy="WEST";
+			1393	+			repeating=1;
+			1394	+			interruptable=1;
+			1395	+			age="UNKNOWN";
+			1396	+			name="zoneair";
+			1397	+			expCond="(player distance zoneair) < 50;";
+			1398	+			expActiv="canbuild = false; inTraderCity = ""Any"";";
+			1399	+			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
+			1400	+			class Effects
+			1401	+			{
+			1402	+			};
+		1386	1403	 		};
+		1387	1404	 	};
+		1388	1405	 };
+- Compare DAYZ_MISSION > ADDONS > BUILDPLUS > player_build.sqf With DAYZ_CODE > ACTIONS > player_build.sqf To See If Update Required
+	- If Update Required, Replace File With One From Code And Follow These Steps:
+		old	new	
+		...	...	@@ -117,27 +117,37 @@ if((count _offset) <= 0) then {
+		117	117	 _isPole = (_classname == "Plastic_Pole_EP1_DZ");
+		118	118	 _isLandFireDZ = (_classname == "Land_Fire_DZ");
+		119	119	 
+		120		-_distance = 30;
+			120	+_distance = DZ_BUILDPLUS_PLOT_DIAMETER;
+		121	121	 _needText = localize "str_epoch_player_246";
+		122	122	 
+		123	123	 if(_isPole) then {
+		124		-	_distance = 60;
+			124	+	_distance = _distance * 2;
+		125	125	 };
+		126	126	 
+		127	127	 // check for near plot
+		128	128	 _findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
+		129	129	 _findNearestPole = [];
+			130	+_findNearestUnownedPole = [];
+		130	131	 
+		131	132	 {
+		132	133	 	if (alive _x) then {
+		133	134	 		_findNearestPole set [(count _findNearestPole),_x];
+			135	+		if (_x getVariable["CharacterID","0"] != dayz_characterID) then {
+			136	+			_findNearestUnownedPole set [(count _findNearestUnownedPole),_x];
+			137	+		};
+		134	138	 	};
+		135	139	 } foreach _findNearestPoles;
+			140	+diag_log format["BUILDPLUS: found %1 poles, %2 owned by other players...",count _findNearestPoles, count _findNearestUnownedPole];
+		136	141	 
+		137	142	 _IsNearPlot = count (_findNearestPole);
+			143	+_IsNearUnownedPlot = count (_findNearestUnownedPole);
+		138	144	 
+		139	145	 // If item is plot pole and another one exists within 45m
+		140		-if(_isPole and _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+			146	+if (DZ_BUILDPLUS_PLOT_IN_PLOT) then {
+			147	+	if(_isPole && _IsNearUnownedPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+			148	+} else {
+			149	+	if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+			150	+};
+		141	151	 
+		142	152	 if(_IsNearPlot == 0) then {
+		143	153	 
+		...	...	@@ -159,11 +169,8 @@ if(_IsNearPlot == 0) then {
+		159	169	 
+		160	170	 	// check if friendly to owner
+		161	171	 	if(dayz_characterID == _ownerID) then {  //Keep ownership
+		162		-		// owner can build anything within his plot except other plots
+		163		-		if(!_isPole) then {
+		164		-			_canBuildOnPlot = true;		
+		165		-		};
+		166		-
+			172	+		// owner can build anything within his plot
+			173	+		_canBuildOnPlot = true;	
+		167	174	 	} else {
+		168	175	 		// disallow building plot
+		169	176	 		if(!_isPole) then {
+		...	...	@@ -212,7 +219,7 @@ if (_hasrequireditem) then {
+		212	219	 
+		213	220	 	cutText [(localize "str_epoch_player_45"), "PLAIN DOWN"];
+		214	221	 
+		215		-	_previewCounter = 60;
+			222	+	_previewCounter = DZ_BUILDPLUS_PREVIEW_TIMER;
+		216	223	 	_objHDiff = 0;
+		217	224	 	
+		218	225	 	while {_isOk} do {
+		...	...	@@ -327,10 +334,10 @@ if (_hasrequireditem) then {
+		327	334	 			deleteVehicle _object;
+		328	335	 		};
+		329	336	 		
+		330		-		if(_location1 distance _location2 > 5) exitWith {
+			337	+		if(_location1 distance _location2 > DZ_BUILDPLUS_PREVIEW_CHANGE_DIST) exitWith {
+		331	338	 			_isOk = false;
+		332	339	 			_cancel = true;
+		333		-			_reason = "You've moved to far away from where you started building (within 5 meters)"; 
+			340	+			_reason = format["You've moved to far away from where you started building (within %1 meters)",DZ_BUILDPLUS_PREVIEW_CHANGE_DIST]; 
+		334	341	 			detach _object;
+		335	342	 			deleteVehicle _object;
+		336	343	 		};
+		...	...	@@ -347,10 +354,10 @@ if (_hasrequireditem) then {
+		347	354	 
+		348	355	 		_previewCounter = _previewCounter - 0.5;
+		349	356	 		
+		350		-		if(abs(_objHDiff) > 5) exitWith {
+			357	+		if(abs(_objHDiff) > DZ_BUILDPLUS_PREVIEW_CHANGE_DIST) exitWith {
+		351	358	 			_isOk = false;
+		352	359	 			_cancel = true;
+		353		-			_reason = "Cannot move up or down more than 5 meters"; 
+			360	+			_reason = format["Cannot move up or down more than %1 meters",DZ_BUILDPLUS_PREVIEW_CHANGE_DIST]; 
+		354	361	 			detach _object;
+		355	362	 			deleteVehicle _object;
+		356	363	 		};
+		...	...	@@ -406,6 +413,10 @@ if (_hasrequireditem) then {
+		406	413	 			_limit = getNumber(configFile >> "CfgVehicles" >> _classname >> "constructioncount");
+		407	414	 		};
+		408	415	 
+			416	+		if (DZ_BUILDPLUS_SINGLE_STAGE_CRAFTING) then {
+			417	+			_limit = 1;
+			418	+		};
+			419	+		
+		409	420	 		_isOk = true;
+		410	421	 		_proceed = false;
+		411	422	 		_counter = 0;
+- Drop DZAI Into DAYZ_SERVER FOLDER From OLD DAYZ_SERVER FOLDER
+- Drop ADDONS Into DAYZ_SERVER FOLDER From OLD DAYZ_SERVER FOLDER
+- Update DAYZ_SERVER > INIT > server_functions.sqf LOAD ADDONS
+	TAIL
+	+[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
+	+[] execVM "z\addons\dayz_server\addons\missions\init.sqf";
+	+[] execVM "z\addons\dayz_server\addons\indestructible\init.sqf";
+	+[] execVM "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+- Update DAYZ_SERVER > COMPILE > server_playerSetup.sqf - ALLOW PLAYER SPAWN CHOOSING
+	-dayzPlayerLogin2 = [_worldspace,_state];
+	+dayzPlayerLogin2 = [_worldspace,_state,_randomSpot];
+- Update DAYZ_SERVER > COMPILE > server_playerDied.sqf PREVENT SPAWNING AS ZOMBIE
+	-_infected =		_this select 5;
+	+_infected =		0;
+- Update DAYZ_SERVER > COMPILE > server_updateObject.sqf PREVENT MISSION VEHICLE DESPAWN
+	AFTER  _uid = 		_object getVariable ["ObjectUID","0"];
+	+if ((_object getVariable["Mission",0]) == 1) exitWith {};
+- Update DAYZ_SERVER > SYSTEM > server_cleanup.fsm PREVENT MISSION VEHICLE PLAYER KILL
+	-       "	if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {" \n
+	+       "	if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle) && (((vehicle _x) getVariable['Mission',0]) != 1)) then {" \n
+- Update DAYZ_SERVER > SYSTEM > server_cleanup.fsm ALLOW MESSAGE SPAM FROM DB
+	old	new	
+	...	...	@@ -92,7 +92,20 @@ class FSM
+	92	92	     {
+	93	93	       name = "waiting";
+	94	94	       init = /*%FSM<STATEINIT""">*/"//diag_log ""CLEANUP: Waiting for next task"";" \n
+	95		-       ""/*%FSM</STATEINIT""">*/;
+		95	+	  "private [""_payload"", ""_interval"",""_delay""];" \n
+		96	+      "{" \n
+		97	+      "	_payload = _x select 0;" \n
+		98	+      "	_interval = _x select 1;" \n
+		99	+      "	_delay = _x select 2;" \n
+		100	+      "	if (time - _delay > _interval && _interval != -1) then {" \n
+		101	+      "		[nil, nil, rSPAWN, [_crier, _payload], { (_this select 0) globalChat (_this select 1) }] call RE;" \n
+		102	+      "		if (_interval == 0) then {" \n
+		103	+      "			_msgList set [_forEachIndex, [_payload, -1, time]];" \n
+		104	+      "		} else {" \n
+		105	+      "			_msgList set [_forEachIndex, [_payload, _interval, time]];" \n
+		106	+      "		};" \n
+		107	+      "	};" \n
+		108	+      "} forEach _msgList;"/*%FSM</STATEINIT""">*/;
+	96	109	       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+	97	110	       class Links
+	98	111	       {
+	...	...	@@ -247,6 +260,9 @@ class FSM
+	247	260	        "" \n
+	248	261	        "_lastCleanup900 = diag_tickTime;" \n
+	249	262	        "_lastCleanup1800 = diag_tickTime;" \n
+		263	+	   "_msgList = msgList;" \n
+		264	+       "_crierGrp = createGroup sideLogic;" \n
+		265	+       "_crier = _crierGrp createUnit [""Survivor2_DZ"", [-2500, 0, 0], [], 0, ""NONE""];" \n
+	250	266	        ""/*%FSM</STATEINIT""">*/;
+	251	267	       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+	252	268	       class Links
+- Update DAYZ_SERVER > SYSTEM > server_monitor.sqf ALLOW MESSAGE SPAM FROM DB
+	old	new	
+	...	...	@@ -36,6 +36,31 @@ if (isServer and isNil "sm_done") then {
+	36	36	 
+	37	37	 	serverVehicleCounter = [];
+	38	38	 	_hiveResponse = [];
+		39	+	/* STREAM OBJECTS */
+		40	+	//Send the key
+		41	+	_key = format["CHILD:999:select payload, loop_interval, start_delay from message where instance_id = ?:[%1]:", dayZ_instance];
+		42	+	_data = "HiveEXT" callExtension _key;
+		43	+
+		44	+	diag_log("SERVER: Fetching messages...");
+		45	+
+		46	+	//Process result
+		47	+	_result = call compile format ["%1", _data];
+		48	+	_status = _result select 0;
+		49	+
+		50	+	msgList = [];
+		51	+	_msgCount = 0;
+		52	+	if (_status == "CustomStreamStart") then {
+		53	+		_val = _result select 1;
+		54	+		for "_i" from 1 to _val do {
+		55	+		_data = "HiveEXT" callExtension _key;
+		56	+		_result = call compile format ["%1",_data];
+		57	+
+		58	+		_status = _result select 0;
+		59	+		msgList set [count msgList, _result];
+		60	+		_msgCount = _msgCount + 1;
+		61	+	};
+		62	+		diag_log ("SERVER: Added " + str(_msgCount) + " messages!");
+		63	+	};
+	39	64	 
+	40	65	 	for "_i" from 1 to 5 do {
+	41	66	 		diag_log "HIVE: trying to get objects";
+- Update Loading Screen To Reflect Any And All Changes
