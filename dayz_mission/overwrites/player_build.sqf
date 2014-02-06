@@ -52,9 +52,7 @@ _reason = "";
 _needNear =     getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions" >> "Build" >> "neednearby");
 
 {
-    _need = _x select 0;
-    _distance = _x select 1;
-    switch(_need) do{
+    switch(_x) do{
         case "fire":
         {
             _isNear = {inflamed _x} count (getPosATL player nearObjects _distance);
@@ -77,6 +75,7 @@ _needNear =     getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions"
             if(_isNear == 0) then {  
                 _abort = true;
                 _reason = "fuel tank";
+                _distance = 30;
             };
         };
     };
@@ -231,7 +230,7 @@ if (_hasrequireditem) then {
     };
     
     _snapper = [_object, _classname] spawn snap_object;
-		        
+                
     while {_isOk} do {
         _zheightchanged = false;
         _zheightdirection = "";
@@ -303,7 +302,7 @@ if (_hasrequireditem) then {
                 SnappingOffset set [2, ((SnappingOffset select 2) - 0.01)];
             };
         };
-		sleep 0.5;
+        sleep 0.5;
     
         if (_zheightchanged or _rotate) then {
             SnappingAttachedToPlayer = false;
@@ -324,6 +323,7 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = format["You've moved to far away from where you started building (within %1 meters)",DZ_BUILDPLUS_PREVIEW_CHANGE_DIST]; 
             detach _object;
+            deleteVehicle _object;
         };
         
         [format["<t size='0.6'>Time left to build: %1</t>",(ceil(_previewCounter))],0,0.8,0.5,0,0,8] spawn BIS_fnc_dynamicText;
@@ -333,6 +333,7 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = "Ran out of time to find position"; 
             detach _object;
+            deleteVehicle _object;
         };
 
         _previewCounter = _previewCounter - 0.5;
@@ -349,6 +350,7 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = (localize "str_epoch_player_43");
             detach _object;
+            deleteVehicle _object;
         };
 
         if (DZE_cancelBuilding) exitWith {
@@ -356,15 +358,18 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = "Cancelled building.";
             detach _object;
+            deleteVehicle _object;
         };
     };
 
     terminate _snapper;
     player removeAction s_building_snapping;
     player allowDamage true;
-    
-    // No building on roads
-    if (isOnRoad _position) then { _cancel = true; _reason = "Cannot build on a road."; };
+
+    //No building on roads unless toggled
+    if (!DZE_BuildOnRoads) then {
+        if (isOnRoad _position) then { _cancel = true; _reason = "Cannot build on a road."; };
+    };
 
     // No building in trader zones
     if(!canbuild) then { _cancel = true; _reason = "Cannot build in a city."; };
@@ -457,6 +462,10 @@ if (_hasrequireditem) then {
             if(_num_removed == 1) then {
 
                 cutText [format[localize "str_build_01",_text], "PLAIN DOWN"];
+                
+                if (_isPole) then {
+                    [] spawn player_plotPreview;
+                };
 
                 _object setVariable ["OEMPos",_location,true];
 
@@ -471,7 +480,7 @@ if (_hasrequireditem) then {
                             _combination_2 = floor(random 10);
                             _combination_3 = floor(random 10);
                             _combination = format["%1%2%3",_combination_1,_combination_2,_combination_3];
-
+                            dayz_combination = _combination;
                             if (_combination_1 == 100) then {
                                 _combination_1_Display = "Red";
                             };
@@ -489,6 +498,7 @@ if (_hasrequireditem) then {
                             _combination_2 = floor(random 10);
                             _combination_3 = floor(random 10);
                             _combination = format["%1%2%3",_combination_1,_combination_2,_combination_3];
+                            dayz_combination = _combination;
                             _combinationDisplay = _combination;
                         };
                         
@@ -498,6 +508,7 @@ if (_hasrequireditem) then {
                             _combination_3 = floor(random 10);
                             _combination_4 = floor(random 10);
                             _combination = format["%1%2%3%4",_combination_1,_combination_2,_combination_3,_combination_4];
+                            dayz_combination = _combination;
                             _combinationDisplay = _combination;
                         };
                     };
