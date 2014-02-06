@@ -1,3 +1,5 @@
+[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
+
 waituntil {!isnil "bis_fnc_init"};
 
 BIS_MPF_remoteExecutionServer = {
@@ -879,3 +881,9 @@ server_spawnCleanAnimals = {
 		diag_log (format["CLEANUP: Deleted %1 Animals out of %2",_delQtyAnimal,_qty]);
 	};
 };
+
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\missions\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
