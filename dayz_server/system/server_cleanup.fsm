@@ -95,6 +95,9 @@ class FSM
        "_lastCleanupNull = diag_tickTime;" \n
        "" \n
        "_lastCleanup900 = diag_tickTime;" \n
+	   "_msgList = msgList;" \n
+	   "_crierGrp = createGroup sideLogic;" \n
+	   "_crier = _crierGrp createUnit [""Survivor2_DZ"", [-2500, 0, 0], [], 0, ""NONE""];" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -118,7 +121,20 @@ class FSM
     {
       name = "waiting";
       init = /*%FSM<STATEINIT""">*/"//diag_log ""CLEANUP: Waiting for next task"";" \n
-       ""/*%FSM</STATEINIT""">*/;
+        "private [""_payload"", ""_interval"",""_delay""];" \n
+        "{" \n
+        "	_payload = _x select 0;" \n
+        "	_interval = _x select 1;" \n
+        "	_delay = _x select 2;" \n
+        "	if (time - _delay > _interval && _interval != -1) then {" \n
+        "		[nil, nil, rSPAWN, [_crier, _payload], { (_this select 0) globalChat (_this select 1) }] call RE;" \n
+        "		if (_interval == 0) then {" \n
+        "			_msgList set [_forEachIndex, [_payload, -1, time]];" \n
+        "		} else {" \n
+        "			_msgList set [_forEachIndex, [_payload, _interval, time]];" \n
+        "		};" \n
+        "	};" \n
+        "} forEach _msgList;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
