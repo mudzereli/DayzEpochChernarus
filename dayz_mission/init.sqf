@@ -28,6 +28,9 @@ MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 15; // Default = 30
 DZE_teleport = [99999,99999,99999,99999,99999]; 
+DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
+DefaultWeapons = ["ItemFlashlight","Makarov"]; 
+DefaultBackpack = "CZ_VestPouch_EP1"; 
 
 dayz_paraSpawn = false;
 
