@@ -31,6 +31,7 @@ DZE_teleport = [99999,99999,99999,99999,99999];
 DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
 DefaultWeapons = ["ItemFlashlight","Makarov"]; 
 DefaultBackpack = "CZ_VestPouch_EP1"; 
+DZE_BuildingLimit = 9999;
 
 dayz_paraSpawn = false;
 
