@@ -84,6 +84,9 @@ while {true} do {
         _pos = [_coords,10] call fnc_random_distance;
         _veh = createVehicle[_x,_pos,[],0,"NONE"];
         _veh setVariable ["Mission",1,true];
+        _uniqueid = str(round(random 999999));
+        _veh setVariable ["ObjectID", _uniqueid, true];
+        _veh setVariable ["ObjectUID", _uniqueid, true];
         clearWeaponCargoGlobal _veh;
         clearMagazineCargoGlobal _veh;
     } forEach _vehicles;
