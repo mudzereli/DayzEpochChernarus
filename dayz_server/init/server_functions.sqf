@@ -1,4 +1,4 @@
-[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
+//[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
 
 waituntil {!isnil "bis_fnc_init"};
 
