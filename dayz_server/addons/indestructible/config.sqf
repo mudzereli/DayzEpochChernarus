@@ -1,26 +1,6 @@
 /* Objects with these classes are indestructible */
 DZ_INDESTRUCTIBLE_CLASSES = 
 [
-	/*
-	"WoodFloor_DZ",
-	"WoodFloorHalf_DZ",
-	"WoodFloorQuarter_DZ",
-	"Land_DZE_LargeWoodDoorLocked",
-	"WoodLargeWallDoor_DZ",
-	"WoodLargeWallWin_DZ",
-	"WoodLargeWall_DZ",
-	"Land_DZE_WoodDoorLocked",
-	"WoodSmallWallDoor_DZ",
-	"WoodSmallWallWin_DZ",
-	"Land_DZE_GarageWoodDoor",
-	"Land_DZE_GarageWoodDoorLocked",
-	"WoodLadder_DZ",
-	"WoodStairsSans_DZ",
-	"WoodStairs_DZ",
-	"WoodSmallWall_DZ",
-	"WoodSmallWallThird_DZ",
-	"Land_DZE_LargeWoodDoor",
-	*/
 	"CinderWallHalf_DZ",
 	"CinderWall_DZ",
     "CinderWallDoorLocked_DZ",
