@@ -884,6 +884,6 @@ server_spawnCleanAnimals = {
 
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\missions\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
-//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";
