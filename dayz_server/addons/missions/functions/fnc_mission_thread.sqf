@@ -89,6 +89,7 @@ while {true} do {
         _veh setVariable ["ObjectUID", _uniqueid, true];
         clearWeaponCargoGlobal _veh;
         clearMagazineCargoGlobal _veh;
+        _veh call fnc_veh_ResetEH;
     } forEach _vehicles;
 
     diag_log text format["MISSION SYSTEM: loading %1 ai groups...",count _aiGroups];
