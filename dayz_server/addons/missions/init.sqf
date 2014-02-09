@@ -6,6 +6,7 @@ diag_log text "MISSION SYSTEM: loading functions...";
 fnc_random_distance = compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_random_distance.sqf";
 fnc_add_unit_group  = compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_add_unit_group.sqf";
 fnc_wait_realtime   = compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_wait_realtime.sqf";
+fnc_mission_thread  = compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_mission_thread.sqf";
 DZ_MISSIONS_MINOR   = [];
 DZ_MISSIONS_MAJOR   = [];
 {
@@ -17,8 +18,8 @@ DZ_MISSIONS_MAJOR   = [];
 } forEach DZ_MISSIONS;
 diag_log text format["MISSION SYSTEM: loaded %1 major and %2 minor missions...",count DZ_MISSIONS_MAJOR, count DZ_MISSIONS_MINOR];
 diag_log text "MISSION SYSTEM: launching major mission script...";
-DZ_MISSIONS_MAJOR spawn compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_mission_thread.sqf";
+DZ_MISSIONS_MAJOR spawn fnc_mission_thread;
 diag_log text "MISSION SYSTEM: launching minor mission script...";
-DZ_MISSIONS_MINOR spawn compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\functions\fnc_mission_thread.sqf";
+DZ_MISSIONS_MINOR spawn fnc_mission_thread;
 diag_log text "MISSION SYSTEM: starting marker refresh script...";
 [] spawn compile preprocessFileLineNumbers "z\addons\dayz_server\addons\missions\refresh_markers.sqf";
