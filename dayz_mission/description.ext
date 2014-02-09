@@ -27,6 +27,11 @@ aiKills = 1;
 diagRadio = 1;
 diagHit = 1;
 
+class RscTitles
+{
+    #include "addons\R3F_ARTY_AND_LOG\desc_rsct_include.h"
+}
+
 class RscText
 {
 	type = 0;
