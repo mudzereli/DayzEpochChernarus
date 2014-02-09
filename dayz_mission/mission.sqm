@@ -1387,14 +1387,14 @@ class Mission
 		class Item5
 		{
 			position[]={12060.471,158.85699,12638.533};
-			a=30;
-			b=30;
+			a=50;
+			b=50;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zoneair";
-			expCond="(player distance zoneair) < 30;";
+			expCond="(player distance zoneair) < 50;";
 			expActiv="canbuild = false; inTraderCity = ""Any"";";
 			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
 			class Effects
@@ -1489,14 +1489,14 @@ class Mission
 		class Item11
 		{
 			position[]={12060.471,158.85699,12638.533};
-			a=40;
-			b=40;
+			a=60;
+			b=60;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="deadzoneair";
-			expCond="(player distance deadzoneair) < 40;";
+			expCond="(player distance deadzoneair) < 60;";
 			expActiv="canshoot = false;";
 			expDesactiv="canshoot = true;";
 			class Effects
