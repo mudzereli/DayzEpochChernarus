@@ -20,11 +20,11 @@ while {true} do {
 	// Allows the variance to act as +/- from the spawn frequency timer
     _timeAdjust = round((random(_variance * 2)) - _variance);
 	_timeToSpawn = time + _frequency + _timeAdjust;
-	
+
 	//Adding some Random systems
-	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","Mass_grave_DZ"] call BIS_fnc_selectRandom;
-	
-	
+	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ","Mass_grave_DZ"] call BIS_fnc_selectRandom;
+
+
 	if(_crashModel == "Mass_grave_DZ") then {
 		_lootTable = "MassGrave";
 	} else {
@@ -34,10 +34,10 @@ while {true} do {
 		//Table without 50 cals
 		//_lootTable = ["Military","HeliCrash_No50s","MilitarySpecial"] call BIS_fnc_selectRandom;
 	};
-	
+
 	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
 
-	diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 secounds", round(_spawnChance * 100), '%', _crashName, _lootTable, _timeToSpawn]);
+	diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _lootTable, _timeToSpawn]);
 
 	// Apprehensive about using one giant long sleep here given server time variances over the life of the server daemon
 	while {time < _timeToSpawn} do {
@@ -96,9 +96,11 @@ while {true} do {
 			_crash setvariable ["fadeFire",_fadeFire,true];
 		};
 
-		
-		
 		_config = 		configFile >> "CfgBuildingLoot" >> _lootTable;
+		if (DZE_MissionLootTable) then {
+			_config = missionConfigFile >> "CfgBuildingLoot" >> _lootTable;
+		};
+
 		_itemTypes =	[] + getArray (_config >> "itemType");
 		_index =        dayz_CBLBase find toLower(_lootTable);
 		_weights =		dayz_CBLChances select _index;
@@ -111,7 +113,7 @@ while {true} do {
 			_itemType = _itemTypes select _index;
 			[_itemType select 0, _itemType select 1, _position, 5] call spawn_loot;
 
-			diag_log(format["CRASHSPAWNER: Loot spawn at '%1' with loot table '%2'", _crashName, _lootTable]); 
+			diag_log(format["CRASHSPAWNER: Loot spawn at '%1' with loot table '%2'", _crashName, _lootTable]);
 
 			// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 and other such items.
 			_nearby = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
