@@ -1,5 +1,3 @@
-[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
-
 waituntil {!isnil "bis_fnc_init"};
 
 BIS_MPF_remoteExecutionServer = {
@@ -798,7 +796,7 @@ server_checkHackers = {
 	if(!isNil "DZE_DYN_HackerCheck") exitWith {  DZE_DYN_AntiStuck2nd = DZE_DYN_AntiStuck2nd + 1;};
 	DZE_DYN_HackerCheck = true;
 	{
-		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle) && (((vehicle _x) getVariable['Mission',0]) != 1)) then {
+		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {
 			diag_log ("CLEANUP: KILLING A HACKER " + (name _x) + " " + str(_x) + " IN " + (typeOf vehicle _x));
 			(vehicle _x) setDamage 1;
 			_x setDamage 1;
@@ -934,8 +932,3 @@ server_setLocalObjVars = {
 	
 	diag_log format["SAFE LOCKED: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player)];
 };
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\missions\init.sqf";
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";
