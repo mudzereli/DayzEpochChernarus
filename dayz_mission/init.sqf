@@ -95,7 +95,6 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
-player_dumpBackpack = compile preprocessFileLineNumbers "overwrites\player_dumpBackpack.sqf";
 call compile preprocessFileLineNumbers "addons\newspawn\init.sqf";
 call compile preprocessFileLineNumbers "addons\bloodbag\init.sqf";
 call compile preprocessFileLineNumbers "addons\buildings\init.sqf";
