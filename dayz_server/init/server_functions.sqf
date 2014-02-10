@@ -1,3 +1,5 @@
+[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
+
 waituntil {!isnil "bis_fnc_init"};
 
 BIS_MPF_remoteExecutionServer = {
@@ -20,16 +22,19 @@ server_playerSetup =			compile preprocessFileLineNumbers "\z\addons\dayz_server\
 server_onPlayerDisconnect = 	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerDisconnect.sqf";
 server_updateObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
 server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
-server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
-server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf";
+server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";	//Creates the object in DB
+server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf"; 	//Removes the object from the DB
 server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
-server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf";
-server_publishVeh2 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf";
-server_publishVeh3 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle3.sqf";
+server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf"; // Custom to add vehicles
+server_publishVeh2 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf"; // Custom to add vehicles
+server_publishVeh3 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle3.sqf"; // Custom to add vehicles
 server_tradeObj = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
 server_traders = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_traders.sqf";
 server_playerSync =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSync.sqf";
+zombie_findOwner =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\zombie_findOwner.sqf";
+server_updateNearbyObjects =	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateNearbyObjects.sqf";
 server_spawnCrashSite  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
+server_handleZedSpawn =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_handleZedSpawn.sqf";
 server_spawnEvents =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnEvent.sqf";
 //server_weather =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_weather.sqf";
 fnc_plyrHit   =					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
@@ -39,31 +44,7 @@ server_maintainArea = 			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
-//onPlayerConnected 			{[_uid,_name] call server_onPlayerConnect;};
-onPlayerDisconnected 		{[_uid,_name] call server_onPlayerDisconnect;};
-
-server_updateNearbyObjects = {
-	private["_pos"];
-	_pos = _this select 0;
-	{
-		[_x, "gear"] call server_updateObject;
-	} forEach nearestObjects [_pos, dayz_updateObjects, 10];
-};
-
-server_handleZedSpawn = {
-	private["_zed"];
-	_zed = _this select 0;
-	_zed enableSimulation false;
-};
-
-zombie_findOwner = {
-	private["_unit"];
-	_unit = _this select 0;
-	#ifdef DZE_SERVER_DEBUG
-	diag_log ("CLEANUP: DELETE UNCONTROLLED ZOMBIE: " + (typeOf _unit) + " OF: " + str(_unit) );
-	#endif
-	deleteVehicle _unit;
-};
+onPlayerDisconnected 		"[_uid,_name] call server_onPlayerDisconnect;";
 
 vehicle_handleInteract = {
 	private["_object"];
@@ -99,6 +80,20 @@ array_reduceSize = {
 		_array resize _count;
 	};
 	_array
+};
+
+vehicle_handleServerKilled = {
+	private["_unit","_killer"];
+	_unit = _this select 0;
+	_killer = _this select 1;
+		
+	[_unit, "killed"] call server_updateObject;
+	
+	_unit removeAllMPEventHandlers "MPKilled";
+	_unit removeAllEventHandlers "Killed";
+	_unit removeAllEventHandlers "HandleDamage";
+	_unit removeAllEventHandlers "GetIn";
+	_unit removeAllEventHandlers "GetOut";
 };
 
 object_handleServerKilled = {
@@ -174,6 +169,11 @@ server_hiveReadWrite = {
 	_resultArray
 };
 
+server_maintainObj = {
+	private["_data"];
+	_data = "HiveExt" callExtension _this;
+};
+
 server_hiveReadWriteLarge = {
 	private["_key","_resultArray","_data"];
 	_key = _this;
@@ -225,19 +225,10 @@ RoadList = MarkerPosition nearRoads DynamicVehicleArea;
 // Very taxing !!! but only on first startup
 BuildingList = [];
 {
-	if (DZE_MissionLootTable) then {
-		if (isClass (missionConfigFile >> "CfgBuildingLoot" >> (typeOf _x))) then
-		{
-				BuildingList set [count BuildingList,_x];
-		};
-	} else {
-		if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then
-		{
-			BuildingList set [count BuildingList,_x];
-		};
+	if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then
+	{
+		BuildingList set [count BuildingList,_x];
 	};
-	
-	
 } forEach (MarkerPosition nearObjects ["building",DynamicVehicleArea]);
 
 spawn_vehicles = {
@@ -796,7 +787,7 @@ server_checkHackers = {
 	if(!isNil "DZE_DYN_HackerCheck") exitWith {  DZE_DYN_AntiStuck2nd = DZE_DYN_AntiStuck2nd + 1;};
 	DZE_DYN_HackerCheck = true;
 	{
-		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {
+		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle) && (((vehicle _x) getVariable['Mission',0]) != 1)) then {
 			diag_log ("CLEANUP: KILLING A HACKER " + (name _x) + " " + str(_x) + " IN " + (typeOf vehicle _x));
 			(vehicle _x) setDamage 1;
 			_x setDamage 1;
@@ -891,44 +882,8 @@ server_spawnCleanAnimals = {
 	};
 };
 
-server_getLocalObjVars = {
-	private ["_player","_obj","_objectID","_objectUID","_weapons","_magazines","_backpacks"];
-
-	_player = _this select 0;
-	_obj = _this select 1;
-
-	_objectID 	= _obj getVariable["ObjectID","0"];
-	_objectUID	= _obj getVariable["ObjectUID","0"];
-
-	_weapons = _obj getVariable ["WeaponCargo", false];
-	_magazines = _obj getVariable ["MagazineCargo", false];
-	_backpacks = _obj getVariable ["BackpackCargo", false];
-
-	PVDZE_localVarsResult = [_weapons,_magazines,_backpacks];
-	(owner _player) publicVariableClient "PVDZE_localVarsResult";
-	
-	diag_log format["SAFE UNLOCKED: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player)];
-};
-
-server_setLocalObjVars = {
-	private ["_obj","_holder","_weapons","_magazines","_backpacks","_player","_objectID","_objectUID"];
-
-	_obj = _this select 0;
-	_holder = _this select 1;
-	_player = _this select 2;
-
-	_objectID 	= _obj getVariable["ObjectID","0"];
-	_objectUID	= _obj getVariable["ObjectUID","0"];
-
-	_weapons = 		getWeaponCargo _obj;
-	_magazines = 	getMagazineCargo _obj;
-	_backpacks = 	getBackpackCargo _obj;
-	
-	deleteVehicle _obj;
-
-	_holder setVariable ["WeaponCargo", _weapons];
-	_holder setVariable ["MagazineCargo", _magazines];
-	_holder setVariable ["BackpackCargo", _backpacks];
-	
-	diag_log format["SAFE LOCKED: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player)];
-};
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\missions\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";
