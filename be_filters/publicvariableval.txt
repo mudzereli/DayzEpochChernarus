@@ -76,7 +76,7 @@
 5 "count"
 5 "markerText"
 5 "BIS_fnc"
-1 "\+" //!"e+"
+5 "\+" //!"e+"
 5 "_bis"
 5 "markerType"
 5 "teamtype"
