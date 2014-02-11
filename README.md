@@ -1,10 +1,13 @@
-DayzEpochChernarus104
+DayzEpochChernarus1041
 ======================
-###### DAYZ_MISSION and DAYZ_SERVER PBOs for EPOCH CHERNARUS 1.0.4
+###### DAYZ_MISSION and DAYZ_SERVER PBOs for EPOCH CHERNARUS 1.0.4.1
 
 
 LIST OF IMPLEMENTED FEATURES
 ----------------------------
+- [x] 02/09 - Updated To 1.0.4.1
+- [x] 02/08 - Updated To 1.0.4
+- [x] 02/08 - Updated Donator Kits
 - [x] 01/29 - Loadout Donators Get Primary Weapons W/ Class Selection
 - [x] 01/29 - Can Only Respawn @ Big Cities (same # of spawns, more spread over map)
 - [x] 01/15 - New Loot Camps @ NWAF, Balota, & More
@@ -51,6 +54,7 @@ LIST OF IMPLEMENTED FEATURES
 
 MINOR CHANGES AND TWEAKS
 ------------------------
+- [x] 02/09 - Air Trader Protection Radius Increased To 50m From 30m
 - [x] 01/27 - Security Updates
 - [x] 01/04 - Change TS IP to Domain In Load Screen
 - [x] 12/31 - Admins Must Be Logged In With An Admin Name To Use Powers
@@ -69,19 +73,16 @@ LIST OF EXTERNALLY IMPLEMENTED FEATURES
 
 LIST OF FEATURES TO BE ADDED
 ----------------------------
-- [ ] Tweak AI Unit Loadouts (Weapon Variants)
-- [ ] Add More Vehicles To Sellers (Towing Tractor, Jackal & BDRM2 Color Variants, etc)
-- [ ] Forward DNS name to TS and server IP and update TS name
+- [ ] Tweak AI Unit Loadouts
+- [ ] Add More Vehicles To Sellers
 - [ ] Custom Donator Skins (Packages)
-- [ ] Tweak Death Messages
-- [ ] Small Humanity Gain For Killing AI Bandits
-- [ ] Faster Selling & Buying @ Traders
 - [ ] More Web Stats & Awards (Weekly Stats, Team Stats, Rewards, etc.)
 - [ ] Add Vendor Prices On Website
-- [ ] Configure Gotcha For All Servers
 
 LIST OF BUG FIXES
 -----------------
+- [x] 02/08 - Fixed Glitch Where 1.0.4 Mission Vehicles Were Not Sellable
+- [x] 02/09 - Fixed Glitch Where Some Vehicles Could Be Repaired W/O Parts
 - [x] 01/27 - Cinder Wall Garages & Doors Now Indestructible
 - [x] 01/27 - Mission Chests should now correctly spawn loot
 - [x] 12/31 - Vehicle Guns should now shoot after exiting a Trader City
