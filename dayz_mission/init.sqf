@@ -95,6 +95,10 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
+//########## OVERWRITES
+local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnlock.sqf";
+
+//########## ADDONS
 call compile preprocessFileLineNumbers "addons\newspawn\init.sqf";
 call compile preprocessFileLineNumbers "addons\bloodbag\init.sqf";
 call compile preprocessFileLineNumbers "addons\buildings\init.sqf";
@@ -107,4 +111,4 @@ call compile preprocessFileLineNumbers "addons\missions\init.sqf";
 call compile preprocessFileLineNumbers "addons\takeclothes\init.sqf";
 call compile preprocessFileLineNumbers "addons\craftvehicles\init.sqf";
 call compile preprocessFileLineNumbers "addons\zombietruck\init.sqf";
-[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf"; 
+[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
