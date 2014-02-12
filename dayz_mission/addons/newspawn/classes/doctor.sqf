@@ -34,6 +34,7 @@ player addMagazine 'ItemBandage';
 player addMagazine 'ItemBloodbag';
 player addMagazine 'ItemMorphine';
 reload player;
+player selectWeapon "M9";
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;

@@ -34,6 +34,7 @@ player addWeapon   'ItemMachete';
 player addMagazine 'ItemBandage';
 player addMagazine 'ItemPainkiller';
 reload player;
+player selectWeapon "glock17_EP1";
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;

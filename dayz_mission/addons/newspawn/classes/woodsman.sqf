@@ -34,6 +34,7 @@ player addWeapon 'ItemHatchet_DZE';
 player addWeapon 'ItemMatchbox_DZE';
 player addWeapon 'ItemKnife';
 reload player;
+player selectWeapon "revolver_EP1";
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;
