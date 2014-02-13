@@ -32,6 +32,7 @@ DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x1
 DefaultWeapons = ["ItemFlashlight","Makarov"]; 
 DefaultBackpack = "CZ_VestPouch_EP1"; 
 DZE_BuildingLimit = 9999;
+DZE_MissionLootTable = true;
 
 dayz_paraSpawn = false;
 
