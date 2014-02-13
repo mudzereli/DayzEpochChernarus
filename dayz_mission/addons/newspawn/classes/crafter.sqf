@@ -1,3 +1,4 @@
+DZ_NEWSPAWN_CREATION_STAGE = 2;
 titleText ["Selecting class...", "PLAIN DOWN", 3];
 //remove items
 removeAllWeapons player;
@@ -37,5 +38,4 @@ reload player;
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;
-DZ_NEWSPAWN_CREATION_STAGE = 2;
 [] call respawn_handler;

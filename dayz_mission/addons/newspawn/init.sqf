@@ -7,16 +7,16 @@ pick_skin        = compile preprocessFileLineNumbers "addons\newspawn\pick_skin.
 pick_class       = compile preprocessFileLineNumbers "addons\newspawn\pick_class.sqf";
 respawn_handler  = compile preprocessFileLineNumbers "addons\newspawn\respawn_handler.sqf";
 add_donator_skin = compile '
+    DZ_NEWSPAWN_CREATION_STAGE = 3;
     player addMagazine (_this select 0);
     cutText["You receive a clothing package!","PLAIN DOWN"];
-    DZ_NEWSPAWN_CREATION_STAGE = 3;
 ';
 [] spawn {
     private ["_donatorID"];
 	diag_log text "NEWSPAWN: waiting for login...";
     waitUntil {!isNil "PVDZE_plr_LoginRecord"};
     diag_log text "NEWSPAWN: building arrays...";
-    DZ_NEWSPAWN_CREATION_STAGE       = 0;
+    DZ_NEWSPAWN_CREATION_STAGE       = 3;
     DZ_NEWSPAWN_DONATOR_SPAWN_POINTS = [];
     DZ_NEWSPAWN_DONATOR_LOADOUT      = false;
     DZ_NEWSPAWN_DONATOR_SKIN         = false;
@@ -30,6 +30,9 @@ add_donator_skin = compile '
         };
     } forEach DZ_NEWSPAWN_DONATOR_TABLE;
     diag_log text "NEWSPAWN: hooking...";
-    if (dayzPlayerLogin2 select 2) then { [] spawn respawn_handler; };
+    if (dayzPlayerLogin2 select 2) then { 
+        DZ_NEWSPAWN_CREATION_STAGE = 0;
+        [] spawn respawn_handler; 
+    };
     diag_log text "NEWSPAWN: hooked...";
 };
