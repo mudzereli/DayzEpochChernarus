@@ -5,6 +5,8 @@ DayzEpochChernarus1041
 
 LIST OF IMPLEMENTED FEATURES
 ----------------------------
+- [x] 02/13 - More Vehicles @ Hero & Bandit Traders!
+- [x] 02/10 - Locked Vehicles Can't Be Towed
 - [x] 02/09 - Updated To 1.0.4.1
 - [x] 02/08 - Updated To 1.0.4
 - [x] 02/08 - Updated Donator Kits
@@ -54,6 +56,8 @@ LIST OF IMPLEMENTED FEATURES
 
 MINOR CHANGES AND TWEAKS
 ------------------------
+- [x] 02/13 - You can now press HOME to bring up the respawn menu if it gets closed somehow 
+- [x] 02/13 - Starting weapons are now equipped properly
 - [x] 02/09 - Air Trader Protection Radius Increased To 50m From 30m
 - [x] 01/27 - Security Updates
 - [x] 01/04 - Change TS IP to Domain In Load Screen
