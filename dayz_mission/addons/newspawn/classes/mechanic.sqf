@@ -36,6 +36,7 @@ player addMagazine 'PartWheel';
 player addWeapon   'ItemToolbox';
 reload player;
 player selectWeapon "Makarov";
+player setVehicleAmmo 1;
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;

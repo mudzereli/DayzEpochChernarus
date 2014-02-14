@@ -36,6 +36,7 @@ player addMagazine 'ItemBandage';
 player addMagazine 'ItemPainkiller';
 reload player;
 player selectWeapon "glock17_EP1";
+player setVehicleAmmo 1;
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;

@@ -36,6 +36,7 @@ player addMagazine 'FoodSteakCooked';
 player addMagazine 'ItemWaterbottle';
 reload player;
 player selectWeapon "M9SD";
+player setVehicleAmmo 1;
 sleep 2;
 titleText ["Class selected!", "PLAIN DOWN", 3];
 titleFadeOut 1;
