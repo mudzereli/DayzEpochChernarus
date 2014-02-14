@@ -799,12 +799,8 @@ class CfgBuildingLoot {
 			{ "machinegunammo","single" },
 			{ "militaryclothes","single" },
 			{ "NVGoggles","weapon" },
-            { "2000Rnd_762x51_M134", "object" },
-			{ "29Rnd_30mm_AGS30",    "object" },
-			{ "50Rnd_127x107_DSHKM", "object" },
-			{ "48Rnd_40mm_MK19",     "object" },
-			{ "100Rnd_127x99_M2",    "object" }
-		};
+            { "militaryammo", "single" }
+        };
 		itemChance[] =	{
 			0.1,
 			0.04,
@@ -827,12 +823,7 @@ class CfgBuildingLoot {
 			0.05,
 			0.05,
 			0.01,
-            0.05,
-			0.05,
-			0.05,
-			0.05,
-			0.05
-
+            0.04
 		};
 		itemTypeSmall[] = {
 			{ "pistols","cfglootweapon" },
