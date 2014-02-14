@@ -14,5 +14,6 @@ DZ_NEWSPAWN_DONATOR_TABLE =
 	[	"NikeFreek",                  "88930246",      [],         true,        true      ],
 	[	"BigCores",                  "93026246",      [],         true,        true      ],
 	[	"Barkity",                  "40113734",      [],         true,        true      ],
+	[	"[BTY]Neux",                  "15708166",      [],         true,        true      ],
 	[	"Example",                  "000000000",      [],         true,        true      ]
 ];
