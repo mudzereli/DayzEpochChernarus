@@ -1,0 +1,20 @@
+HMMWV_M2                  6 10oz      forest camo humvee with mounted m2
+policecar                 4 oz        police car
+UAZ_MG_CDF                2 10oz      open top UAZ with DSHKM
+UAZ_MG_INS                2 10oz      open top UAZ with DSHKM
+Pickup_PK_INS             2 10oz      pickup with rear mounted PKT
+Pickup_PK_GUE             2 10oz      pickup with rear mounted PKT
+Offroad_DSHKM_Gue         4 10oz      offroad pickup with rear mounted DSHKM
+Offroad_DSHKM_INS         4 10oz      offroad pickup with rear mounted DSHKM
+HMMWV_Armored             1 brief     armored forest camo humvee with mounted m2
+TowingTractor             1 oz        small towing tractor
+BTR40_MG_TK_GUE_EP1       8 10oz      open top armored military vehicle with mounted m2
+BTR40_MG_TK_INS_EP1       8 10oz      open top armored military vehicle with mounted m2
+BTR40_TK_GUE_EP1          4 10oz      open top armored military vehicle
+BTR40_TK_INS_EP1          4 10oz      open top armored military vehicle
+LandRover_MG_TK_EP1_DZE   4 10oz      open top landrover with mounted 
+BAF_Jackal2_L2A1_W        8 10oz      wheeled open top 
+BAF_Jackal2_L2A1_D        8 10oz      wheeled open top 
+*BMP_Ambul_CDF            3 brief     tracked unarmed tank
+*M113Ambul_UN_EP1_DZ      3 brief     tracked unarmed tank
+*M113Ambul_TK_EP1_DZ      3 brief     tracked unarmed tank`
