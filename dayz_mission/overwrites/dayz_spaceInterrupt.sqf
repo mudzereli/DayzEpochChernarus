@@ -4,8 +4,16 @@ _dikCode = 	_this select 1;
 _handled = false;
 
 if (_dikCode in[0x02,0x03,0x04,0x58,0x57,0x44,0x43,0x42,0x41,0x40,0x3F,0x3E,0x3D,0x3C,0x3B,0x0B,0x0A,0x09,0x08,0x07,0x06,0x05]) then {
-	_handled = true;
+    //### COMMENTED OUT TO ALLOW KEY PRESSES FOR COMMAND MENUS
+	//_handled = true;
+    //### END MODIFIED CODE
 };
+
+//### RESPAWN HANDLER CODE ON KEYPRESS
+if (_dikCode == 0xC7) then {
+	[] call respawn_handler;
+};
+//### END INSERTED CODE
 
 if ((_dikCode == 0x3E or _dikCode == 0x0F or _dikCode == 0xD3)) then {
 	if(diag_tickTime - dayz_lastCheckBit > 10) then {
