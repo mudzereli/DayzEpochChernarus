@@ -18,8 +18,6 @@ _firstTime = false;
 _objectID =	_object getVariable ["ObjectID","0"];
 _uid = 		_object getVariable ["ObjectUID","0"];
 
-if ((_object getVariable["Mission",0]) == 1) exitWith {};
-
 if ((typeName _objectID != "string") || (typeName _uid != "string")) then
 { 
     diag_log(format["Non-string Object: ID %1 UID %2", _objectID, _uid]);

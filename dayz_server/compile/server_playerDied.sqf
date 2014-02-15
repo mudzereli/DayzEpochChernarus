@@ -4,7 +4,7 @@ _characterID = 	_this select 0;
 _minutes =		_this select 1;
 _newObject = 	_this select 2;
 _playerID = 	_this select 3;
-_infected =		0;
+_infected =		_this select 4;
 _victimName = 	name _newObject;
 
 _victim = _newObject;
