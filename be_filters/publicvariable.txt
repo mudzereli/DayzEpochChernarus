@@ -1,11 +1,2 @@
 //new
-5 "" !"PVDZE_" !"norrn" !"usec" !="remExField" !="remExFP" !="drn_AskServerDynamicWeatherEventArgs" !="BIS_effects_gepv" !="usecBreakLegs" !="usecBleed" !="usecMorphine" !="usecBandage" !="maintainArea_log" !"player" !"PVAHR_" !="MUDPVAH_AdminRequest" !="PVAH_WriteLogRequest" !="dayzSetFuel" !="axeLampObjects"
-5="player"
-5="server"
-5 "remExFP" !="\"remExFP\" = \[,,\"per\",\"execVM\",\"ca\Modules\Functions\init.sqf\"\]" !"\[,,\"per\",\"execVM\",\"ca\Modules\Functions\init.sqf\"\]"
-5 "PVAHR_" !"PVAHR_0" !"PVAHR_1" !"PVAHR_2" !"PVAHR_3" !"PVAHR_4" !"PVAHR_5" !"PVAHR_6" !"PVAHR_7" !"PVAHR_8" !"PVAHR_9"
-1 "PVAHR_"
-1="MUDPVAH_AdminRequest"
-1="PVAH_WriteLogRequest"
-1="PVDZE_obj_Delete"
-1="PVDZE_veh_Update"
+5 "" !"PVDZE_" !"norrn" !"usec" !="remExField" !="remExFP" !="drn_AskServerDynamicWeatherEventArgs" !="BIS_effects_gepv"
