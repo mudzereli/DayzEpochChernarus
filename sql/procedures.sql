@@ -29,6 +29,30 @@ end//
 delimiter ;
 
 /*####### FUNCTIONS BELOW ARE USED TO LOOK UP INFORMATION #######*/
+drop procedure if exists p_view_expired_objects;
+delimiter //
+create procedure p_view_expired_objects(in _DAYS int)
+comment 'looks up a list of expired objects based on days since owners last login'
+begin
+    drop temporary table if exists tt_playerlastlogin;
+    create temporary table tt_playerlastlogin as select max(DATESTAMP) as PLAYERLASTLOGIN, PLAYERUID from player_login group by PLAYERUID;
+    select c.PLAYERUID,
+           c.PLAYERNAME,
+           d.PLAYERLASTLOGIN,
+           a.CLASSNAME,
+           a.WORLDSPACE,
+           a.INVENTORY,
+           a.HITPOINTS,
+           a.FUEL,
+           a.DAMAGE
+    from       object_data        a
+    inner join character_data     b on a.CHARACTERID = b.CHARACTERID
+    inner join player_data        c on b.PLAYERUID   = c.PLAYERUID
+    inner join tt_playerlastlogin d on c.PLAYERUID   = d.PLAYERUID
+    and datediff(now(),d.PLAYERLASTLOGIN) >= _DAYS and a.DAMAGE = 0 and a.FUEL = 0; 
+end//
+delimiter ;
+
 drop procedure if exists p_lookup_playeruid;
 delimiter //
 create procedure p_lookup_playeruid(in _PLAYERNAME text)
