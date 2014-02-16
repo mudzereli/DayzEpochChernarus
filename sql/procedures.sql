@@ -31,25 +31,17 @@ delimiter ;
 /*####### FUNCTIONS BELOW ARE USED TO LOOK UP INFORMATION #######*/
 drop procedure if exists p_view_expired_objects;
 delimiter //
-create procedure p_view_expired_objects(in _DAYS int)
+create procedure p_view_expired_objects(in _DAYS int, in _DELETE int)
 comment 'looks up a list of expired objects based on days since owners last login'
 begin
-    drop temporary table if exists tt_playerlastlogin;
-    create temporary table tt_playerlastlogin as select max(DATESTAMP) as PLAYERLASTLOGIN, PLAYERUID from player_login group by PLAYERUID;
-    select c.PLAYERUID,
-           c.PLAYERNAME,
-           d.PLAYERLASTLOGIN,
-           a.CLASSNAME,
-           a.WORLDSPACE,
-           a.INVENTORY,
-           a.HITPOINTS,
-           a.FUEL,
-           a.DAMAGE
-    from       object_data        a
-    inner join character_data     b on a.CHARACTERID = b.CHARACTERID
-    inner join player_data        c on b.PLAYERUID   = c.PLAYERUID
-    inner join tt_playerlastlogin d on c.PLAYERUID   = d.PLAYERUID
-    and datediff(now(),d.PLAYERLASTLOGIN) >= _DAYS and a.DAMAGE = 0 and a.FUEL = 0; 
+    select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742") order by PLAYERLASTLOGIN;
+        
+    if _DELETE = 1 then
+        drop temporary table if exists tt_objectid;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742");
+        insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+    end if;
 end//
 delimiter ;
 
@@ -58,15 +50,7 @@ delimiter //
 create procedure p_lookup_playeruid(in _PLAYERNAME text)
 comment 'looks up a list of playeruids based on partial name'
 begin
-    select a.PLAYERUID,
-           a.PLAYERNAME,
-           max(b.DATESTAMP) as PLAYERLASTLOGIN,
-           min(b.DATESTAMP) as PLAYERFIRSTLOGIN
-    from       player_data  a
-    inner join player_login b on a.PLAYERUID = b.PLAYERUID
-    where lower(a.PLAYERNAME) like concat("%",lower(_PLAYERNAME),"%")
-    group by a.PLAYERUID 
-    order by PLAYERLASTLOGIN desc;
+    select * from v_player_data where lower(PLAYERNAME) like concat("%",lower(_PLAYERNAME),"%");
 end//
 delimiter ;
 
@@ -75,23 +59,16 @@ delimiter //
 create procedure p_lookup_player(in _CHARACTERID text)
 comment 'shows the player info of a given characterid'
 begin
-    select a.PLAYERUID,
-           a.PLAYERNAME,
-           max(b.DATESTAMP) as PLAYERLASTLOGIN,
-           min(b.DATESTAMP) as PLAYERFIRSTLOGIN,
-           c.CHARACTERID,
-           c.DATESTAMP as CREATEDATE,
-           c.ALIVE,
-           c.INVENTORY,
-           c.BACKPACK,
-           c.MODEL,
-           c.WORLDSPACE
-    from       player_data    a
-    inner join player_login   b on a.PLAYERUID = b.PLAYERUID
-    inner join character_data c on a.PLAYERUID = c.PLAYERUID
-    where c.CHARACTERID = _CHARACTERID
-    group by a.PLAYERUID 
-    order by PLAYERLASTLOGIN desc;
+    select * from v_character_data where CHARACTERID = _CHARACTERID;
+end//
+delimiter ;
+
+drop procedure if exists p_lookup_characters;
+delimiter //
+create procedure p_lookup_characters(in _PLAYERUID text)
+comment 'shows a list of characters created by a given playeruid'
+begin
+    select * from v_character_data where PLAYERUID = _PLAYERUID;
 end//
 delimiter ;
 
@@ -115,30 +92,5 @@ begin
     inner join object_data       c on b.CHARACTERID = c.CHARACTERID
     where a.PLAYERUID = _PLAYERUID and c.FUEL = 0 and c.DAMAGE = 0
     order by CREATEDATE desc;
-end//
-delimiter ;
-
-drop procedure if exists p_lookup_characters;
-delimiter //
-create procedure p_lookup_characters(in _PLAYERUID text)
-comment 'shows a list of characters created by a given playeruid'
-begin
-    select min(DATESTAMP) into @PLAYERFIRSTLOGIN from player_login where PLAYERUID = _PLAYERUID;
-    select max(DATESTAMP) into @PLAYERLASTLOGIN  from player_login where PLAYERUID = _PLAYERUID;
-	select  a.PLAYERUID, 
-            a.PLAYERNAME,
-            @PLAYERFIRSTLOGIN as PLAYERFIRSTLOGIN,
-            @PLAYERLASTLOGIN  as PLAYERLASTLOGIN,
-            b.CHARACTERID,
-            b.DATESTAMP as CREATEDATE,
-            b.ALIVE,
-            b.INVENTORY,
-            b.BACKPACK,
-            b.MODEL,
-            b.WORLDSPACE
-    from       player_data       a
-    inner join character_data    b on a.PLAYERUID   = b.PLAYERUID
-    where a.PLAYERUID = _PLAYERUID
-    order by b.CHARACTERID desc;
 end//
 delimiter ;
