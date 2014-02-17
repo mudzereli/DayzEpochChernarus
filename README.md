@@ -56,6 +56,8 @@ LIST OF IMPLEMENTED FEATURES
 
 MINOR CHANGES AND TWEAKS
 ------------------------
+- [x] 02/16 - Update Snap Building Script (Can Snap More Objects & Snap Top To Bottom)
+- [x] 02/16 - Update Epoch Cleanup Script (Should Prevent Mission Crates From Being Wiped)
 - [x] 02/13 - You can now press HOME to bring up the respawn menu if it gets closed somehow 
 - [x] 02/13 - Starting weapons are now equipped properly
 - [x] 02/09 - Air Trader Protection Radius Increased To 50m From 30m
