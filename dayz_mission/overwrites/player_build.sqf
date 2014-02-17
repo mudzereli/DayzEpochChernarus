@@ -2,17 +2,7 @@
     DayZ Base Building
     Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-/*
-Build Snapping - Extended v1.5
-
-Idea and first code:
-Maca
-
-Reworked:
-OtterNas3
-01/11/2014
-*/
-private ["_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_objHupDiff","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap"];
+private ["_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_objHupDiff","_needNear","_vehicle","_inVehicle","_previewCounter","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
@@ -126,32 +116,42 @@ if((count _offset) <= 0) then {
 _isPole = (_classname == "Plastic_Pole_EP1_DZ");
 _isLandFireDZ = (_classname == "Land_Fire_DZ");
 
-_distance = DZE_PlotPole select 0;
+_distance = DZ_BUILDPLUS_PLOT_DIAMETER;
 _needText = localize "str_epoch_player_246";
 
 if(_isPole) then {
-    _distance = DZE_PlotPole select 1;
+    _distance = _distance * 2;
 };
 
 // check for near plot
 _findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
 _findNearestPole = [];
+_findNearestUnownedPole = [];
 
 {
     if (alive _x) then {
         _findNearestPole set [(count _findNearestPole),_x];
+        if (_x getVariable["CharacterID","0"] != dayz_characterID) then {
+            _findNearestUnownedPole set [(count _findNearestUnownedPole),_x];
+        };
     };
 } foreach _findNearestPoles;
+diag_log text format["BUILDPLUS: found %1 poles, %2 owned by other players...",count _findNearestPoles, count _findNearestUnownedPole];
 
 _IsNearPlot = count (_findNearestPole);
+_IsNearUnownedPlot = count (_findNearestUnownedPole);
 
 // If item is plot pole and another one exists within 45m
-if(_isPole and _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+if (DZ_BUILDPLUS_PLOT_IN_PLOT) then {
+    if(_isPole && _IsNearUnownedPlot > 0) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+} else {
+    if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+};
 
 if(_IsNearPlot == 0) then {
 
     // Allow building of plot
-    if(_requireplot == 0 or _isLandFireDZ) then {
+    if(_requireplot == 0 or _isLandFireDZ or _className in DZ_BUILDPLUS_NO_PLOT_ITEMS) then {
         _canBuildOnPlot = true;
     };
 
@@ -168,11 +168,8 @@ if(_IsNearPlot == 0) then {
 
     // check if friendly to owner
     if(dayz_characterID == _ownerID) then {  //Keep ownership
-        // owner can build anything within his plot except other plots
-        if(!_isPole) then {
-            _canBuildOnPlot = true;     
-        };
-
+        // owner can build anything within his plot
+        _canBuildOnPlot = true; 
     } else {
         // disallow building plot
         if(!_isPole) then {
@@ -185,6 +182,7 @@ if(_IsNearPlot == 0) then {
     };
 };
 
+if(!_canBuildOnPlot && _IsNearUnownedPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText ["Plot already controlled. If you have recently died and you own the plot, you must remove and replace the plot pole to re-claim it.", "PLAIN DOWN"]; };
 // _message
 if(!_canBuildOnPlot) exitWith {  DZE_ActionInProgress = false; cutText [format[(localize "STR_EPOCH_PLAYER_135"),_needText,_distance] , "PLAIN DOWN"]; };
 
@@ -208,14 +206,8 @@ if (_hasrequireditem) then {
     _location1 = getPosATL player;
     _dir = getDir player;
 
-    /* Commented out cause GHOST preview does not work with snapping!
-    // if ghost preview available use that instead
-    if (_ghost != "") then {
-        _classname = _ghost;
-    };
-    */
-
     _object = createVehicle [_classname, _location, [], 0, "CAN_COLLIDE"];
+    
     _object setDir _dir;
     _object attachTo [player,_offset];
     
@@ -223,6 +215,7 @@ if (_hasrequireditem) then {
 
     cutText [(localize "str_epoch_player_45"), "PLAIN DOWN"];
 
+    _previewCounter = DZ_BUILDPLUS_PREVIEW_TIMER;
     
     player allowDamage false;
     SnappingOffset = _offset;
@@ -233,14 +226,89 @@ if (_hasrequireditem) then {
     SnappingResetPos = false;
 
     if (isClass (missionConfigFile >> "SnapPoints" >> _classname)) then {
-        s_building_snapping = player addAction ["<t color=""#0000ff"">Toggle Snapping</t>", "custom\snap_build\player_toggleSnapping.sqf",_classname, 3, true, false, "",""];
+        s_building_snapping = player addAction ["<t color=""#33b5e5"">Toggle Snapping</t>", "addons\buildplus\player_toggleSnapping.sqf",_classname, 3, true, false, "",""];
     };
     
     _snapper = [_object, _classname] spawn snap_object;
-    _key_monitor = [] spawn player_buildControls ;
-
+                
     while {_isOk} do {
-        sleep 1;
+        _zheightchanged = false;
+        _zheightdirection = "";
+        _rotate = false;
+    
+        if (DZE_Q) then {
+            DZE_Q = false;
+            _zheightdirection = "up";
+            _zheightchanged = true;
+        };
+        if (DZE_Z) then {
+            DZE_Z = false;
+            _zheightdirection = "down";
+            _zheightchanged = true; 
+        };
+        if (DZE_Q_alt) then {
+            DZE_Q_alt = false;
+            _zheightdirection = "up_alt";
+            _zheightchanged = true;
+        };
+        if (DZE_Z_alt) then {
+            DZE_Z_alt = false;
+            _zheightdirection = "down_alt";
+            _zheightchanged = true;
+        };
+        if (DZE_Q_ctrl) then {
+            DZE_Q_ctrl = false;
+            _zheightdirection = "up_ctrl";
+            _zheightchanged = true;
+        };
+        if (DZE_Z_ctrl) then {
+            DZE_Z_ctrl = false;
+            _zheightdirection = "down_ctrl";
+            _zheightchanged = true;
+        };
+        if (DZE_4) then {
+            DZE_4 = false;
+            SnappingDir = 0;
+            _rotate = true;
+        };
+        if (DZE_6) then {
+            DZE_6 = false;
+            SnappingDir = 180;
+            _rotate = true;
+        };
+    
+        if(_zheightchanged) then {
+            if(_zheightdirection == "up") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) + 0.1)];
+            };
+    
+            if(_zheightdirection == "down") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) - 0.1)];
+            };
+    
+            if(_zheightdirection == "up_alt") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) + 1)];
+            };
+    
+            if(_zheightdirection == "down_alt") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) - 1)];
+            };
+    
+            if(_zheightdirection == "up_ctrl") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) + 0.01)];
+            };
+    
+            if(_zheightdirection == "down_ctrl") then {
+                SnappingOffset set [2, ((SnappingOffset select 2) - 0.01)];
+            };
+        };
+        sleep 0.5;
+    
+        if (_zheightchanged or _rotate) then {
+            SnappingAttachedToPlayer = false;
+            diag_log "height or rotation changed";
+        };
+
         _location2 = getPosATL player;
 
         if(DZE_5) exitWith {
@@ -249,18 +317,31 @@ if (_hasrequireditem) then {
             _dir = getDir _object;
             _position = getPosATL _object;
         };
-
-        if(_location1 distance _location2 > 5) exitWith {
+        
+        if(_location1 distance _location2 > DZ_BUILDPLUS_PREVIEW_CHANGE_DIST) exitWith {
             _isOk = false;
             _cancel = true;
-            _reason = "You've moved to far away from where you started building (within 5 meters)"; 
+            _reason = format["You've moved to far away from where you started building (within %1 meters)",DZ_BUILDPLUS_PREVIEW_CHANGE_DIST]; 
             detach _object;
+            deleteVehicle _object;
         };
         
-        if(((SnappingOffset select 2) > 5) or ((SnappingOffset select 2) < -5)) exitWith {
+        [format["<t size='0.6'>Time left to build: %1</t>",(ceil(_previewCounter))],0,0.8,0.5,0,0,8] spawn BIS_fnc_dynamicText;
+        
+        if(_previewCounter <= 0) exitWith {
             _isOk = false;
             _cancel = true;
-            _reason = "Cannot move up or down more than 5 meters"; 
+            _reason = "Ran out of time to find position"; 
+            detach _object;
+            deleteVehicle _object;
+        };
+
+        _previewCounter = _previewCounter - 0.5;
+        
+        if(((SnappingOffset select 2) > DZ_BUILDPLUS_PREVIEW_CHANGE_DIST) or ((SnappingOffset select 2) < -DZ_BUILDPLUS_PREVIEW_CHANGE_DIST)) exitWith {
+            _isOk = false;
+            _cancel = true;
+            _reason = format["Cannot move up or down more than %1 meters",DZ_BUILDPLUS_PREVIEW_CHANGE_DIST]; 
             detach _object;
         };
 
@@ -269,6 +350,7 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = (localize "str_epoch_player_43");
             detach _object;
+            deleteVehicle _object;
         };
 
         if (DZE_cancelBuilding) exitWith {
@@ -276,18 +358,19 @@ if (_hasrequireditem) then {
             _cancel = true;
             _reason = "Cancelled building.";
             detach _object;
+            deleteVehicle _object;
         };
     };
 
     terminate _snapper;
-    terminate _key_monitor;
     player removeAction s_building_snapping;
     player allowDamage true;
-    
+
     //No building on roads unless toggled
     if (!DZE_BuildOnRoads) then {
         if (isOnRoad _position) then { _cancel = true; _reason = "Cannot build on a road."; };
     };
+
     // No building in trader zones
     if(!canbuild) then { _cancel = true; _reason = "Cannot build in a city."; };
     if(!placevault) then { _cancel = true; _reason = "Cannot build in a city."; };
@@ -302,13 +385,16 @@ if (_hasrequireditem) then {
             _location set [2,0];
         };
     
-        _object setPosATL _location;
         cutText [format[(localize "str_epoch_player_138"),_text], "PLAIN DOWN"];
         
         _limit = 3;
 
         if(isNumber (configFile >> "CfgVehicles" >> _classname >> "constructioncount")) then {
             _limit = getNumber(configFile >> "CfgVehicles" >> _classname >> "constructioncount");
+        };
+        
+        if (DZ_BUILDPLUS_SINGLE_STAGE_CRAFTING) then {
+            _limit = 1;
         };
 
         _isOk = true;
@@ -376,7 +462,7 @@ if (_hasrequireditem) then {
             if(_num_removed == 1) then {
 
                 cutText [format[localize "str_build_01",_text], "PLAIN DOWN"];
-
+                
                 if (_isPole) then {
                     [] spawn player_plotPreview;
                 };
