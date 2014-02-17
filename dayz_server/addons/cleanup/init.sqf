@@ -1,85 +1,111 @@
-[] spawn {
-    private ["_lastUpdate","_lastNeedUpdate","_myGroupX","_lastZombieCheck"];
-    waitUntil {!(isNil "sm_done")};    
+// Dayz ScottyTM cleanup script v2.0
 
-    _lastUpdate = diag_tickTime;
-    _lastZombieCheck = diag_tickTime;
-    _lastNeedUpdate = diag_tickTime;
-    
-    while {true} do {
-        if (((diag_tickTime - _lastUpdate) > 600)) then
-        {
+purge = {
+ if(!isNull(_this)) then {
+  _this enableSimulation false;
+  _this removeAllMPEventHandlers "mpkilled";
+  _this removeAllMPEventHandlers "mphit";
+  _this removeAllMPEventHandlers "mprespawn";
+  _this removeAllEventHandlers "FiredNear";
+  _this removeAllEventHandlers "HandleDamage";
+  _this removeAllEventHandlers "Killed";
+  _this removeAllEventHandlers "Fired";
+  _this removeAllEventHandlers "GetOut";
+  _this removeAllEventHandlers "GetIn";
+  _this removeAllEventHandlers "Local";
+  clearVehicleInit _this;
+  deleteVehicle _this;
+  deleteGroup (group _this);
+  _this = nil;
+ };
+};
+
+if (isServer) then {
+    [] spawn
+    {
+        waitUntil {!(isNil "sm_done")};
+        diag_log ["SCOTTY tm CLEANUP Initialized"];
+
+        _lastlootcheck = diag_tickTime;
+        _lastZombieClean = diag_tickTime;
+        _lastGroupClean = diag_tickTime;
+        _lastGullMod = diag_tickTime;
+
+        while {true} do {
+            if (((diag_tickTime - _lastlootcheck) > 120)) then
+            {
             _lastUpdate = diag_tickTime;
-            private ["_date","_dateNum","_diff","_result","_outcome"];
-            _result = "CHILD:307:" call server_hiveReadWrite;
-            _outcome = _result select 0;
-            if(_outcome == "PASS") then {
-                _date = _result select 1; 
-                _dateNum = dateToNumber(_date); 
-                _diff = ( _dateNum - dateToNumber (date) )*365*24*60;
-                if ( abs(_diff)>5 ) then {
-                    setDate _date;
-                    dayzSetDate = _date;
-                    publicVariable "dayzSetDate";
+            private ["_delQty","_nearby","_keep","_qty","_lootpiles","_ammobox"];
+
+            _ammobox = ["USLaunchersBox","RULaunchersBox","USSpecialWeapons_EP1","USVehicleBox"];
+
+            _lootpiles =  allMissionObjects "ReammoBox";
+            _delQty = 0;
+            {   
+                _keep = (_x getVariable ["permaLoot",false]) || (typeOf _x in _ammobox);
+                if (!_keep) then {
+                            _nearby = {(isPlayer _x) and (alive _x)} count (_x nearEntities [["CAManBase","AllVehicles"], 130]);
+                            if (_nearby==0) then {
+                                deleteVehicle _x;
+                                sleep 0.025;
+                                _delQty = _delQty + 1;
+                            };
+                        };
+                sleep 0.001;
+                } forEach _missionObjs;
+                if (_delQty > 0) then {
+                    _qty = count _lootpiles;
+                    diag_log (format["SCOTTY tm CLEANUP: Deleted %1 Loot Piles out of %2",_delQty,_qty]);
                 };
             };
-        };
-        if ((count needUpdate_objects) > 0 && (diag_tickTime -_lastNeedUpdate>40)) then
-        {
-            _lastNeedUpdate = diag_tickTime;
-            {
-                needUpdate_objects = needUpdate_objects - [_x];
-                [_x,"all", true] call server_updateObject;
-                
-            } forEach needUpdate_objects;
-        };
-        if ((diag_tickTime - _lastZombieCheck) > 360) then {
-            _lastZombieCheck = diag_tickTime;
-            {
-                if (local _x) then {
-                    _x enableSimulation false;
-                    _myGroupX = group _x;
-                    _x removeAllMPEventHandlers "mpkilled";
-                    _x removeAllMPEventHandlers "mphit";
-                    _x removeAllMPEventHandlers "mprespawn";
-                    _x removeAllEventHandlers "FiredNear";
-                    _x removeAllEventHandlers "HandleDamage";
-                    _x removeAllEventHandlers "Killed";
-                    _x removeAllEventHandlers "Fired";
-                    _x removeAllEventHandlers "GetOut";
-                    _x removeAllEventHandlers "Local";
-                    clearVehicleInit _x;
-                    deleteVehicle _x;
-                    deleteGroup _myGroupX;
-                    _x = nil;
-                };
-            } forEach allMissionObjects "Animal";
-            
-            //Player Groups Cleanup
-            {
-                if (count units _x==0) then {
-                    deleteGroup _x;
-                    _x = nil;
-                };
+
+            if ((diag_tickTime - _lastZombieClean) > 180) then {
+                _lastZombieClean = diag_tickTime;
+                {
+                    if (local _x) then {
+                        private ["_pos","_delrndzed","_qty","_randomzeds","_nearby"];
+
+                        _randomzeds = entities "zZombie_Base";
+                        _delrndzed = 0;
+                            
+                        _x call purge;
+                        sleep 0.025;
+                        _delrndzed = _delrndzed + 1;
+                            } else {
+                                if (!alive _x) then {
+                                    _pos = getPosATL _x;
+                                    if (count _pos > 0) then {
+                                        _nearby = {(isPlayer _x) and (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
+                                        if (_nearby==0) then {
+                                            _x call purge;
+                                            sleep 0.025;
+                                            _delrndzed = _delrndzed + 1;
+                                        };
+                                    };
+                                };
+                            };
+                            sleep 0.001;
+                } forEach _randomzeds;
+                    if (_delrndzed > 0) then {
+                        _qty = count_randomzeds;
+                        diag_log (format["SCOTTY tm CLEANUP: Deleted %1 Zombies out of %2",_delrndzed,_qty]);
+                    };
+
+                    
+            if ((diag_tickTime - _lastGroupClean) > 360) then {
+                //Player Groups Cleanup
+                    if (count units _x==0) then {
+                        deleteGroup _x;
+                        _x = nil;
+                    }; 
             } forEach allGroups;
-            
-            {
-                _myGroupX = group _x;
-                _x removeAllMPEventHandlers "mpkilled";
-                _x removeAllMPEventHandlers "mphit";
-                _x removeAllMPEventHandlers "mprespawn";
-                _x removeAllEventHandlers "FiredNear";
-                _x removeAllEventHandlers "HandleDamage";
-                _x removeAllEventHandlers "Killed";
-                _x removeAllEventHandlers "Fired";
-                _x removeAllEventHandlers "GetOut";
-                _x removeAllEventHandlers "Local";
-                clearVehicleInit _x;
-                deleteVehicle _x;
-                deleteGroup _myGroupX;
-                _x = nil;
+
+
+            if ((diag_tickTime - _lastGullMod) > 180) then {
+                _x call purge;
             } forEach entities "Seagull";
             sleep 5;
+            };
         };
     };
 };
