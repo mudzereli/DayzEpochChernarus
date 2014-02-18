@@ -17,4 +17,4 @@ DZAI_MiscItemS set [(count DZAI_MiscItemS),"ItemNails"];
 for "_i" from 0 to ((count _craftingBooks) - 1) do {DZAI_tools0 set [(count DZAI_tools0),(_craftingBooks select _i)];};
 for "_i" from 0 to ((count _craftingBooks) - 1) do {DZAI_tools1 set [(count DZAI_tools1),(_craftingBooks select _i)];};
 
-diag_log "Sahrani classnames loaded.";
+diag_log "[DZAI] Sahrani classnames loaded.";

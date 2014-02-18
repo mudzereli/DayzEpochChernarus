@@ -9,7 +9,7 @@
 
 if (!isServer) exitWith {};
 
-private ["_helicopter","_heliWeapons","_markername","_marker","_startTime","_timePatrolled","_unitGroup","_wpmarkername","_wpmarker","_baseHeight"];
+private ["_helicopter","_heliWeapons","_markername","_marker","_startTime","_timePatrolled","_unitGroup","_wpmarkername","_wpmarker","_baseHeight","_nearTargets"];
 
 _helicopter = _this select 0;
 _heliWeapons = weapons _helicopter;
@@ -21,14 +21,14 @@ _markername = format["Helicopter_%1",_helicopter];
 if ((getMarkerColor _markername) != "") then {deleteMarker _markername; sleep 5;};	//Delete the previous marker if it wasn't deleted for some reason.
 //diag_log format ["Helicopter marker name is %1.",_markername];
 _marker = createMarker[_markername,(getposATL _helicopter)];
-_marker setMarkerText format ["AI %1 %2",(typeOf _helicopter),_unitGroup];
+_marker setMarkerText format ["AI %1 (Health: %2)",(typeOf _helicopter),"???"];
 _marker setMarkerType "Attack";
 _marker setMarkerColor "ColorRed";
 _marker setMarkerBrush "Solid";
 //_marker setMarkerSize [50, 50];
 
 diag_log format ["Helicopter is part of group %1.",_unitGroup];
-_wpmarkername = format ["HeliWP_%1",_helicopter];
+_wpmarkername = format ["[%1,%2]",_unitGroup,_helicopter];
 if ((getMarkerColor _wpmarkername) != "") then {deleteMarker _markername};	//Delete the previous marker if it wasn't deleted for some reason.
 //diag_log format ["Helicopter waypoint name is %1.",_wpmarkername];
 _wpmarker = createMarker[_wpmarkername,(getWPPos [_unitGroup,0])];
@@ -39,13 +39,13 @@ _wpmarker setMarkerBrush "SolidBorder";
 _wpmarker setMarkerSize [100, 100];
 
 //Wait until helicopter has pilot and script has finished finding helicopter's weapons.
-waitUntil {sleep 0.1; (!isNil "_heliWeapons" && !isNull (driver _helicopter))};
+waitUntil {sleep 0.1; (!isNil "_heliWeapons" && {!isNull (driver _helicopter)})};
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Helicopter %1 driver is %2. Crew is %3. Vehicle weapons: %4.",(typeOf _helicopter),(driver _helicopter),(crew _helicopter),_heliWeapons];};
 _startTime = time;
 
 if ((count _heliWeapons) > 0) then {
 	//For armed air vehicles
-	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {	
+	while {!(_helicopter getVariable ["heli_disabled",false]) && {alive _helicopter}} do {	
 		//Check if helicopter ammunition needs to be replenished
 		{
 			if ((_helicopter ammo _x) < 20) then {
@@ -59,24 +59,20 @@ if ((count _heliWeapons) > 0) then {
 			_helicopter setFuel 1;
 			if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Refueled AI patrol helicopter.";};
 		};
-		
+				
 		//Update helicopter position and waypoint markers
+		_marker setMarkerText format ["AI %1 (Health: %2)",(typeOf _helicopter),(_helicopter getVariable "durability")];
 		_marker setMarkerPos (getposATL _helicopter);
 		_wpmarker setMarkerPos (getWPPos [_unitGroup,0]);
 		
 		//Destroy helicopter if pilot is killed
-		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&{(isEngineOn _helicopter)}) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
 			_helicopter setFuel 0;
 			_helicopter setVehicleAmmo 0;
 			_helicopter setDamage 1;
 		};
-		
-		//Periodically vary the helicopter's altitude (DevNote: Change flying height every x script cycles instead of using chance?)
-		/*if ((random 1) < 0.3) then {
-			_helicopter flyInHeight (_baseHeight + (random 40));
-		};*/
-		
+
 		//Uncomment to test despawn/respawn process. Destroys helicopter after ~60 seconds of flight
 		/*
 		if ((time - _startTime) > 60) then {
@@ -88,7 +84,7 @@ if ((count _heliWeapons) > 0) then {
 	};
 } else {
 	//For unarmed air vehicles
-	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {		
+	while {!(_helicopter getVariable ["heli_disabled",false]) && {alive _helicopter}} do {		
 		//Check if helicopter fuel is low
 		if (fuel _helicopter < 0.20) then {
 			_helicopter setFuel 1;
@@ -96,29 +92,17 @@ if ((count _heliWeapons) > 0) then {
 		};
 		
 		//Update helicopter position and waypoint markers
+		_marker setMarkerText format ["AI %1 (Health: %2)",(typeOf _helicopter),(_helicopter getVariable "durability")];
 		_marker setMarkerPos (getposATL _helicopter);
 		_wpmarker setMarkerPos (getWPPos [_unitGroup,0]);
 		
 		//Destroy helicopter if pilot is killed
-		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&{(isEngineOn _helicopter)}) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
 			_helicopter setFuel 0;
 			_helicopter setVehicleAmmo 0;
 			_helicopter setDamage 1;
 		};
-		
-		//Periodically vary the helicopter's altitude
-		/*
-		if ((random 1) < 0.3) then {
-			_helicopter flyInHeight (_baseHeight + (random 40));
-		};*/
-		
-		//Uncomment to test despawn/respawn process. Destroys helicopter after ~60 seconds of flight
-		/*
-		if ((time - _startTime) > 60) then {
-			_helicopter setDamage 1;
-		};
-		*/
 		
 		sleep DZAI_refreshRate;
 	};

@@ -17,11 +17,11 @@ _unitGroup = _helicopter getVariable "unitGroup";
 
 _baseHeight = if ((typeOf _helicopter) isKindOf "Helicopter") then {100} else {125};
 
-waitUntil {sleep 0.1; (!isNil "_heliWeapons" && !isNull (driver _helicopter))};
+waitUntil {sleep 0.1; (!isNil "_heliWeapons" && {!isNull (driver _helicopter)})};
 _startTime = time;
 
 if ((count _heliWeapons) > 0) then {
-	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {	
+	while {!(_helicopter getVariable ["heli_disabled",false]) && {alive _helicopter}} do {
 		//Check if helicopter ammunition needs to be replenished
 		{
 			if ((_helicopter ammo _x) < 20) then {
@@ -37,7 +37,7 @@ if ((count _heliWeapons) > 0) then {
 		};
 	
 		//Destroy helicopter if pilot is killed
-		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&{(isEngineOn _helicopter)}) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
 			_helicopter setFuel 0;
 			_helicopter setVehicleAmmo 0;
@@ -53,7 +53,7 @@ if ((count _heliWeapons) > 0) then {
 		sleep DZAI_refreshRate;
 	};
 } else {
-	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {	
+	while {!(_helicopter getVariable ["heli_disabled",false]) && {alive _helicopter}} do {
 		//Check if helicopter fuel is low
 		if (fuel _helicopter < 0.20) then {
 			_helicopter setFuel 1;
@@ -61,7 +61,7 @@ if ((count _heliWeapons) > 0) then {
 		};
 	
 		//Destroy helicopter if pilot is killed
-		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&{(isEngineOn _helicopter)}) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
 			_helicopter setFuel 0;
 			_helicopter setVehicleAmmo 0;

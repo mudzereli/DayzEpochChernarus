@@ -20,4 +20,4 @@ DZAI_MiscItemS = [DZAI_MiscItemS,["ItemZombieParts"]] call DZAI_append;
 (DZAI_tools1 select 3) set [0,"ItemHatchet_DZE"];
 (DZAI_tools1 select 7) set [0,"ItemMatchbox_DZE"];
 
-diag_log "DayZ Epoch loot tables loaded.";
+diag_log "[DZAI] Epoch classnames loaded.";

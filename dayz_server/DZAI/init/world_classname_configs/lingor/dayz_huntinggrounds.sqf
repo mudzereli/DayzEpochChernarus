@@ -9,3 +9,5 @@
 [DZAI_Backpacks1,["DZ_TerminalPack_EP1"]] call DZAI_append;	//T1 backpacks
 [DZAI_Backpacks2,["DZ_GunBag_EP1","DZ_LargeGunBag_EP1"]] call DZAI_append;	//T2 backpacks
 [DZAI_Backpacks3,["DZ_GunBag_EP1","DZ_LargeGunBag_EP1"]] call DZAI_append;	//T3 backpacks
+
+diag_log "[DZAI] DayZ Hunting Grounds classnames loaded.";

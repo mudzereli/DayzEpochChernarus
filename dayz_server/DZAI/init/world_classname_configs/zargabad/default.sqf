@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "Zargabad classnames loaded.";
+diag_log "[DZAI] Zargabad classnames loaded.";

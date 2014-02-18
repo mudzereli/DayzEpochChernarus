@@ -14,10 +14,6 @@ switch (DZAI_modName) do {
 	{
 		#include "epoch\dayz_epoch.sqf"
 	};
-	case "civilian":
-	{
-		#include "chernarus\dayz_civilian.sqf"
-	};
 	case "overwatch":
 	{
 		#include "chernarus\dayz_overwatch.sqf"

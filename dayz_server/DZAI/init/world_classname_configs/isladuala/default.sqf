@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "Isladuala classnames loaded.";
+diag_log "[DZAI] Isladuala classnames loaded.";

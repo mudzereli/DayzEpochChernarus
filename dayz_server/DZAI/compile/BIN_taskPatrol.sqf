@@ -46,17 +46,17 @@ if (isServer) then
 	_grp = _this select 0;
 	_pos = _this select 1;
 	_max_dist = _this select 2;
-	_debug = if ((count _this) > 3) then {_this select 3} else {0};
-	_blacklist = if ((count _this) > 4) then {_blacklist = _this select 4} else {[]};
+	//_debug = if ((count _this) > 3) then {if ((typeName (_this select 3)) != "") then {1} else {0}} else {0};
+	//_blacklist = if ((count _this) > 4) then {_blacklist = _this select 4} else {[]};
+	_debug = !(isNil "DZAI_debugMarkers");
 
-	//_grp setBehaviour _dzai_behavior;
 	_grp setBehaviour "AWARE";
-	//_grp setSpeedMode (["FULL","NORMAL"] call BIS_fnc_selectRandom2);
-	_grp setSpeedMode "FULL";
-	//_grp setCombatMode (["YELLOW", "RED"] call BIS_fnc_selectRandom2);
+	if (_max_dist > 75) then {_grp setSpeedMode "FULL"} else {_grp setSpeedMode "LIMITED"};
 	_grp setCombatMode "RED";
-	//_grp setFormation (["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"] call BIS_fnc_selectRandom2);
 
+	_wpStatements = if (_max_dist >= 100) then {"if ((random 3) > 2) then { group this setCurrentWaypoint [(group this), (floor (random (count (waypoints (group this)))))];} else {_nul = [(group this),100] spawn DZAI_findLootPile;};"} else {"if ((random 3) > 2) then { group this setCurrentWaypoint [(group this), (floor (random (count (waypoints (group this)))))];};"};
+	_wpTimeouts = if (_max_dist >= 100) then {[0, 3, 10]} else {[5, 10, 15]};
+	
 	_center_x = (_pos) select 0;
 	_center_y = (_pos) select 1;
 	_center_z = (_pos) select 2;
@@ -102,7 +102,7 @@ if (isServer) then
 			_prepos = [_x1, _y1];
 		};
 
-		_wp_pos = [_prepos, 0, _slack, 6, 0, 50 * (pi / 180), 0, _blacklist,[_prepos]] call BIS_fnc_findSafePos;
+		_wp_pos = [_prepos, 0, _slack, 6, 0, 50 * (pi / 180), 0, [],[_prepos]] call BIS_fnc_findSafePos;
 		
 		_a = 0 + (_wp_pos select 0);
 		_b = 0 + (_wp_pos select 1);
@@ -141,11 +141,11 @@ if (isServer) then
 			_wp = _grp addWaypoint [_cur_pos, 0];
 			_wp setWaypointType "MOVE";
 			_wp setWaypointCompletionRadius (5 + _slack);
-			_wp setWaypointTimeout [0, 2, 16];
+			_wp setWaypointTimeout [_wpTimeouts select 0, _wpTimeouts select 1, _wpTimeouts select 2];
 			// When completing waypoint have 33% chance to choose a random next wp
-			_wp setWaypointStatements ["true", "if ((random 3) > 2) then { group this setCurrentWaypoint [(group this), (floor (random (count (waypoints (group this)))))];} else {_nul = [(group this),100] spawn DZAI_findLootPile;};"];
+			_wp setWaypointStatements ["true", _wpStatements];
 			
-			if (_debug > 0) then {
+			if (_debug) then {
 				_markername = str (_wp);
 				if ((getMarkerColor _markername) != "") then {deleteMarker _markername};
 				//diag_log format ["DEBUG :: Created patrol waypoint %1.",_markername];
@@ -155,7 +155,7 @@ if (isServer) then
 				_marker setMarkerType "Dot";
 				_marker setMarkerColor "ColorBlue";
 				_marker setMarkerBrush "SolidBorder";
-				_marker setMarkerSize [20, 20];
+				_marker setMarkerSize [10, 10];
 			};
 		};
 		sleep 0.5;

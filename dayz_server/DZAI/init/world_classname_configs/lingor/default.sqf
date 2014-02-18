@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "DayZ Lingor classnames loaded.";
+diag_log "[DZAI] Lingor classnames loaded.";

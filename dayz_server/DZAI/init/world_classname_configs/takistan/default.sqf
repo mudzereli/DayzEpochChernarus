@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "Takistan classnames loaded.";
+diag_log "[DZAI] Takistan classnames loaded.";

@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "Taviana classnames loaded.";
+diag_log "[DZAI] Taviana classnames loaded.";

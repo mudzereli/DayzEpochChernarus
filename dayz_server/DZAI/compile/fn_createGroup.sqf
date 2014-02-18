@@ -9,40 +9,41 @@
 	_trigger: The trigger object responsible for spawning the AI unit.
 	_weapongrade: weapongrade to be used for generating equipment. Influences weapon quality and skill level.
 	
-	Last updated: 6:08 PM 11/1/2013
+	Last updated: 9:57 AM 1/12/2014
 	
 */
 private ["_totalAI","_spawnPos","_unitGroup","_trigger","_attempts","_baseDist","_dummy","_weapongrade"];
 if (!isServer) exitWith {};
 	
 _totalAI = _this select 0;
-_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
+//_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
 _spawnPos = _this select 2;
 _trigger = _this select 3;
 _weapongrade = _this select 4;
 
 _pos = [];
 _attempts = 0;
-_baseDist = 100;
+_baseDist = 25;
 
-while {((count _pos) < 1)&&(_attempts < 3)} do {
-	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Land_Ind_BoardsPack2"];
+while {((count _pos) < 1) && {(_attempts < 3)}} do {
+	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Misc_cargo_cont_small_EP1"];
 	if ((count _pos) > 1) then {
 		_pos = _pos isFlatEmpty [0,0,0.75,5,0,false,ObjNull];
+	} else {
+		_baseDist = (_baseDist + 25);	_attempts = (_attempts + 1);
 	};
-	_baseDist = (_baseDist + 75);	_attempts = (_attempts + 1);
 };
 
 if ((count _pos) < 1) then {
-	_pos = [_spawnPos,0,100,0.5,0,2000,0] call BIS_fnc_findSafePos;
-	if ((_pos distance _spawnPos) > 200) then {_pos = _spawnPos;};
+	_pos = [_trigger,random (125),random(360),false] call SHK_pos;
 	_attempts = (_attempts + 1);
 };
 
 _pos set [2,0];
 
-if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found spawn position at %3 meters away at position %1 after %2 attempts.",_pos,_attempts,(_pos distance _spawnPos)]};
+if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found spawn position at %3 meters away at position %1 after %2 retries.",_pos,_attempts,(_pos distance _spawnPos)]};
 
+_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
 for "_i" from 1 to _totalAI do {
 	private ["_type","_unit","_name"];
 	_type = DZAI_BanditTypes call BIS_fnc_selectRandom2;								// Select skin of AI unit
@@ -50,14 +51,12 @@ for "_i" from 1 to _totalAI do {
 	_unit setPosATL _pos;
 	[_unit] joinSilent _unitGroup;														// Add AI unit to group
 
-	_name = (name _unit);
-	_unit setIdentity _name;	
-	_unit setVariable ["bodyName",_name];												// Set unit body name
-	_unit setVariable ["unithealth",[12000,0,0]];										// Set unit health (blood, hands health, legs health)
+	_unit setVariable ["bodyName",(name _unit)];										// Set unit body name
+	_unit setVariable ["unithealth",[(10000 + (random 2000)),0,false]];					// Set unit health (blood, legs health, legs broken)
 	_unit setVariable ["unconscious",false];											// Set unit consciousness
 
-	if (DZAI_zAggro) then {
-		_unit addEventHandler ["Fired", {_this spawn ai_fired;}];};						// Unit firing causes zombie aggro in the area, like player.
+	if (DZAI_weaponNoise) then {
+		_unit addEventHandler ["Fired", {_this call ai_fired;}];};						// Unit firing causes zombie aggro in the area, like player.
 	if (DZAI_taserAI) then {
 		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
 	} else {
@@ -80,6 +79,9 @@ if (!isNil "_dummy") then {
 
 _unitGroup selectLeader ((units _unitGroup) select 0);
 _unitGroup setVariable ["trigger",_trigger];
-_unitGroup setVariable ["groupSize",_totalAI];
+_unitGroup setVariable ["GroupSize",_totalAI];
+if (isNull _trigger) then {_unitGroup setVariable ["spawnPos",_spawnPos]};
+//DZAI_numAIUnits = DZAI_numAIUnits + _totalAI;
+(DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
 
 _unitGroup

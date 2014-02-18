@@ -5,5 +5,5 @@
 	
 */
 
-diag_log "Fallujah classnames loaded.";
+diag_log "[DZAI] Fallujah classnames loaded.";
  

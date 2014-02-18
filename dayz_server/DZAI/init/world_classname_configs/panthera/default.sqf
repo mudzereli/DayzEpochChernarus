@@ -5,4 +5,4 @@
 	
 */
 
-diag_log "Panthera classnames loaded.";
+diag_log "[DZAI] Panthera classnames loaded.";
