@@ -115,4 +115,4 @@ AllowedVehiclesList = [
 ["Volha_2_TK_CIV_EP1",2 * _multiplier],
 ["VWGolf",2 * _multiplier],
 ["Zodiac",2 * _multiplier]
- * _multiplier];
+];
