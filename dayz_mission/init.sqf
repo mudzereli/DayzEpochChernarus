@@ -112,4 +112,7 @@ call compile preprocessFileLineNumbers "addons\missions\init.sqf";
 call compile preprocessFileLineNumbers "addons\takeclothes\init.sqf";
 call compile preprocessFileLineNumbers "addons\craftvehicles\init.sqf";
 call compile preprocessFileLineNumbers "addons\zombietruck\init.sqf";
+call compile preprocessFileLineNumbers "addons\UPSMON\scripts\Init_UPSMON.sqf";
+call compile preprocessFileLineNumbers "addons\SHK_pos\shk_pos_init.sqf";
+[] execVM "addons\SARGE\SAR_AI_init.sqf";
 [] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
