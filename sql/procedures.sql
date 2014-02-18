@@ -39,10 +39,10 @@ end//
 delimiter ;
 
 /*####### FUNCTIONS BELOW ARE USED TO LOOK UP INFORMATION #######*/
-drop procedure if exists p_view_expired_objects;
+drop procedure if exists p_view_expired_buildables;
 delimiter //
-create procedure p_view_expired_objects(in _DAYS int, in _DELETE int)
-comment 'looks up a list of expired objects based on days since owners last login'
+create procedure p_view_expired_buildables(in _DAYS int, in _DELETE int)
+comment 'looks up a list of expired buildables based on days since owners last login'
 begin
     select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742") order by PLAYERLASTLOGIN;
         
@@ -54,6 +54,30 @@ begin
     end if;
 end//
 delimiter ;
+
+drop procedure if exists p_view_expired_vehicles;
+delimiter //
+create procedure p_view_expired_vehicles(in _DAYS int, in _DELETE int)
+comment 'looks up a list of expired vehicles based on days since it was accessed'
+begin
+    select * from v_object_data where datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]")
+    union all
+    select * from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CATEGORY = "VEHICLE"
+    order by LASTUPDATED;
+        
+    if _DELETE = 1 then
+        drop temporary table if exists tt_objectid;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]") order by LASTUPDATED;
+        insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        drop temporary table if exists tt_objectid;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CATEGORY = "VEHICLE" order by LASTUPDATED;
+        insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+    end if;
+end//
+delimiter ;
+
 
 drop procedure if exists p_lookup_playeruid;
 delimiter //

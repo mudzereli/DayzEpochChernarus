@@ -52,14 +52,15 @@ select a.OBJECTID,
        a.DATESTAMP as BUILTDATE,
        b.CATEGORY,
        a.CLASSNAME,
-       cast(replace(split_str(a.WORLDSPACE,",",1),"[" ,"") as DECIMAL(3,2)) as WORLD_DIR,
-       cast(replace(split_str(a.WORLDSPACE,",",2),"[" ,"") as DECIMAL(5,2)) as WORLD_X,
-       cast(split_str(a.WORLDSPACE,",",3)                  as DECIMAL(5,2)) as WORLD_Y,
-       cast(replace(split_str(a.WORLDSPACE,",",4),"]]","") as DECIMAL(5,2)) as WORLD_Z,
+       a.INVENTORY as OINVENTORY,
+       cast(replace(split_str(a.WORLDSPACE,",",1),"[" ,"") as DECIMAL(10,2)) as WORLD_DIR,
+       cast(replace(split_str(a.WORLDSPACE,",",2),"[" ,"") as DECIMAL(10,2)) as WORLD_X,
+       cast(split_str(a.WORLDSPACE,",",3)                  as DECIMAL(10,2)) as WORLD_Y,
+       cast(replace(split_str(a.WORLDSPACE,",",4),"]]","") as DECIMAL(10,2)) as WORLD_Z,
        a.WORLDSPACE as OWORLDSPACE,
+       a.LASTUPDATED,
        c.*
 from       Object_DATA      a
 inner join v_object_class   b on a.CLASSNAME   = b.CLASSNAME
-left  join v_character_data c on a.CHARACTERID = c.CHARACTERID
-where b.CATEGORY = "DEPLOYABLE" and c.PLAYERUID not in ("147943494","155036742")
+left  join v_character_data c on a.CHARACTERID = c.CHARACTERID and b.CATEGORY = "DEPLOYABLE" and c.PLAYERUID not in ("147943494","155036742")
 order by BUILTDATE desc;
