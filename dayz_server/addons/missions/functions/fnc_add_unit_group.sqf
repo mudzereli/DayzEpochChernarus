@@ -106,7 +106,7 @@ for [{ x=1 },{ x < _numunits+1 },{ x = x + 1; }] do
     removeAllWeapons _aiunit;
     _aiwep1 = _ailoadout select 0;
     _aiammo1 = _ailoadout select 1;
-    _aiunit addweapon _aiwep1;
+    _aiunit addWeapon _aiwep1;
     _aiunit addMagazine _aiammo1;
     _aiunit addMagazine _aiammo1;
     _aiunit removeWeapon "ItemRadio";
@@ -128,7 +128,7 @@ for [{ x=1 },{ x < _numunits+1 },{ x = x + 1; }] do
         _aiunit addMagazine "ItemBandage";
     };
     _aiunit setSkill ["aimingAccuracy",1];
-    _aiunit setSkill ["aimingShake"   ,1];
+    _aiunit setSkill ["aimingShake"   ,0.7];
     _aiunit setSkill ["aimingSpeed"   ,1];
     _aiunit setSkill ["endurance"     ,1];
     _aiunit setSkill ["spotDistance"  ,1];
