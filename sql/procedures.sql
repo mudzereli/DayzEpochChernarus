@@ -28,6 +28,16 @@ begin
 end//
 delimiter ;
 
+drop procedure if exists p_teleport;
+delimiter //
+create procedure p_teleport(in _PLAYERUID text, in _WORLDSPACE text)
+comment 'Transfers all alive characters from one playeruid to a worldspace.'
+begin
+    update character_data set WORLDSPACE = _WORLDSPACE where PLAYERUID = _PLAYERUID and ALIVE = 1;
+	select * from character_data where PLAYERUID = _PLAYERUID and ALIVE = 1;
+end//
+delimiter ;
+
 /*####### FUNCTIONS BELOW ARE USED TO LOOK UP INFORMATION #######*/
 drop procedure if exists p_view_expired_objects;
 delimiter //
