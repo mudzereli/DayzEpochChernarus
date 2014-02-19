@@ -742,7 +742,7 @@ class CfgLoot {
 			"50Rnd_127x107_DSHKM",
 			"48Rnd_40mm_MK19",
 			"100Rnd_127x99_M2",
-			"200Rnd_762x54_PK"
+			"100Rnd_762x54_PK"
 		},
 		{
 			0.10,
