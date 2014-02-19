@@ -7,8 +7,6 @@ LIST OF IMPLEMENTED FEATURES
 ----------------------------
 - [x] 02/13 - More Vehicles @ Hero & Bandit Traders!
 - [x] 02/10 - Locked Vehicles Can't Be Towed
-- [x] 02/09 - Updated To 1.0.4.1
-- [x] 02/08 - Updated To 1.0.4
 - [x] 02/08 - Updated Donator Kits
 - [x] 01/29 - Loadout Donators Get Primary Weapons W/ Class Selection
 - [x] 01/29 - Can Only Respawn @ Big Cities (same # of spawns, more spread over map)
@@ -56,6 +54,8 @@ LIST OF IMPLEMENTED FEATURES
 
 MINOR CHANGES AND TWEAKS
 ------------------------
+- [x] 02/09 - Updated To 1.0.4.1
+- [x] 02/08 - Updated To 1.0.4
 - [x] 02/16 - Update Snap Building Script (Can Snap More Objects & Snap Top To Bottom)
 - [x] 02/16 - Update Epoch Cleanup Script (Should Prevent Mission Crates From Being Wiped)
 - [x] 02/13 - You can now press HOME to bring up the respawn menu if it gets closed somehow 
