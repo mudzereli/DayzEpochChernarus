@@ -94,7 +94,7 @@ if (isServer) then {
                     
             if ((diag_tickTime - _lastGroupClean) > 360) then {
                 //Player Groups Cleanup
-                    if (count units _x==0 && !(_x getVariable["SAR_protect",false])) then {
+                    if (count units _x==0) then {
                         deleteGroup _x;
                         _x = nil;
                     }; 
