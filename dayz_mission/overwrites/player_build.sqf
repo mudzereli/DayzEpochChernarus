@@ -69,15 +69,6 @@ _needNear =     getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions"
                 _reason = "workshop";
             };
         };
-        case "fueltank":
-        {
-            _isNear = count (nearestObjects [player, dayz_fuelsources, _distance]);
-            if(_isNear == 0) then {  
-                _abort = true;
-                _reason = "fuel tank";
-                _distance = 30;
-            };
-        };
     };
 } forEach _needNear;
 
