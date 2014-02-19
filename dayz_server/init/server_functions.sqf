@@ -937,3 +937,4 @@ server_setLocalObjVars = {
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+[] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
