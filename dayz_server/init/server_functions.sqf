@@ -934,8 +934,6 @@ server_setLocalObjVars = {
 	
 	diag_log format["SAFE LOCKED: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player)];
 };
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\missions\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-//call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\objectcleaner\init.sqf";

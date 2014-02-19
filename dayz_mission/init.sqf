@@ -108,7 +108,6 @@ call compile preprocessFileLineNumbers "addons\refuel\init.sqf";
 call compile preprocessFileLineNumbers "addons\safezones\init.sqf";
 call compile preprocessFileLineNumbers "addons\suicide\init.sqf";
 call compile preprocessFileLineNumbers "addons\keyhandler\init.sqf";
-call compile preprocessFileLineNumbers "addons\missions\init.sqf";
 call compile preprocessFileLineNumbers "addons\takeclothes\init.sqf";
 call compile preprocessFileLineNumbers "addons\craftvehicles\init.sqf";
 call compile preprocessFileLineNumbers "addons\zombietruck\init.sqf";
