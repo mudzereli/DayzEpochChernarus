@@ -128,3 +128,43 @@ begin
     order by CREATEDATE desc;
 end//
 delimiter ;
+
+drop procedure if exists p_wipe_data;
+delimiter //
+create procedure p_wipe_data(in _PASSWORD text)
+comment 'wipes ALL DATA from the database - USE WITH CAUTION'
+begin
+    if _PASSWORD = "Dayz2013" then
+        drop table if exists bkCharacter_DATA;
+        create table bkCharacter_DATA as select * from Character_DATA;
+        truncate table Character_DATA;
+        drop table if exists bkObject_DATA;
+        create table bkObject_DATA as select * from Object_DATA;
+        truncate table Object_DATA;
+        drop table if exists bkPlayer_DATA;
+        create table bkPlayer_DATA as select * from Player_DATA;
+        truncate table Player_DATA;
+        drop table if exists bkPlayer_LOGIN;
+        create table bkPlayer_LOGIN as select * from Player_LOGIN;
+        truncate table Player_LOGIN;
+    end if;
+end//
+delimiter ;
+
+drop procedure if exists p_restore_data;
+delimiter //
+create procedure p_restore_data(in _PASSWORD text)
+comment 'restores ALL DATA from the backup tables to the database - USE WITH CAUTION'
+begin
+    if _PASSWORD = "Dayz2013" then
+        truncate table Character_DATA;
+        insert into Character_DATA select * from bkCharacter_DATA;
+        truncate table Object_DATA;
+        insert into Object_DATA select * from bkObject_DATA;
+        truncate table Player_DATA;
+        insert into Player_DATA select * from bkPlayer_DATA;
+        truncate table Player_LOGIN;
+        insert into Player_LOGIN select * from bkPlayer_LOGIN;
+    end if;
+end//
+delimiter ;
