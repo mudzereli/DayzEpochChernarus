@@ -85,4 +85,3 @@ DZMSMinorMax = 900;
 // Do Not Edit Below This Line
 /*=============================================================================================*/
 DZMSVersion = "RC1.1";
-DZMSConfigured = true;

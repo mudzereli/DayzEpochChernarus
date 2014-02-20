@@ -18,7 +18,7 @@ while {_run} do
 	//Lets wait the random time
 	_wait  = round(random _timeVar);
     _startTime = diag_tickTime;
-    waitUntil{ sleep 1;diag_tickTime - _startTime > _wait};
+    waitUntil{ sleep 5;diag_tickTime - _startTime > _wait};
 	
 	//Let's check that there are missions in the array.
 	//If there are none, lets end the timer.
