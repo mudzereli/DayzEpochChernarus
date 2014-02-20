@@ -80,7 +80,6 @@ if (DZAI_staticAI) then {
 	["DZAI_Rogovo",[0,1],[],1] call DZAI_static_spawn;
 	["DZAI_Gorka",[0,2],[],2] call DZAI_static_spawn;
 	["DZAI_NovySobor",[2,1],[],2] call DZAI_static_spawn;
-	["DZAI_StarySobor",[2,0],[],2,2] call DZAI_static_spawn;
 	["DZAI_Kabanino",[1,2],[],1] call DZAI_static_spawn;
 	["DZAI_Lopatino",[0,2],[],2] call DZAI_static_spawn;
 	["DZAI_DevilsCastle",[2,2],['DevilsCastle','DevilsCastle2','Devils3','Devils4'],1] call DZAI_static_spawn;
