@@ -1,4 +1,7 @@
-[] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf";
+//########## BEGIN INSERTED CODE: CONFIG FILE AND ANTIHACK LOAD
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\config\cfg_server.sqf";
+if (INFISTAR_ENABLED) then { [] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf"; };
+//########## END INSERTED CODE: CONFIG FILE AND ANTIHACK LOAD
 
 waituntil {!isnil "bis_fnc_init"};
 
@@ -934,7 +937,10 @@ server_setLocalObjVars = {
 	
 	diag_log format["SAFE LOCKED: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player)];
 };
+
+//########## BEGIN INSERTED CODE: LOAD ALL ADDONS
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\indestructible\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\addons\cleanup\init.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 [] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
+//########## END INSERTED CODE: LOAD ALL ADDONS

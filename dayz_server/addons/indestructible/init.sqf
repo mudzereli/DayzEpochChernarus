@@ -1,5 +1,4 @@
 diag_log text "INDESTRUCTIBLE BASES: loading...";
-call compile preprocessFileLineNumbers "z\addons\dayz_server\addons\indestructible\config.sqf";
 [] spawn {
     private ["_count"];
     waitUntil { !(isNil "sm_done") };
