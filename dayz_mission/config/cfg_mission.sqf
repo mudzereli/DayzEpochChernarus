@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* addons from these folders will be loaded */
-DZ_ADDONS_TO_LOAD = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
+DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
 //########################################################################################
 //### EPOCH CONFIG

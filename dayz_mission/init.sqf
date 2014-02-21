@@ -112,4 +112,4 @@ local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnloc
     diag_log text format["Loading Addon: %1",_x];
     call compile preprocessFileLineNumbers format["addons\%1\init.sqf",_x];
     diag_log text format["Loaded Addon: %1",_x];
-} forEach DZ_ADDONS_TO_LOAD;
+} forEach DZ_MISSION_ADDONS;

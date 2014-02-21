@@ -6,7 +6,7 @@
 INFISTAR_ENABLED = true;
 
 /* load init.sqf files from the following addon folders */
-OTHER_LOAD_ADDONS = ["indestructible","cleanup"];
+DZ_SERVER_ADDONS = ["indestructible","cleanup"];
 
 //########################################################################################
 //### INDESTRUCTIBLE BASES
