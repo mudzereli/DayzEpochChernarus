@@ -40,6 +40,32 @@ union all
 select "HMMWV_Terminal_EP1" as item_class, a.item_type, a.afile, a.qty, a.buy_count, a.buy_class, a.tid from traders_base a where a.item_class = "HMMWV_Ambulance"
 ;
 
+/* TWEAK PRICING TO BE MORE CONVENIENT TO PLAYERS */
+update traders_base a set a.buy_class = "ItemSilverBar", a.buy_count = 1 where a.buy_class = "ItemCopperBar";
+update traders_base a set a.buy_class = "ItemSilverBar", a.buy_count = 1 where a.buy_class = "ItemCopperBar10oz";
+update traders_base a set a.buy_count = 2 where a.buy_count = 1 and a.buy_class = "ItemSilverBar";
+update traders_base a set a.buy_count = 5 where a.buy_count > 5 and a.buy_class = "ItemSilverBar";
+update traders_base a set a.qty = 99999;
+
+/* CREATE NEW TRADERS_DATA TABLE */
+truncate table Traders_DATA;
+insert into Traders_DATA
+select 	a.id,
+		concat('["',a.item_class,'",',a.item_type,']') as item,
+		a.qty,
+		concat('[',greatest(floor(a.buy_count),1),',"',a.buy_class,'",1]') as buy,
+		case	
+			when a.buy_count > 1 then concat('[',greatest(floor(a.buy_count/2),1),',"',a.buy_class,'",1]') 
+			when a.buy_class = "ItemSilverBar10oz" then concat('[5,"ItemSilverBar",1]') 
+			when a.buy_class = "ItemGoldBar10oz" then concat('[5,"ItemGoldBar",1]') 
+			when a.buy_class = "ItemBriefcase100oz" then concat('[5,"ItemGoldBar10oz",1]') 
+			when a.buy_class = "ItemGoldBar" then concat('[1,"ItemSilverBar10oz",1]') 
+		end as sell,
+		0 as `order`,
+		a.tid,
+		a.afile
+from 	traders_base a;
+
 /* add extreme military vehicles */
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'	,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,479,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'  ,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,534,'trade_any_vehicle');
@@ -66,29 +92,3 @@ INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["LandRover_MG_TK_EP1_DZE",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'  ,9999,'[5,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'  ,9999,'[5,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
-
-/* TWEAK PRICING TO BE MORE CONVENIENT TO PLAYERS */
-update traders_base a set a.buy_class = "ItemSilverBar", a.buy_count = 1 where a.buy_class = "ItemCopperBar";
-update traders_base a set a.buy_class = "ItemSilverBar", a.buy_count = 1 where a.buy_class = "ItemCopperBar10oz";
-update traders_base a set a.buy_count = 2 where a.buy_count = 1 and a.buy_class = "ItemSilverBar";
-update traders_base a set a.buy_count = 5 where a.buy_count > 5 and a.buy_class = "ItemSilverBar";
-update traders_base a set a.qty = 99999;
-
-/* CREATE NEW TRADERS_DATA TABLE */
-truncate table Traders_DATA;
-insert into Traders_DATA
-select 	a.id,
-		concat('["',a.item_class,'",',a.item_type,']') as item,
-		a.qty,
-		concat('[',greatest(floor(a.buy_count),1),',"',a.buy_class,'",1]') as buy,
-		case	
-			when a.buy_count > 1 then concat('[',greatest(floor(a.buy_count/2),1),',"',a.buy_class,'",1]') 
-			when a.buy_class = "ItemSilverBar10oz" then concat('[5,"ItemSilverBar",1]') 
-			when a.buy_class = "ItemGoldBar10oz" then concat('[5,"ItemGoldBar",1]') 
-			when a.buy_class = "ItemBriefcase100oz" then concat('[5,"ItemGoldBar10oz",1]') 
-			when a.buy_class = "ItemGoldBar" then concat('[1,"ItemSilverBar10oz",1]') 
-		end as sell,
-		0 as `order`,
-		a.tid,
-		a.afile
-from 	traders_base a;
