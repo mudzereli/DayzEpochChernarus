@@ -1,6 +1,5 @@
 if (isDedicated) exitWith {};
 diag_log text "TAKECLOTHES: initializing...";
-call compile preprocessFileLineNumbers "addons\takeclothes\config.sqf";
 {
     DZ_TAKECLOTHES_MAP = DZ_TAKECLOTHES_MAP + [[_x,"Skin_" + _x]];
 } forEach DZ_TAKECLOTHES_MATCH;

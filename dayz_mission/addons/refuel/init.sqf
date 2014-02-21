@@ -1,5 +1,4 @@
 if (isDedicated) exitWith {};
-call compile preprocessFileLineNumbers "addons\refuel\config.sqf";
 [] spawn {
     private ["_vehicle","_vehicle_refuel_id","_isNearFeed","_last_vehicle"];
     diag_log text "REFUEL: initializing...";

@@ -3,7 +3,6 @@ private ["_distanceTarget","_targetClassName","_isTargetTruck","_loadedZombies",
 diag_log text "ZOMBIE TRUCK: initializing...";
 if (isNil "s_player_unload_zombies") then { s_player_unload_zombies = -1; };
 if (isNil "s_player_load_zombie") then { s_player_load_zombie = -1; };
-call compile preprocessFileLineNumbers "addons\zombietruck\config.sqf";
 unload_zombie_generate = compile preprocessFileLineNumbers "addons\zombietruck\zombie_generate.sqf";
 [] spawn {
     diag_log text "ZOMBIE TRUCK: waiting for login...";

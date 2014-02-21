@@ -1,5 +1,4 @@
 if (isDedicated) exitWith {};
-call compile preprocessFileLineNumbers "addons\newspawn\config.sqf";
 call compile preprocessFileLineNumbers "addons\newspawn\key_map.sqf";
 diag_log text "NEWSPAWN: building functions...";
 pick_location    = compile preprocessFileLineNumbers "addons\newspawn\pick_location.sqf";

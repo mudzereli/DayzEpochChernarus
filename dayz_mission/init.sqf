@@ -96,18 +96,15 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
+//########## TOWING ADDON FROM THE BOX
+[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
+
 //########## OVERWRITES
 local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnlock.sqf";
 
 //########## ADDONS
-call compile preprocessFileLineNumbers "addons\newspawn\init.sqf";
-call compile preprocessFileLineNumbers "addons\bloodbag\init.sqf";
-call compile preprocessFileLineNumbers "addons\buildings\init.sqf";
-call compile preprocessFileLineNumbers "addons\buildplus\init.sqf";
-call compile preprocessFileLineNumbers "addons\refuel\init.sqf";
-call compile preprocessFileLineNumbers "addons\safezones\init.sqf";
-call compile preprocessFileLineNumbers "addons\suicide\init.sqf";
-call compile preprocessFileLineNumbers "addons\keyhandler\init.sqf";
-call compile preprocessFileLineNumbers "addons\takeclothes\init.sqf";
-call compile preprocessFileLineNumbers "addons\zombietruck\init.sqf";
-[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
+{
+    diag_log text format["Loading Addon: %1",_x];
+    call compile preprocessFileLineNumbers format["addons\%1\init.sqf",_x];
+    diag_log text format["Loaded Addon: %1",_x];
+} forEach DZ_ADDONS_TO_LOAD;

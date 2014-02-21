@@ -1,6 +1,5 @@
 if (isDedicated) exitWith {};
 diag_log text "SUICIDE: initializing...";
-call compile preprocessFileLineNumbers "addons\suicide\config.sqf";
 [] spawn {
     private ["_onLadder","_canDo"];
     diag_log text "SUICIDE: waiting for login...";

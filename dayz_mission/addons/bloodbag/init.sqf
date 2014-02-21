@@ -1,7 +1,6 @@
 if (isDedicated) exitWith {};
 private ["_onLadder","_canDo","_mags"];
 diag_log text "SELF BLOODBAG: initializing...";
-call compile preprocessFileLineNumbers "addons\bloodbag\config.sqf";
 [] spawn {
     diag_log text "SELF BLOODBAG: waiting for login...";
     waitUntil{!isNil "PVDZE_plr_LoginRecord"};
