@@ -107,6 +107,7 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 //########## OVERWRITES
 local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnlock.sqf";
 spawn_loot = compile preprocessFileLineNumbers "overwrites\spawn_loot.sqf";
+building_spawnLoot = compile preprocessFileLineNumbers "overwrites\building_spawnLoot.sqf";
 
 //########## ADDONS
 {

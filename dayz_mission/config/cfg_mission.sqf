@@ -59,6 +59,12 @@ EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","
 dayz_fullMoonNights = true;
 
 //########################################################################################
+//### EXTRA LOOT
+//########################################################################################
+/* multiplier for loot chance */
+DZ_LOOTCHANCE_MULTIPLIER = 1;
+
+//########################################################################################
 //### SELF BLOODBAG
 //########################################################################################
 
@@ -324,6 +330,7 @@ switch (DZ_GAMEMODE) do {
         dayz_fullMoonNights = false;
         DZ_NEWSPAWN_PICK_CLASS = false;
         DZ_REFUEL_AUTOMATIC = false;
+        DZ_LOOTCHANCE_MULTIPLIER = 0.5;
     };
     case 2: {
         DZ_LOAD_SARGE_AI = true;
@@ -335,5 +342,6 @@ switch (DZ_GAMEMODE) do {
         DZ_SPAWN_LOOT_MULTIPLIER = 2;
         DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
         DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 3;
+        DZ_LOOTCHANCE_MULTIPLIER = 3;
     };
 };
