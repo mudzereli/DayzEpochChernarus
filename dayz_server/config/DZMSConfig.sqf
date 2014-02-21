@@ -25,7 +25,7 @@ DZMSCleanDeath = false;
 DZMSRunGear = false;
 
 // How long before bodies disappear? (in seconds) (default = 2400)
-DZMSBodyTime = 24;
+DZMSBodyTime = 2400;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // You can adjust the weapons that spawn in weapon crates inside DZMSWeaponCrateList.sqf
@@ -65,19 +65,19 @@ DZMSMinorArray = ["SM1","SM2","SM3","SM4","SM5","SM6"];
 /////////////////////////////////////////////////////////////////////////////////////////////
 // The Minumum time in seconds before a major mission will run.
 // At least this much time will pass between major missions. Default = 650 (10.8 Minutes)
-DZMSMajorMin = 65;
+DZMSMajorMin = 600;
 
 // Maximum time in seconds before a major mission will run.
 // A major mission will always run before this much time has passed. Default = 2000 (33.33 Minutes)
-DZMSMajorMax = 200;
+DZMSMajorMax = 1800;
 
 // Time in seconds before a minor mission will run.
 // At least this much time will pass between minor missions. Default = 600 (10 Minutes)
-DZMSMinorMin = 60;
+DZMSMinorMin = 600;
 
 // Maximum time in seconds before a minor mission will run.
 // A minor mission will always run before this much time has passed. Default = 990 (16.5 Minutes)
-DZMSMinorMax = 99;
+DZMSMinorMax = 1200;
 
 
 
