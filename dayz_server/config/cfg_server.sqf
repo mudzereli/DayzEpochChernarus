@@ -24,14 +24,14 @@ DZ_INDESTRUCTIBLE_CLASSES = ["CinderWallHalf_DZ","CinderWall_DZ","CinderWallDoor
 //########################################################################################
 //### DZMS
 //########################################################################################
-call compile preprocessFileLineNumbers "DZMSConfig.sqf";
+call compile preprocessFileLineNumbers "z\addons\dayz_server\config\DZMSConfig.sqf";
 
 //########################################################################################
 //### DZAI
 //########################################################################################
-call compile preprocessFileLineNumbers "dzai_config.sqf";
+call compile preprocessFileLineNumbers "z\addons\dayz_server\config\dzai_config.sqf";
 
 //########################################################################################
 //### OVERRIDES
 //########################################################################################
-call compile preprocessFileLineNumbers "cfg_server_override.sqf";
+call compile preprocessFileLineNumbers "z\addons\dayz_server\config\cfg_server_override.sqf";
