@@ -18,3 +18,9 @@ DZ_NEWSPAWN_DONATOR_TABLE =
 	[	"Bekool813",                  "236779846",      [],         true,        true      ],
 	[	"Example",                  "000000000",      [],         true,        true      ]
 ];
+
+/* should players be able to choose a class or not? */
+DZ_NEWSPAWN_PICK_CLASS = true;
+
+/* should all players be able to choose a skin? */
+DZ_NEWSPAWN_ALL_SKINS = true;

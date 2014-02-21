@@ -4,10 +4,15 @@ switch (DZ_NEWSPAWN_CREATION_STAGE) do {
 		[] call pick_location;
 	};
 	case 1: {
-		[] call pick_class;
+        if (DZ_NEWSPAWN_PICK_CLASS) then {
+            [] call pick_class;
+        } else {
+            DZ_NEWSPAWN_CREATION_STAGE = 2;
+            [] spawn respawn_handler; 
+        };
 	};
 	case 2: {
-        if (DZ_NEWSPAWN_DONATOR_LOADOUT) then {
+        if (DZ_NEWSPAWN_DONATOR_LOADOUT or DZ_NEWSPAWN_ALL_SKINS) then {
             [] call pick_skin;
         } else {
             DZ_NEWSPAWN_CREATION_STAGE = 3;
