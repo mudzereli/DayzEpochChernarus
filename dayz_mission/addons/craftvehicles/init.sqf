@@ -1,7 +1,5 @@
 if (isDedicated) exitWith {};
 private ["_has_toolbox","_has_parts","_vehicle_class","_parts_required","_required_class","_required_count","_actual_count","_on_ladder","_can_do"];
-diag_log text "CRAFT VEHICLES: initializing...";
-call compile preprocessFileLineNumbers "addons\craftvehicles\config.sqf";
 diag_log text "CRAFT VEHICLES: waiting for login...";
 [] spawn {
     waitUntil{!isNil "PVDZE_plr_LoginRecord"};
