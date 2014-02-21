@@ -2,7 +2,7 @@
 diag_log text "loading config...";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\config\cfg_server.sqf";
 diag_log text "loading antihack if enabled...";
-if (INFISTAR_ENABLED) then { [] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf"; };
+if (DZ_INFISTAR_ENABLED) then { [] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf"; };
 diag_log text "loading server...";
 //########## END INSERTED CODE: CONFIG FILE AND ANTIHACK LOAD
 

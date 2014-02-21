@@ -2,6 +2,9 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
+/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
+DZ_GAMEMODE = 0;
+
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
@@ -289,16 +292,16 @@ DZ_ZOMBIE_TRUCK_LOAD_DISTANCE = 5;
 //########################################################################################
 
 /* multiplier for ALL loot -- stacks with settings below */
-DZ_SPAWN_LOOT_MULTIPLIER = 3;
+DZ_SPAWN_LOOT_MULTIPLIER = 1;
 
 /* multiplier for default loot */
-DZ_SPAWN_LOOT_DEFAULT_MULTIPLIER = 5;
+DZ_SPAWN_LOOT_DEFAULT_MULTIPLIER = 1;
 
 /* multiplier for weapon mag loot */
-DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
+DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 1;
 
 /* multiplier for supply loot */
-DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
+DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 1;
 
 //########################################################################################
 //### SARGE CONFIG
@@ -309,3 +312,28 @@ call compile preprocessFileLineNumbers "config\SAR_config.sqf";
 //### OVERRIDES
 //########################################################################################
 call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
+
+//########################################################################################
+//### GAMEMODE OVERRIDES
+//########################################################################################
+switch (DZ_GAMEMODE) do {
+    case 1: {
+        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones"];
+        DZ_LOAD_SARGE_AI = true;
+        DZE_BuildOnRoads = true;
+        dayz_fullMoonNights = false;
+        DZ_NEWSPAWN_PICK_CLASS = false;
+        DZ_REFUEL_AUTOMATIC = false;
+    };
+    case 2: {
+        DZ_LOAD_SARGE_AI = true;
+        DynamicVehicleDamageHigh = 0;
+        dayz_maxLocalZombies = 50;
+        MaxVehicleLimit = 2000;
+        MaxHeliCrashes= 10;
+        DZ_RESPAWN_VEHICLE_CLASS = "SUV_Camo";
+        DZ_SPAWN_LOOT_MULTIPLIER = 2;
+        DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
+        DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 3;
+    };
+};

@@ -2,8 +2,11 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
+/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
+DZS_GAMEMODE = 0;
+
 /* try to load infistar files if this is set to true */
-INFISTAR_ENABLED = true;
+DZ_INFISTAR_ENABLED = true;
 
 /* load init.sqf files from the following addon folders */
 DZ_SERVER_ADDONS = ["indestructible","cleanup"];
@@ -30,6 +33,20 @@ call compile preprocessFileLineNumbers "z\addons\dayz_server\config\DZMSConfig.s
 //### DZAI
 //########################################################################################
 call compile preprocessFileLineNumbers "z\addons\dayz_server\config\dzai_config.sqf";
+
+//########################################################################################
+//### GAMEMODE
+//########################################################################################
+switch(DZS_GAMEMODE) do {
+    case 1: {
+        DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
+        DZ_DYNAMIC_VEHICLE_MULTIPLIER = 1;
+    };
+    case 2: {
+        DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
+        DZ_DYNAMIC_VEHICLE_MULTIPLIER = 4;
+    };
+};
 
 //########################################################################################
 //### OVERRIDES
