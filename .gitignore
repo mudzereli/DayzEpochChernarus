@@ -2,6 +2,8 @@
 ## Eclipse
 #################
 
+server_install/
+
 *.pydevproject
 .project
 .metadata
