@@ -3,8 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZ_GAMEMODE = -1;
-if (DZ_GAMEMODE = -1) then {DZ_GAMEMODE = floor(random 3);};
+DZS_GAMEMODE = 0;
 
 /* try to load infistar files if this is set to true */
 DZ_INFISTAR_ENABLED = true;
@@ -36,8 +35,14 @@ call compile preprocessFileLineNumbers "z\addons\dayz_server\config\DZMSConfig.s
 call compile preprocessFileLineNumbers "z\addons\dayz_server\config\dzai_config.sqf";
 
 //########################################################################################
+//### OVERRIDES
+//########################################################################################
+call compile preprocessFileLineNumbers "z\addons\dayz_server\config\cfg_server_override.sqf";
+
+//########################################################################################
 //### GAMEMODE
 //########################################################################################
+if (DZS_GAMEMODE == -1) then {DZS_GAMEMODE = floor(random 3);};
 switch(DZS_GAMEMODE) do {
     case 1: {
         DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
@@ -48,8 +53,3 @@ switch(DZS_GAMEMODE) do {
         DZ_DYNAMIC_VEHICLE_MULTIPLIER = 4;
     };
 };
-
-//########################################################################################
-//### OVERRIDES
-//########################################################################################
-call compile preprocessFileLineNumbers "z\addons\dayz_server\config\cfg_server_override.sqf";

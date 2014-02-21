@@ -3,8 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZ_GAMEMODE = -1;
-if (DZ_GAMEMODE = -1) then {DZ_GAMEMODE = floor(random 3);};
+DZ_GAMEMODE = 0;
 
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
@@ -323,6 +322,7 @@ call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
 //########################################################################################
 //### GAMEMODE OVERRIDES
 //########################################################################################
+if (DZ_GAMEMODE == -1) then {DZ_GAMEMODE = floor(random 3);};
 switch (DZ_GAMEMODE) do {
     case 1: {
         DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones"];
@@ -333,7 +333,7 @@ switch (DZ_GAMEMODE) do {
         DZ_REFUEL_AUTOMATIC = false;
         DZ_LOOTCHANCE_MULTIPLIER = 0.5;
         DefaultWeapons = ["ItemFlashlight"]; 
-        DefaultBackpack = "CZ_VestPouch_EP1"; 
+        DefaultBackpack = "CZ_VestPouch_EP1";
     };
     case 2: {
         DZ_LOAD_SARGE_AI = true;
