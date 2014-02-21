@@ -22,7 +22,7 @@ DZMSOpenRamp = "\z\addons\dayz_server\DZMS\Scripts\DZMSOpenRamp.sqf";
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-    private["_mapHardCenter","_isTavi","_centerPos","_pos","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis"];
+    private["_mapHardCenter","_isTavi","_centerPos","_pos","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis","_isBlack"];
   
     //Lets try to use map specific "Novy Sobor Fixes".
     //If the map is unrecognised this function will still work.
@@ -88,8 +88,14 @@ DZMSFindPos = {
 			_disMin = (_pos distance DZMSMinCoords);
 			_okDis = ((_disMaj > 1000) AND (_disMin > 1000));
 			
+            //make sure the point is not blacklisted
+            _isBlack = false;
+            {
+                if ((_pos distance (_x select 0)) <= (_x select 1)) then {_isBlack = true;};
+            } forEach DZMSBlacklistZones;
+
 			//Lets combine all our checks to possibly end the loop
-            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis) then {
+            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis AND !_isBlack) then {
 				if (!(_isTavi)) then {
 					_findRun = false;
 				};
