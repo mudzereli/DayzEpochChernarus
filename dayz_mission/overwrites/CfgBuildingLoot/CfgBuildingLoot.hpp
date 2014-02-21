@@ -37,7 +37,7 @@ class CfgBuildingLoot {
 			{ "","military" },
 			{ "","trash" },
 			{ "Binocular","weapon" },
-			{ "PartPlywoodPack","magazine" },
+			{ "PartPlywoodPack","supplies" },
 			{ "clothes","single" },
 			{ "specialclothes","single" },
 			{ "WeaponHolder_MeleeCrowbar","object" },
@@ -121,7 +121,7 @@ class CfgBuildingLoot {
 			{ "","military" },
 			{ "","trash" },
 			{ "Binocular","weapon" },
-			{ "PartPlywoodPack","magazine" },
+			{ "PartPlywoodPack","supplies" },
 			{ "clothes","single" },
 			{ "specialclothes","single" },
 			{ "WeaponHolder_MeleeCrowbar","object" },
@@ -209,11 +209,11 @@ class CfgBuildingLoot {
 			{ "WeaponHolder_ItemHatchet_DZE","object" },
 			{ "ItemKnife","military" },
 			{ "ItemToolbox","weapon" },
-			{ "ItemWire","magazine" },
-			{ "ItemTankTrap","magazine" },
+			{ "ItemWire","supplies" },
+			{ "ItemTankTrap","supplies" },
 			{ "ItemKeyKit","weapon" },
-			{ "CinderBlocks","magazine" },
-			{ "MortarBucket","magazine" }
+			{ "CinderBlocks","supplies" },
+			{ "MortarBucket","supplies" }
 		};
 		itemChance[] =	{
 			0.01,
@@ -274,8 +274,8 @@ class CfgBuildingLoot {
 			{ "WeaponHolder_ItemHatchet_DZE","object" },
 			{ "ItemKnife","military" },
 			{ "ItemToolbox","weapon" },
-			{ "ItemWire","magazine" },
-			{"ItemTankTrap","magazine"},
+			{ "ItemWire","supplies" },
+			{"ItemTankTrap","supplies"},
 			{"ItemKeyKit","weapon"}
 		};
 		itemChance[] =	{
@@ -381,7 +381,7 @@ class CfgBuildingLoot {
 			{ "","food" },
 			{ "","trash" },
 			{ "Binocular","weapon" },
-			{ "PartPlywoodPack","magazine" }
+			{ "PartPlywoodPack","supplies" }
 		};
 		itemChance[] =	{
 			0.07,
@@ -631,7 +631,7 @@ class CfgBuildingLoot {
 			{ "","generic" },
 			{ "","military" },
 			{ "ItemEtool","weapon" },
-			{ "ItemSandbag","magazine" },
+			{ "ItemSandbag","supplies" },
 			{ "ItemFuelBarrelEmpty","magazine" },
 			{ "ItemFuelPump","magazine" },
 			{ "machineguns","cfglootweapon" }
@@ -713,7 +713,7 @@ class CfgBuildingLoot {
 			{ "","generic" },
 			{ "","military" },
 			{ "ItemEtool","weapon" },
-			{ "ItemSandbag","magazine" },
+			{ "ItemSandbag","supplies" },
 			{ "ItemFuelBarrelEmpty","magazine" },
 			{ "ItemFuelPump","magazine" },
 			{ "machineguns","cfglootweapon" }
@@ -968,7 +968,7 @@ class CfgBuildingLoot {
 		zombieClass[] = {"z_soldier_pilot","z_soldier_heavy"};
 		itemType[] = {
 			{ "ItemEtool","weapon" },
-			{ "ItemSandbag","magazine"},
+			{ "ItemSandbag","supplies"},
 			{ "","military" },
 			{ "ItemWatch","generic" },
 			{ "ItemCompass","generic" },
@@ -1020,10 +1020,10 @@ class CfgBuildingLoot {
 		lootChance = 1;
 		lootPos[] = {};
 		itemType[] = {
-			{ "PartPlywoodPack","magazine" },
-			{ "PartPlankPack","magazine" },
-			{ "CinderBlocks","magazine" },
-			{ "MortarBucket","magazine" },
+			{ "PartPlywoodPack","supplies" },
+			{ "PartPlankPack","supplies" },
+			{ "CinderBlocks","supplies" },
+			{ "MortarBucket","supplies" },
 			{ "bulk_PartGeneric","magazine" },
 			{ "bulk_ItemSandbag","magazine"},
 			{ "bulk_ItemTankTrap","magazine"},
