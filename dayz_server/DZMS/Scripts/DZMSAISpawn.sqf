@@ -127,9 +127,7 @@ _wpfin setWaypointType "CYCLE";
 //diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
 
 // load the unit groups into an array based upon their mission type so they can be cleaned up later
-if (isNil "DZMS_GROUPS_MINOR") then { DZMS_GROUPS_MINOR = []; };
-if (isNil "DZMS_GROUPS_MAJOR") then { DZMS_GROUPS_MAJOR = []; };
 switch(_missionType) do {
-    case 0: {DZMS_GROUPS_MINOR = DZMS_GROUPS_MINOR + [_unitGroup];};
-    case 1: {DZMS_GROUPS_MAJOR = DZMS_GROUPS_MAJOR + [_unitGroup];};
+    case 0: {DZMS_UNITS_MINOR = DZMS_UNITS_MINOR + (units _unitGroup);};
+    case 1: {DZMS_UNITS_MAJOR = DZMS_UNITS_MAJOR + (units _unitGroup);};
 };

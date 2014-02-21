@@ -25,7 +25,7 @@ DZMSCleanDeath = false;
 DZMSRunGear = false;
 
 // How long before bodies disappear? (in seconds) (default = 2400)
-DZMSBodyTime = 2400;
+DZMSBodyTime = 24;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // You can adjust the weapons that spawn in weapon crates inside DZMSWeaponCrateList.sqf

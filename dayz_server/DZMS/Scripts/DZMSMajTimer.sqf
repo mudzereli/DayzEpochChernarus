@@ -29,29 +29,30 @@ while {_run} do
 	_ranMis = floor (random _cntMis);
 	_varName = DZMSMajorArray select _ranMis;
 	
+    // create array of units if it doesn't exist
+    if (isNil "DZMS_UNITS_MAJOR") then { DZMS_UNITS_MAJOR = []; };
+    
     // clean up all the existing units before starting a new one
     {
-        {
-              _x enableSimulation false;
-              _x removeAllMPEventHandlers "mpkilled";
-              _x removeAllMPEventHandlers "mphit";
-              _x removeAllMPEventHandlers "mprespawn";
-              _x removeAllEventHandlers "FiredNear";
-              _x removeAllEventHandlers "HandleDamage";
-              _x removeAllEventHandlers "Killed";
-              _x removeAllEventHandlers "Fired";
-              _x removeAllEventHandlers "GetOut";
-              _x removeAllEventHandlers "GetIn";
-              _x removeAllEventHandlers "Local";
-              clearVehicleInit _x;
-              deleteVehicle _x;
-              deleteGroup (group _x);
-              _x = nil;
-        } forEach units _x;
-    } forEach DZMS_GROUPS_MAJOR;
+        _x enableSimulation false;
+        _x removeAllMPEventHandlers "mpkilled";
+        _x removeAllMPEventHandlers "mphit";
+        _x removeAllMPEventHandlers "mprespawn";
+        _x removeAllEventHandlers "FiredNear";
+        _x removeAllEventHandlers "HandleDamage";
+        _x removeAllEventHandlers "Killed";
+        _x removeAllEventHandlers "Fired";
+        _x removeAllEventHandlers "GetOut";
+        _x removeAllEventHandlers "GetIn";
+        _x removeAllEventHandlers "Local";
+        clearVehicleInit _x;
+        deleteVehicle _x;
+        deleteGroup (group _x);
+        _x = nil;
+    } forEach DZMS_UNITS_MAJOR;
     
     // rebuild the array for the next mission
-    DZMS_GROUPS_MAJOR = [];
+    DZMS_UNITS_MAJOR = [];
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];
