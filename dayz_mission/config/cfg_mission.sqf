@@ -303,9 +303,9 @@ DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
 //########################################################################################
 //### SARGE CONFIG
 //########################################################################################
-call compile preprocessFileLineNumbers "SAR_config.sqf";
+call compile preprocessFileLineNumbers "config\SAR_config.sqf";
 
 //########################################################################################
 //### OVERRIDES
 //########################################################################################
-call compile preprocessFileLineNumbers "cfg_mission_override.sqf";
+call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
