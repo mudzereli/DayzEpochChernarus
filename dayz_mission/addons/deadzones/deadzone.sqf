@@ -4,11 +4,6 @@ diag_log ( "[AGN] Starting Deadzone Commander!" );
 
 private ["_EH_Fired","_inVehicle","_inVehicleLast","_EH_Fired_Vehicle"];
 
-//CONFIGURATION
-AGN_deadZoneMessages = true;                                //Should messages be displayed?
-AGN_safeZone_Vehicles_DisableMountedGuns = true;			//Should players not be able to shoot bullets/projectiles from mounted guns?
-AGN_safeZone_Players_DisableWeaponFiring = true;			//Should players not be able to shoot bullets/projectiles from their weapon(s)?
-
 disableSerialization;
 waitUntil {!isNil "dayz_animalCheck"};
 diag_log text "[AGN] deadzone done waiting -- initializing!";
