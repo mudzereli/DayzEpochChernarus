@@ -12,5 +12,9 @@ if (dayz_combat == 1) then {
 	player setPosATL _ebayrandomspawn;
 	titleText ["Spawned!","PLAIN DOWN",3];
 	titleFadeOut 1;
+    if (DZ_RESPAWN_VEHICLE_CLASS != "NONE") then {
+        _vehicle = DZ_RESPAWN_VEHICLE_CLASS createVehicle(position player);
+        _vehicle setVariable["Mission",1,true];
+    };
 	[] call respawn_handler;
 };

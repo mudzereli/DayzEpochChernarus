@@ -24,3 +24,6 @@ DZ_NEWSPAWN_PICK_CLASS = true;
 
 /* should all players be able to choose a skin? */
 DZ_NEWSPAWN_ALL_SKINS = true;
+
+/* what vehicle should players spawn with? default = "NONE" */
+DZ_RESPAWN_VEHICLE_CLASS = "NONE";
