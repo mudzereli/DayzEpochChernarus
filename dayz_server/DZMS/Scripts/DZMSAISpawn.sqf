@@ -5,10 +5,11 @@
 		UnitCount is the number of units to spawn
 		SkillLevel is the skill number defined in DZMSAIConfig.sqf
 */																		//
-private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wppos1","_wppos2","_wppos3","_wppos4","_wp1","_wp2","_wp3","_wp4","_wpfin"];
+private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wppos1","_wppos2","_wppos3","_wppos4","_wp1","_wp2","_wp3","_wp4","_wpfin","_missionType"];
 _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
+_missionType = _this select 3;
 
 //diag_log format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
 
@@ -124,3 +125,11 @@ _wpfin = _unitGroup addWaypoint [[_xpos,_ypos, 0], _wpRadius];
 _wpfin setWaypointType "CYCLE";
 
 //diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
+
+// load the unit groups into an array based upon their mission type so they can be cleaned up later
+if (isNil "DZMS_GROUPS_MINOR") then { DZMS_GROUPS_MINOR = []; };
+if (isNil "DZMS_GROUPS_MAJOR") then { DZMS_GROUPS_MAJOR = []; };
+switch(_missionType) do {
+    case 0: {DZMS_GROUPS_MINOR = DZMS_GROUPS_MINOR + [_unitGroup];};
+    case 1: {DZMS_GROUPS_MAJOR = DZMS_GROUPS_MAJOR + [_unitGroup];};
+};
