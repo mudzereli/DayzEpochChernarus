@@ -1,4 +1,3 @@
-
 /* BACK UP TRADERS DATA */
 create table if not exists O_Traders_DATA as select * from Traders_DATA;
 
@@ -30,8 +29,6 @@ union all
 select "An2_TK_EP1", a.item_type, a.afile, a.qty, a.buy_count, a.buy_class, a.tid from traders_base a where a.item_class = "AN2_DZ"
 union all
 select "Ka137_PMC", a.item_type, a.afile, a.qty, a.buy_count, a.buy_class, a.tid from traders_base a where a.item_class = "CSJ_GyroC"
-union all
-select "BAF_Merlin_HC3_D", a.item_type, a.afile, a.qty, a.buy_count, a.buy_class, a.tid from traders_base a where a.item_class = "Mi17_Civilian_DZ"
 ;
 
 /* INSERT NEW LAND VEHICLES INTO THE TRADERS USING EXISTING ONES AS TEMPLATES */
@@ -42,6 +39,33 @@ select "TowingTractor" as item_class, a.item_type, a.afile, a.qty, a.buy_count, 
 union all
 select "HMMWV_Terminal_EP1" as item_class, a.item_type, a.afile, a.qty, a.buy_count, a.buy_class, a.tid from traders_base a where a.item_class = "HMMWV_Ambulance"
 ;
+
+/* add extreme military vehicles */
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'	,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'  ,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BRDM2_HQ_Gue",1]'   				,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BRDM2_HQ_Gue",1]'   				,9999,'[2,"ItemBriefcase100oz",1]'	,'[1,"ItemBriefcase100oz",1]'	,0,534,'trade_any_vehicle');
+/* */
+
+/* military vehicles */
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M2",1]'  ,9999,'[4,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M2",1]'  ,9999,'[4,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["UAZ_MG_CDF",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["UAZ_MG_INS",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["Pickup_PK_GUE",1]'  ,9999,'[2,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["Pickup_PK_INS",1]'  ,9999,'[2,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["Offroad_DSHKM_Gue",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["Offroad_DSHKM_INS",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_Armored",1]'  ,9999,'[8,"ItemGoldBar10oz",1]'	,'[4,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_Armored",1]'  ,9999,'[8,"ItemGoldBar10oz",1]'	,'[4,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BTR40_MG_TK_GUE_EP1",1]'  ,9999,'[8,"ItemGoldBar10oz",1]'	,'[4,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BTR40_MG_TK_INS_EP1",1]'  ,9999,'[8,"ItemGoldBar10oz",1]'	,'[4,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BTR40_TK_GUE_EP1",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BTR40_TK_INS_EP1",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["LandRover_MG_TK_EP1_DZE",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["LandRover_MG_TK_EP1_DZE",1]'  ,9999,'[3,"ItemGoldBar10oz",1]'	,'[1,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'  ,9999,'[5,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,479,'trade_any_vehicle');
+INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'  ,9999,'[5,"ItemGoldBar10oz",1]'	,'[2,"ItemGoldBar10oz",1]'	,0,534,'trade_any_vehicle');
 
 /* TWEAK PRICING TO BE MORE CONVENIENT TO PLAYERS */
 update traders_base a set a.buy_class = "ItemSilverBar", a.buy_count = 1 where a.buy_class = "ItemCopperBar";
