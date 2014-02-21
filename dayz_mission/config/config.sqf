@@ -6,6 +6,54 @@
 DZ_ADDONS_TO_LOAD = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
 //########################################################################################
+//### EPOCH CONFIG
+//########################################################################################
+dayZ_instance =	1742;
+dayzHiveRequest = [];
+initialized = false;
+dayz_previousID = 0;
+
+//disable greeting menu 
+player setVariable ["BIS_noCoreConversations", true];
+//disable radio messages to be heard and shown in the left lower corner of the screen
+enableRadio true;
+// May prevent "how are you civillian?" messages from NPC
+enableSentences false;
+
+spawnShoremode = 1; // Default = 1 (on shore)
+spawnArea= 1500; // Default = 1500
+MaxHeliCrashes= 5; // Default = 5
+MaxVehicleLimit = 600; // Default = 50
+MaxDynamicDebris = 100; // Default = 100
+dayz_MapArea = 14000; // Default = 10000
+dayz_maxLocalZombies = 15; // Default = 30
+DZE_teleport = [99999,99999,99999,99999,99999]; 
+DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
+DefaultWeapons = ["ItemFlashlight","Makarov"]; 
+DefaultBackpack = "CZ_VestPouch_EP1"; 
+DZE_BuildingLimit = 9999;
+DZE_MissionLootTable = true;
+
+dayz_paraSpawn = false;
+
+dayz_minpos = -1; 
+dayz_maxpos = 16000;
+
+dayz_sellDistance_vehicle = 10;
+dayz_sellDistance_boat = 30;
+dayz_sellDistance_air = 40;
+
+dayz_maxAnimals = 5; // Default: 8
+dayz_tameDogs = true;
+DynamicVehicleDamageLow = 0; // Default: 0
+DynamicVehicleDamageHigh = 100; // Default: 100
+
+DZE_BuildOnRoads = false; // Default: False
+
+EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
+dayz_fullMoonNights = true;
+
+//########################################################################################
 //### SELF BLOODBAG
 //########################################################################################
 

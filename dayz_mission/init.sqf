@@ -6,8 +6,11 @@ startLoadingScreen ["","RscDisplayLoadCustom"];
 cutText ["","BLACK OUT"];
 enableSaving [false, false];
 
-//REALLY IMPORTANT VALUES
-dayZ_instance =	1742;					//The instance
+//########## BEGIN MODIFIED CODE: LOAD CONFIG FILE
+call compile preprocessFileLineNumbers "config\config.sqf";
+
+/*
+dayZ_instance =	1742;
 dayzHiveRequest = [];
 initialized = false;
 dayz_previousID = 0;
@@ -19,7 +22,6 @@ enableRadio true;
 // May prevent "how are you civillian?" messages from NPC
 enableSentences false;
 
-// DayZ Epoch config
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
@@ -52,6 +54,9 @@ DZE_BuildOnRoads = false; // Default: False
 
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
+*/
+
+//########## END MODIFIED CODE: LOAD CONFIG FILE
 
 //Load in compiled functions
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
