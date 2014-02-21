@@ -325,7 +325,7 @@ call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
 if (DZ_GAMEMODE == -1) then {DZ_GAMEMODE = floor(random 3);};
 switch (DZ_GAMEMODE) do {
     case 1: {
-        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones","buildings"];
+        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones"];
         DZ_LOAD_SARGE_AI = true;
         DZE_BuildOnRoads = true;
         dayz_fullMoonNights = false;
