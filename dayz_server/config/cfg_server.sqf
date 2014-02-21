@@ -2,8 +2,9 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
-/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
-DZS_GAMEMODE = 2;
+/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
+DZ_GAMEMODE = -1;
+if (DZ_GAMEMODE = -1) then {DZ_GAMEMODE = floor(random 3);};
 
 /* try to load infistar files if this is set to true */
 DZ_INFISTAR_ENABLED = true;

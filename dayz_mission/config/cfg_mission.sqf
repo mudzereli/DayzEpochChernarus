@@ -2,8 +2,9 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
-/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
-DZ_GAMEMODE = 2;
+/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
+DZ_GAMEMODE = -1;
+if (DZ_GAMEMODE = -1) then {DZ_GAMEMODE = floor(random 3);};
 
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
@@ -331,6 +332,8 @@ switch (DZ_GAMEMODE) do {
         DZ_NEWSPAWN_PICK_CLASS = false;
         DZ_REFUEL_AUTOMATIC = false;
         DZ_LOOTCHANCE_MULTIPLIER = 0.5;
+        DefaultWeapons = ["ItemFlashlight"]; 
+        DefaultBackpack = "CZ_VestPouch_EP1"; 
     };
     case 2: {
         DZ_LOAD_SARGE_AI = true;
