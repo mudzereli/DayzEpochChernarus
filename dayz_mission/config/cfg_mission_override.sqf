@@ -1,1 +1,1 @@
-DZ_GAMEMODE = 1;
+DZ_GAMEMODE = 2;
