@@ -56,6 +56,11 @@ EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","
 dayz_fullMoonNights = true;
 
 //########################################################################################
+//### SARGE CONFIG
+//########################################################################################
+call compile preprocessFileLineNumbers "SAR_config.sqf";
+
+//########################################################################################
 //### SELF BLOODBAG
 //########################################################################################
 
@@ -283,3 +288,8 @@ DZ_ZOMBIE_TRUCK_LOAD_TIME = 5;
 
 /* Max distance from truck and zombie to load it? (default = 5) */
 DZ_ZOMBIE_TRUCK_LOAD_DISTANCE = 5;
+
+//########################################################################################
+//### OVERRIDES
+//########################################################################################
+call compile preprocessFileLineNumbers "cfg_mission_override.sqf";
