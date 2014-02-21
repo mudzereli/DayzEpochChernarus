@@ -15,7 +15,6 @@ LIST OF IMPLEMENTED FEATURES
 - [x] 01/04 - Install OpenDayz Epoch Cleanup Script
 - [x] 01/03 - Fire Barrels @ Hero & Bandit Traders
 - [x] 01/03 - Hero Trader City now 200m Radius From 300m
-- [x] 01/03 - Can Craft Vehicles W/ Toolbox & Parts [Bike(2xWheel 1xScrap),Moto(2xWheel 1xEngine 1xFueltank 1xScrap),ATV (4xWheel 1xEngine 1xFueltank 1xScrap),Gyro(1xRotor 1xEngine 1xFueltank 2xScrap)]
 - [x] 01/03 - Can Load/Unload Zombies From Cargo Trucks
 - [x] 01/03 - 10m Deadzone Around Protected Areas
 - [x] 12/31 - Add Barricades @ NEAF Air Dealer
