@@ -157,3 +157,4 @@ class DayZ_loadingScreen
 };
 #include "addons\buildplus\points.hpp"
 #include "overwrites\CfgBuildingLoot\CfgBuildingLoot.hpp"
+#include "addons\SARGE\SAR_define.hpp"

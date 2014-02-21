@@ -5,6 +5,8 @@
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
+DZ_LOAD_SARGE_AI = false;
+
 //########################################################################################
 //### EPOCH CONFIG
 //########################################################################################

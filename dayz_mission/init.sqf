@@ -113,3 +113,10 @@ local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnloc
     call compile preprocessFileLineNumbers format["addons\%1\init.sqf",_x];
     diag_log text format["Loaded Addon: %1",_x];
 } forEach DZ_MISSION_ADDONS;
+
+if (DZ_LOAD_SARGE_AI) then {
+   call compile preprocessFileLineNumbers "addons\UPSMON\scripts\Init_UPSMON.sqf";
+   call compile preprocessFileLineNumbers "addons\SHK_pos\shk_pos_init.sqf";
+   [] execVM "addons\SARGE\SAR_AI_init.sqf";
+};
+
