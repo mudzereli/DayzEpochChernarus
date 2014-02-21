@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
-DZS_GAMEMODE = 0;
+DZS_GAMEMODE = 2;
 
 /* try to load infistar files if this is set to true */
 DZ_INFISTAR_ENABLED = true;

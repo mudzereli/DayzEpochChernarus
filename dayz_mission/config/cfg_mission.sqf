@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK */
-DZ_GAMEMODE = 0;
+DZ_GAMEMODE = 2;
 
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
