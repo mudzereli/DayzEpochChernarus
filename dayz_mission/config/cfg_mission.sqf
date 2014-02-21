@@ -56,11 +56,6 @@ EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","
 dayz_fullMoonNights = true;
 
 //########################################################################################
-//### SARGE CONFIG
-//########################################################################################
-call compile preprocessFileLineNumbers "SAR_config.sqf";
-
-//########################################################################################
 //### SELF BLOODBAG
 //########################################################################################
 
@@ -288,6 +283,27 @@ DZ_ZOMBIE_TRUCK_LOAD_TIME = 5;
 
 /* Max distance from truck and zombie to load it? (default = 5) */
 DZ_ZOMBIE_TRUCK_LOAD_DISTANCE = 5;
+
+//########################################################################################
+//### SPAWN LOOT
+//########################################################################################
+
+/* multiplier for ALL loot -- stacks with settings below */
+DZ_SPAWN_LOOT_MULTIPLIER = 3;
+
+/* multiplier for default loot */
+DZ_SPAWN_LOOT_DEFAULT_MULTIPLIER = 5;
+
+/* multiplier for weapon mag loot */
+DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
+
+/* multiplier for supply loot */
+DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
+
+//########################################################################################
+//### SARGE CONFIG
+//########################################################################################
+call compile preprocessFileLineNumbers "SAR_config.sqf";
 
 //########################################################################################
 //### OVERRIDES
