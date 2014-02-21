@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+*.bat
 server_install/
 
 *.pydevproject
