@@ -7,7 +7,7 @@ cutText ["","BLACK OUT"];
 enableSaving [false, false];
 
 //########## BEGIN MODIFIED CODE: LOAD CONFIG FILE
-call compile preprocessFileLineNumbers "config\config.sqf";
+call compile preprocessFileLineNumbers "config\cfg_mission.sqf";
 
 /*
 dayZ_instance =	1742;
