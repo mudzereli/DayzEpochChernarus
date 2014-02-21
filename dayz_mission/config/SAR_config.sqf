@@ -44,7 +44,7 @@ SAR_max_grpsize_survivors = 3;
 // -----------------------------------------------
 // run fix for the issue that bandits cant travel in a vehicle with survivors EXPERIMENTAL, might not work 100% DO NOT ENABLE for the time being
 // -----------------------------------------------
-SAR_FIX_VEHICLE_ISSUE = false;
+SAR_FIX_VEHICLE_ISSUE = true;
 
 // -----------------------------------------------
 // modify AI behaviour
