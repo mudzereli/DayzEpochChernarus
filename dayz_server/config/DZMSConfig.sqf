@@ -65,19 +65,21 @@ DZMSMinorArray = ["SM1","SM2","SM3","SM4","SM5","SM6"];
 /////////////////////////////////////////////////////////////////////////////////////////////
 // The Minumum time in seconds before a major mission will run.
 // At least this much time will pass between major missions. Default = 650 (10.8 Minutes)
-DZMSMajorMin = 600;
+DZMSMajorMin = 65;
 
 // Maximum time in seconds before a major mission will run.
 // A major mission will always run before this much time has passed. Default = 2000 (33.33 Minutes)
-DZMSMajorMax = 1200;
+DZMSMajorMax = 200;
 
 // Time in seconds before a minor mission will run.
 // At least this much time will pass between minor missions. Default = 600 (10 Minutes)
-DZMSMinorMin = 600;
+DZMSMinorMin = 60;
 
 // Maximum time in seconds before a minor mission will run.
 // A minor mission will always run before this much time has passed. Default = 990 (16.5 Minutes)
-DZMSMinorMax = 900;
+DZMSMinorMax = 99;
+
+
 
 /*=============================================================================================*/
 // Do Not Edit Below This Line
