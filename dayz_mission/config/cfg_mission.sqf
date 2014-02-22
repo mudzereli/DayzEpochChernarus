@@ -179,6 +179,7 @@ DZ_NEWSPAWN_DONATOR_TABLE =
 	[	"[BTY]Neux",                  "15708166",      [],         true,        true      ],
 	[	"Bekool813",                  "236779846",      [],         true,        true      ],
 	[	"JustGoNow",                  "129213126",      [],         true,        true      ],
+	[	"Khan_ARG",                  "103418886",      [],         true,        true      ],
 	[	"Example",                  "000000000",      [],         true,        true      ]
 ];
 
