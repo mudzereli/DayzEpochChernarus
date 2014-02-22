@@ -14,6 +14,10 @@ DZMSCntHumanity = 25;
 //(They are deleted on death)
 DZMSUseNVG = true;
 
+// Do you want AI to use RPG7V's?
+//(Only one unit per group spawn will have one)
+DZMSUseRPG = false;
+
 // Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
 
@@ -79,13 +83,14 @@ DZMSMinorMin = 600;
 // A minor mission will always run before this much time has passed. Default = 990 (16.5 Minutes)
 DZMSMinorMax = 990;
 
-// Blacklist Zone Array -- format: [[x,y,z],radius]
+// Blacklist Zone Array -- missions will not spawn in these areas
+// format: [[x,y,z],radius]
 DZMSBlacklistZones = [
-    [[06325,07807,0],500], //stary
-    [[04063,11664,0],500], //klen
-    [[11447,11364,0],500], //bash
-    [[01606,07803,0],400], //hero
-    [[12944,12766,0],400]  //bandit
+    [[06325,07807,0],300], //stary
+    [[04063,11664,0],300], //klen
+    [[11447,11364,0],300], //bash
+    [[01606,07803,0],200], //hero
+    [[12944,12766,0],200]  //bandit
 ];
 
 /*=============================================================================================*/

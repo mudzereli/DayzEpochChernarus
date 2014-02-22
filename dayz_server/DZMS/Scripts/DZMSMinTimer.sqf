@@ -30,7 +30,7 @@ while {_run} do
 	_varName = DZMSMinorArray select _ranMis;
     
     // create array of units if it doesn't exist
-	if (isNil "DZMS_UNITS_MINOR") then { DZMS_UNITS_MINOR = []; };
+    if (isNil "DZMS_UNITS_MINOR") then { DZMS_UNITS_MINOR = []; };
     
     // clean up all the existing units before starting a new one
     {
