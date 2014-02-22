@@ -1,4 +1,4 @@
-DZS_GAMEMODE = 2;
+DZS_GAMEMODE = 1;
 DZMSBodyTime = 300;
 DZMSBlacklistZones = [
     [[06325,07807,0],600], //stary
@@ -7,8 +7,3 @@ DZMSBlacklistZones = [
     [[01606,07803,0],400], //hero
     [[12944,12766,0],400]  //bandit
 ];
-DZMSMajorMin = 30;
-DZMSMajorMax = 30;
-DZMSMinorMin = 30;
-DZMSMinorMax = 30;
-DZMSRequiredKillPercent = 0.75;

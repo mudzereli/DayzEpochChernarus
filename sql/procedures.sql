@@ -134,7 +134,7 @@ delimiter //
 create procedure p_wipe_data(in _PASSWORD text)
 comment 'wipes ALL DATA from the database - USE WITH CAUTION'
 begin
-    if _PASSWORD = "Dayz2013" then
+    if _PASSWORD = "DELETE" then
         drop table if exists bkCharacter_DATA;
         create table bkCharacter_DATA as select * from Character_DATA;
         truncate table Character_DATA;
@@ -156,7 +156,7 @@ delimiter //
 create procedure p_restore_data(in _PASSWORD text)
 comment 'restores ALL DATA from the backup tables to the database - USE WITH CAUTION'
 begin
-    if _PASSWORD = "Dayz2013" then
+    if _PASSWORD = "DELETE" then
         truncate table Character_DATA;
         insert into Character_DATA select * from bkCharacter_DATA;
         truncate table Object_DATA;

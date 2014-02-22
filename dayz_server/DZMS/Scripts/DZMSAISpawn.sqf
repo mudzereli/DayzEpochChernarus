@@ -5,7 +5,7 @@
 		UnitCount is the number of units to spawn
 		SkillLevel is the skill number defined in DZMSAIConfig.sqf
 */																		//
-private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wppos1","_wppos2","_wppos3","_wppos4","_wp1","_wp2","_wp3","_wp4","_wpfin","_unitArrayName"];
+private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wppos1","_wppos2","_wppos3","_wppos4","_wp1","_wp2","_wp3","_wp4","_wpfin","_unitArrayName","_unitMissionCount"];
 _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
@@ -135,5 +135,8 @@ _wpfin setWaypointType "CYCLE";
 //diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
 
 // load the unit groups into a passed array name so they can be cleaned up later
-call compile format["%1 = %1 + (units _unitGroup);",_unitArrayName];
-diag_log text format["[DZMS]: %1 AI Spawned, %2 units in this mission type's array.",count (units _unitGroup),count compile format["%1",_unitArrayName]];
+call compile format["
+%1 = %1 + (units _unitGroup); 
+_unitMissionCount = count %1;
+",_unitArrayName];
+diag_log format["[DZMS]: (%3) %1 AI Spawned, %2 units in mission.",count (units _unitGroup),_unitMissionCount,_unitArrayName];

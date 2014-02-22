@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+*.lnk
 *.bat
 server_install/
 
