@@ -4,6 +4,12 @@
 */
 private ["_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_objHupDiff","_needNear","_vehicle","_inVehicle","_previewCounter","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap"];
 
+//### BEGIN INSERTED CODE: CHECK IF PLAYER IS ADMIN
+private["_isAdmin"];
+_isAdmin = false;
+if ((getPlayerUID player) in DZ_BUILDPLUS_ADMINS) then { _isAdmin = true; };
+//### END INSERTED CODE: CHECK IF PLAYER IS ADMIN
+
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
 
@@ -40,7 +46,7 @@ closeDialog 1;
 if (_isWater) exitWith {DZE_ActionInProgress = false; cutText [localize "str_player_26", "PLAIN DOWN"];};
 if (_inVehicle) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_42"), "PLAIN DOWN"];};
 if (_onLadder) exitWith {DZE_ActionInProgress = false; cutText [localize "str_player_21", "PLAIN DOWN"];};
-if (player getVariable["combattimeout", 0] >= time) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_43"), "PLAIN DOWN"];};
+if (player getVariable["combattimeout", 0] >= time && !_isAdmin) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_43"), "PLAIN DOWN"];};
 
 _item = _this;
 
@@ -72,8 +78,7 @@ _needNear =     getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions"
     };
 } forEach _needNear;
 
-
-if(_abort) exitWith {
+if(_abort && !_isAdmin) exitWith {
     cutText [format[(localize "str_epoch_player_135"),_reason,_distance], "PLAIN DOWN"];
     DZE_ActionInProgress = false;
 };
@@ -134,9 +139,9 @@ _IsNearUnownedPlot = count (_findNearestUnownedPole);
 
 // If item is plot pole and another one exists within 45m
 if (DZ_BUILDPLUS_PLOT_IN_PLOT) then {
-    if(_isPole && _IsNearUnownedPlot > 0) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+    if(_isPole && _IsNearUnownedPlot > 0 && !_isAdmin) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
 } else {
-    if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+    if(_isPole && _IsNearPlot > 0 && !_isAdmin) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
 };
 
 if(_IsNearPlot == 0) then {
@@ -173,22 +178,22 @@ if(_IsNearPlot == 0) then {
     };
 };
 
-if(!_canBuildOnPlot && _IsNearUnownedPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText ["Plot already controlled. If you have recently died and you own the plot, you must remove and replace the plot pole to re-claim it.", "PLAIN DOWN"]; };
+if(!_canBuildOnPlot && _IsNearUnownedPlot > 0 && !_isAdmin) exitWith {  DZE_ActionInProgress = false; cutText ["Plot already controlled. If you have recently died and you own the plot, you must remove and replace the plot pole to re-claim it.", "PLAIN DOWN"]; };
 // _message
-if(!_canBuildOnPlot) exitWith {  DZE_ActionInProgress = false; cutText [format[(localize "STR_EPOCH_PLAYER_135"),_needText,_distance] , "PLAIN DOWN"]; };
+if(!_canBuildOnPlot && !_isAdmin) exitWith {  DZE_ActionInProgress = false; cutText [format[(localize "STR_EPOCH_PLAYER_135"),_needText,_distance] , "PLAIN DOWN"]; };
 
 _missing = "";
 _hasrequireditem = true;
 {
     _hastoolweapon = _x in weapons player;
-    if(!_hastoolweapon) exitWith { _hasrequireditem = false; _missing = getText (configFile >> "cfgWeapons" >> _x >> "displayName"); }
+    if(!_hastoolweapon && !_isAdmin) exitWith { _hasrequireditem = false; _missing = getText (configFile >> "cfgWeapons" >> _x >> "displayName"); }
 } forEach _require;
 
 _hasbuilditem = _this in magazines player;
-if (!_hasbuilditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_player_31"),_text,"build"] , "PLAIN DOWN"]; };
+if (!_hasbuilditem && !_isAdmin) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_player_31"),_text,"build"] , "PLAIN DOWN"]; };
 
-if (!_hasrequireditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_epoch_player_137"),_missing] , "PLAIN DOWN"]; };
-if (_hasrequireditem) then {
+if (!_hasrequireditem && !_isAdmin) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_epoch_player_137"),_missing] , "PLAIN DOWN"]; };
+if (_hasrequireditem || _isAdmin) then {
 
     _location = [0,0,0];
     _isOk = true;
@@ -336,7 +341,7 @@ if (_hasrequireditem) then {
             detach _object;
         };
 
-        if (player getVariable["combattimeout", 0] >= time) exitWith {
+        if (player getVariable["combattimeout", 0] >= time && !_isAdmin) exitWith {
             _isOk = false;
             _cancel = true;
             _reason = (localize "str_epoch_player_43");
@@ -363,8 +368,8 @@ if (_hasrequireditem) then {
     };
 
     // No building in trader zones
-    if(!canbuild) then { _cancel = true; _reason = "Cannot build in a city."; };
-    if(!placevault) then { _cancel = true; _reason = "Cannot build in a city."; };
+    if(!canbuild && !_isAdmin) then { _cancel = true; _reason = "Cannot build in a city."; };
+    if(!placevault && !_isAdmin) then { _cancel = true; _reason = "Cannot build in a city."; };
 
     if(!_cancel) then {
 

@@ -61,6 +61,7 @@ dayz_fullMoonNights = true;
 //########################################################################################
 //### EXTRA LOOT
 //########################################################################################
+
 /* multiplier for loot chance */
 DZ_LOOTCHANCE_MULTIPLIER = 1;
 
@@ -132,6 +133,9 @@ DZ_BUILDPLUS_NO_PLOT_ITEMS = [
     "WoodSmallWallThird_DZ",
     "Land_DZE_LargeWoodDoor"
 ];
+
+/* these players can build anywhere */
+DZ_BUILDPLUS_ADMINS = ["38130182"];
 
 //########################################################################################
 //### CRAFT VEHICLES
@@ -340,7 +344,7 @@ switch (DZ_GAMEMODE) do {
         DZ_LOAD_SARGE_AI = true;
         DynamicVehicleDamageHigh = 0;
         dayz_maxLocalZombies = 50;
-        MaxVehicleLimit = 2000;
+        MaxVehicleLimit = 1000;
         MaxHeliCrashes= 10;
         DZ_RESPAWN_VEHICLE_CLASS = "MMT_Civ";
         DZ_SPAWN_LOOT_MULTIPLIER = 2;
