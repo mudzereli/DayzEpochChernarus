@@ -47,9 +47,11 @@ switch(DZS_GAMEMODE) do {
     case 1: {
         DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
         DZ_DYNAMIC_VEHICLE_MULTIPLIER = 1;
+        DZAI_maxHeliPatrols = 2;
     };
     case 2: {
         DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
         DZ_DYNAMIC_VEHICLE_MULTIPLIER = 4;
+        DZAI_maxHeliPatrols = 4;
     };
 };
