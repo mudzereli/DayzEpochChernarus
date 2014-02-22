@@ -11,3 +11,4 @@ DZMSMajorMin = 30;
 DZMSMajorMax = 30;
 DZMSMinorMin = 30;
 DZMSMinorMax = 30;
+DZMSRequiredKillPercent = 0.75;

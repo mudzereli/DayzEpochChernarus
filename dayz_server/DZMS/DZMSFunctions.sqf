@@ -3,7 +3,7 @@
 	by Vampire
 */
 
-diag_log text "[DZMS]: loading execVM scripts.";
+diag_log text "[DZMS]: loading execVM sqf scripts.";
 DZMSMajTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
 DZMSMinTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
 DZMSMarkerLoop = "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
@@ -204,13 +204,13 @@ DZMSGetWeapon = {
 };
 
 DZMSWaitMissionComp = {
-    private["_objective","_unitArray","_numSpawned","_numKillReq"];
+    private["_objective","_unitArrayName","_numSpawned","_numKillReq"];
     _objective = _this select 0;
-    _unitArray = _this select 1;
-    _numSpawned = count _unitArray;
-    _numKillReq = ceil(DZMSAIKillPctReq * _numSpawned);
+    _unitArrayName = _this select 1;
+    _numSpawned = count compile format["%1",_unitArrayName];
+    _numKillReq = ceil(DZMSRequiredKillPercent * _numSpawned);
     diag_log text format["[DZMS]: Mission will complete if %1/%2 units or less are alive and player is near objective.",(_numSpawned - _numKillReq),_numSpawned];
-    waitUntil{({isPlayer _x && _x distance _objective <= 30} count playableUnits > 0) && ({alive _x} count _unitArray <= (_numSpawned - _numKillReq));};
+    waitUntil{({isPlayer _x && _x distance _objective <= 30} count playableUnits > 0) && ({alive _x} count compile format["%1",_unitArrayName] <= (_numSpawned - _numKillReq));};
 };
 
 //------------------------------------------------------------------//

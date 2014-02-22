@@ -46,10 +46,10 @@ while {_run} do
         deleteVehicle _x;
         deleteGroup (group _x);
         _x = nil;
-    } forEach DZMSUnitArrayMajor;
+    } forEach DZMSUnitsMajor;
     
     // rebuild the array for the next mission
-    DZMSUnitArrayMajor = [];
+    DZMSUnitsMajor = [];
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];

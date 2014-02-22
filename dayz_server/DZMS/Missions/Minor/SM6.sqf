@@ -36,17 +36,17 @@ _crate2 = createVehicle ["RULaunchersBox",[(_coords select 0) - 6, _coords selec
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[_coords,3,0,DZMSUnitArrayMinor] call DZMSAISpawn;
+[_coords,3,0,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 1;
-[_coords,3,0,DZMSUnitArrayMinor] call DZMSAISpawn;
+[_coords,3,0,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 1;
-[_coords,3,0,DZMSUnitArrayMinor] call DZMSAISpawn;
+[_coords,3,0,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 1;
-[_coords,3,0,DZMSUnitArrayMinor] call DZMSAISpawn;
+[_coords,3,0,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 1;
 
 //Wait until the player is within 30 meters and also meets the kill req
-[_coords,DZMSUnitArrayMinor] call DZMSWaitMissionComp;
+[_coords,"DZMSUnitsMinor"] call DZMSWaitMissionComp;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;

@@ -98,8 +98,8 @@ if (DZMSEpoch) then {
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSFunctions.sqf";
 
 // these arrays are used to hold units for each mission type
-DZMSUnitArrayMinor = [];
-DZMSUnitArrayMajor = [];
+DZMSUnitsMinor = [];
+DZMSUnitsMajor = [];
 
 // Let's get the clocks running!
 [] ExecVM DZMSMajTimer;

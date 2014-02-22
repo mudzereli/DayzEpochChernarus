@@ -48,11 +48,11 @@ sleep 5;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[_coords,6,1,DZMSUnitArrayMajor] call DZMSAISpawn;
+[_coords,6,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
-[_coords,6,1,DZMSUnitArrayMajor] call DZMSAISpawn;
+[_coords,6,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
-[_coords,4,1,DZMSUnitArrayMajor] call DZMSAISpawn;
+[_coords,4,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
 
 _loop = true;
@@ -151,7 +151,7 @@ clearBackpackCargoGlobal _boxFin;
 [_boxFin] call DZMSProtectObj;
 
 //Wait until the player is within 30 meters and also meets the kill req
-[_boxFin,DZMSUnitArrayMajor] call DZMSWaitMissionComp;
+[_boxFin,"DZMSUnitsMajor"] call DZMSWaitMissionComp;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The AN2 Cargo has been Secured by Survivors!", "PLAIN",6] call RE;
