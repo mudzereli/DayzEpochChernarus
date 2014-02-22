@@ -393,4 +393,4 @@ SAR_sniper_tools = [["ItemMap",50],["ItemCompass",30]];
 // ---------------------------------------------------------------------------------------------------------------------
 
 // define the type of heli(s) you want to use here for the heli patrols - make sure you include helis that have minimum 2 gunner positions, anything else might fail
-SAR_heli_type=[];
+SAR_heli_type=["UH1H_DZ","Mi17_DZ"];
