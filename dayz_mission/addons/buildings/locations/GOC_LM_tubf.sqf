@@ -6754,6 +6754,10 @@ if (true) then
   _bldObj setVehicleLock "LOCKED";
 };
 
+/*
+
+//### THESE CLASSNAMES CAUSE ISSUES ON SOME ARMA INSTALLS
+
 _bldObj = objNull;
 if (true) then
 {
@@ -6811,7 +6815,6 @@ if (true) then
   _bldObj setVehicleLock "LOCKED";
 };
 
-
 _bldObj = objNull;
 if (true) then
 {
@@ -6857,6 +6860,7 @@ if (true) then
   _bldObj setVehicleLock "LOCKED";
 };
 
+*/
 
 
 // END OF MAP
