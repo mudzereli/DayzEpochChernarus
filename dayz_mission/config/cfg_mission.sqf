@@ -246,7 +246,7 @@ DZ_SUICIDE_MESSAGE_2 = "There's no reason to go on living now...";
 DZ_SUICIDE_MESSAGE_3 = "I refuse to become one of those, those THINGS!";
 
 /* Final message displayed during suicide sequence */
-DZ_SUICIDE_MESSAGE_4 = "This is the end!";
+DZ_SUICIDE_MESSAGE_4 = "There's no turning back now!";
 
 //########################################################################################
 //### TAKECLOTHES
@@ -332,6 +332,7 @@ switch (DZ_GAMEMODE) do {
         DZ_NEWSPAWN_PICK_CLASS = false;
         DZ_REFUEL_AUTOMATIC = false;
         DZ_LOOTCHANCE_MULTIPLIER = 0.5;
+        DefaultMagazines = []; 
         DefaultWeapons = ["ItemFlashlight"]; 
         DefaultBackpack = "CZ_VestPouch_EP1";
     };
@@ -341,7 +342,7 @@ switch (DZ_GAMEMODE) do {
         dayz_maxLocalZombies = 50;
         MaxVehicleLimit = 2000;
         MaxHeliCrashes= 10;
-        DZ_RESPAWN_VEHICLE_CLASS = "SUV_Camo";
+        DZ_RESPAWN_VEHICLE_CLASS = "MMT_Civ";
         DZ_SPAWN_LOOT_MULTIPLIER = 2;
         DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
         DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 3;
