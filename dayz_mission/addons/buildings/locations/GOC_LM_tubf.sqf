@@ -6748,7 +6748,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["UH1Wreck", [8631.7354, 10116.486], [], 0, "CAN_COLLIDE"];
+  _bldObj = createVehicle ["UH1Wreck_DZ", [8631.7354, 10116.486], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 227.14;
   _bldObj setPos [8631.7354, 10116.486];
   _bldObj setVehicleLock "LOCKED";

@@ -19595,7 +19595,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["UH1Wreck", [11993.609, 12669.661], [], 0, "CAN_COLLIDE"];
+  _bldObj = createVehicle ["UH1Wreck_DZ", [11993.609, 12669.661], [], 0, "CAN_COLLIDE"];
   _bldObj setDir -58.63818;
   _bldObj setPos [11993.609, 12669.661];
   _bldObj setPosASL [11993.609, 12669.661, 159];
@@ -19606,7 +19606,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["UH1Wreck", [12273.031, 12578.459], [], 0, "CAN_COLLIDE"];
+  _bldObj = createVehicle ["UH1Wreck_DZ", [12273.031, 12578.459], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 189.48978;
   _bldObj setPos [12273.031, 12578.459];
   _bldObj setPosASL [12273.031, 12578.459, 160];
