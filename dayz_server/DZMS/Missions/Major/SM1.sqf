@@ -42,17 +42,17 @@ _crate3 = createVehicle ["AmmoBoxSmall_556",[(_coords select 0) + 4.0996,(_coord
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,DZMSUnitArrayMajor] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,DZMSUnitArrayMajor] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],4,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],4,1,DZMSUnitArrayMajor] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],4,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],4,1,DZMSUnitArrayMajor] call DZMSAISpawn;
 sleep 5;
 
 //Wait until the player is within 30 meters and also meets the kill req
-[1] call DZMSWaitMissionComp;
+[_coords,DZMSUnitArrayMajor] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

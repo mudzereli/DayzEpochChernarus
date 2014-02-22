@@ -48,17 +48,17 @@ _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 8, _coords selec
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],4,0,0] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 20, (_coords select 1) - 15,0],4,0,DZMSUnitArrayMinor] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 10, (_coords select 1) + 15,0],4,0,0] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 10, (_coords select 1) + 15,0],4,0,DZMSUnitArrayMinor] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) - 10, (_coords select 1) - 15,0],4,0,0] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 10, (_coords select 1) - 15,0],4,0,DZMSUnitArrayMinor] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],4,0,0] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 20, (_coords select 1) + 15,0],4,0,DZMSUnitArrayMinor] call DZMSAISpawn;
 sleep 3;
 
 //Wait until the player is within 30 meters and also meets the kill req
-[0] call DZMSWaitMissionComp;
+[_coords,DZMSUnitArrayMinor] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
