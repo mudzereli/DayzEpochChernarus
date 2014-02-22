@@ -30,7 +30,8 @@ sleep 5;
 [_coords,2,1,0] ExecVM DZMSAISpawn;
 sleep 1;
 
-waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 };
+//Wait until the player is within 30 meters and also meets the kill req
+[0] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

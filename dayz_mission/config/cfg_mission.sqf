@@ -178,6 +178,7 @@ DZ_NEWSPAWN_DONATOR_TABLE =
 	[	"Barkity",                  "40113734",      [],         true,        true      ],
 	[	"[BTY]Neux",                  "15708166",      [],         true,        true      ],
 	[	"Bekool813",                  "236779846",      [],         true,        true      ],
+	[	"JustGoNow",                  "129213126",      [],         true,        true      ],
 	[	"Example",                  "000000000",      [],         true,        true      ]
 ];
 
@@ -185,7 +186,7 @@ DZ_NEWSPAWN_DONATOR_TABLE =
 DZ_NEWSPAWN_PICK_CLASS = true;
 
 /* should all players be able to choose a skin? */
-DZ_NEWSPAWN_ALL_SKINS = true;
+DZ_NEWSPAWN_ALL_SKINS = false;
 
 /* what vehicle should players spawn with? default = "NONE" */
 DZ_RESPAWN_VEHICLE_CLASS = "NONE";

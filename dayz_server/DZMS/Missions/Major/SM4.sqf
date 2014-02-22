@@ -38,7 +38,7 @@ _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6.1718,(_coords s
 [_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
-_crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 2.9824,(_coords select 1) + 4.0,0],[], 90, "CAN_COLLIDE"];
+_crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 7.1718,(_coords select 1) + 1.6426,0],[], 0, "CAN_COLLIDE"];
 [_crate2,"weapons"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 
@@ -53,8 +53,8 @@ sleep 5;
 [[(_coords select 0) + 7.5337,(_coords select 1) + 4.2656,0],4,1,1] ExecVM DZMSAISpawn;
 sleep 5;
 
-//Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
+//Wait until the player is within 30 meters and also meets the kill req
+[1] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

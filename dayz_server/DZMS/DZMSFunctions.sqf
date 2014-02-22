@@ -198,6 +198,16 @@ DZMSGetWeapon = {
 	_fin
 };
 
+DZMSWaitMissionComp = {
+    private["_unitArray","_numSpawned","_numKillReq"];
+    switch(_this select 0) do {
+        case 0: {_unitArray = DZMS_UNITS_MINOR;};
+        case 1: {_unitArray = DZMS_UNITS_MAJOR;};
+    };
+    _numSpawned = count _unitArray;
+    _numKillReq = ceil(DZMSAIKillPctReq * _numSpawned);
+    waitUntil{({isPlayer _x && _x distance _coords <= 30} count playableUnits > 0) && ({alive _x} count _unitArray < (_numSpawned - _numKillReq));};
+};
 
 //------------------------------------------------------------------//
 diag_log format ["[DZMS]: Mission Functions Script Loaded!"];

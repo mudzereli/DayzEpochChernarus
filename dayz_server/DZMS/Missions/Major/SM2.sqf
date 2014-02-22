@@ -150,8 +150,8 @@ clearBackpackCargoGlobal _boxFin;
 [_boxFin,"weapons"] ExecVM DZMSBoxSetup;
 [_boxFin] call DZMSProtectObj;
 
-//Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _boxFin <= 30 } count playableunits > 0}; 
+//Wait until the player is within 30 meters and also meets the kill req
+[1] call DZMSWaitMissionComp;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The AN2 Cargo has been Secured by Survivors!", "PLAIN",6] call RE;

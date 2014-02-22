@@ -35,8 +35,8 @@ sleep 1;
 [_coords,3,1,0] ExecVM DZMSAISpawn;
 sleep 1;
 
-//Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
+//Wait until the player is within 30 meters and also meets the kill req
+[0] call DZMSWaitMissionComp;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
