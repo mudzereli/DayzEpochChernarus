@@ -3,7 +3,7 @@ _target = _this select 0;
 _caller = _this select 1;
 if (isNil "ib_refueling_in_progress") then { ib_refueling_in_progress = false; };
 if (!ib_refueling_in_progress) then {
-    _isNearFeed = count ((position _caller) nearObjects ["Land_A_FuelStation_Feed", 10]) > 0;
+    _isNearFeed = count (((position _caller) nearObjects ["Land_A_FuelStation_Feed", 10]) + ((position _caller) nearObjects ["FuelPump_DZ", 10])) > 0;
     if (!_isNearFeed) then {
         if (!DZ_REFUEL_AUTOMATIC) then {
             titleText ["You must be near a fuel station pump.", "PLAIN DOWN", 3];
