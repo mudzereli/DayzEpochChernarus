@@ -3817,7 +3817,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["FuelPump_DZ", [11445.943, 11393.387], [], 0, "CAN_COLLIDE"];
+  _bldObj = createVehicle ["Land_A_FuelStation_Feed", [11445.943, 11393.387], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 22.75;
   _bldObj setPosASL [11445.943, 11393.387, 317.45];
   _bldObj setVectorUp [0,0,0.01];
@@ -5104,15 +5104,6 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["Generator_DZ", [11446.193, 11394.057], [], 0, "CAN_COLLIDE"];
-  _bldObj setDir -67.48;
-  _bldObj setPosASL [11446.193, 11394.057, 318.15];
-  _bldObj setVectorUp [0,0,0.01];
-};
-
-_bldObj = objNull;
-if (true) then
-{
   _bldObj = createVehicle ["MAP_F_postel_panelak2", [11443.063, 11310.458, 0.291], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 108.68;
   _bldObj setPos [11443.063, 11310.458, 0.291];
@@ -5168,15 +5159,6 @@ if (true) then
   _bldObj = createVehicle ["MAP_Kitchenstove_Elec", [11450.169, 11314.188], [], 0, "CAN_COLLIDE"];
   _bldObj setDir -89;
   _bldObj setPosASL [11450.169, 11314.188, 317.14];
-  _bldObj setVectorUp [0,0,0.01];
-};
-
-_bldObj = objNull;
-if (true) then
-{
-  _bldObj = createVehicle ["Generator_DZ", [11450.178, 11313.493, 0.152], [], 0, "CAN_COLLIDE"];
-  _bldObj setDir -89;
-  _bldObj setPosASL [11450.178, 11313.493, 317.15];
   _bldObj setVectorUp [0,0,0.01];
 };
 
@@ -5318,16 +5300,6 @@ if (true) then
   _bldObj setPosASL [11428.072, 11324.934, 316.8];
   _bldObj setVectorUp [0,0,0.01];
 };
-
-_bldObj = objNull;
-if (true) then
-{
-  _bldObj = createVehicle ["Generator_DZ", [11427.66, 11324.337], [], 0, "CAN_COLLIDE"];
-  _bldObj setDir -52.49;
-  _bldObj setPosASL [11427.66, 11324.337, 316.85];
-  _bldObj setVectorUp [0,0,0.01];
-};
-
 
 
 
