@@ -28,7 +28,7 @@ enableSentences false;
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
-MaxVehicleLimit = 600; // Default = 50
+MaxVehicleLimit = 1000; // Default = 50
 MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 15; // Default = 30
@@ -338,6 +338,7 @@ switch (DZ_GAMEMODE) do {
         DZ_NEWSPAWN_PICK_CLASS = false;
         DZ_REFUEL_AUTOMATIC = false;
         DZ_LOOTCHANCE_MULTIPLIER = 0.5;
+        MaxVehicleLimit = 30;
         DefaultMagazines = []; 
         DefaultWeapons = ["ItemFlashlight"]; 
         DefaultBackpack = "CZ_VestPouch_EP1";
