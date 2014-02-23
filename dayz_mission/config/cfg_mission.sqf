@@ -38,6 +38,7 @@ DefaultWeapons = ["ItemFlashlight","Makarov"];
 DefaultBackpack = "CZ_VestPouch_EP1"; 
 DZE_BuildingLimit = 9999;
 DZE_MissionLootTable = true;
+DZE_BackpackGuard = false;
 
 dayz_paraSpawn = false;
 
