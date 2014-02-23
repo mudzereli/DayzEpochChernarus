@@ -838,7 +838,9 @@ class CfgLoot {
 			"VSS_vintorez",
 			"SCAR_H_LNG_Sniper_SD",
 			"M14_EP1",
-			"DMR"
+			"DMR",
+            //new items
+			"SVD_NSPU_EP1"
 		},
 		{
 			0.1,
@@ -847,7 +849,7 @@ class CfgLoot {
 			0.07,
 			0.07,
 			0.07,
-			0.09,
+			0.08,
 			0.08,
 			0.07,
 			0.07,
@@ -856,7 +858,9 @@ class CfgLoot {
 			0.04,
 			0.03,
 			0.02,
-			0.01
+			0.01,
+            //new items
+            0.01
 		}
 	};
 	sniperriflesammo[] = {
@@ -893,16 +897,22 @@ class CfgLoot {
 			"MP5A5",
 			"bizon_silenced",
 			"UZI_SD_EP1",
-			"MP5SD"
+			"MP5SD",
+            
+            "AKS_74_U",
+            "AKS_74_UN_kobra"
 		},
 		{
-			0.25,
+			0.20,
 			0.20,
 			0.20,
 			0.13,
 			0.10,
 			0.07,
-			0.05
+			0.05,
+            
+            0.4,
+            0.1
 		}
 	};
 
@@ -938,38 +948,90 @@ class CfgLoot {
 			"m8_carbine",
 			"BAF_L85A2_RIS_SUSAT",
 			"BAF_L85A2_RIS_Holo",
-			"M4A1_HWS_GL_SD_Camo"
+			"M4A1_HWS_GL_SD_Camo",
+            //new items
+			"M16A4_GL",
+			"M16A4_ACG_GL",
+			"M4A1_Aim_camo",
+			"M4A1_RCO_GL",
+			"M4A1_HWS_GL",
+			"G36K",
+			"G36_C_SD_eotech",
+			"G36a",
+			"AK_74_GL",
+			"AK_74_GL_kobra",
+            "AK_107_kobra",
+            "AK_107_GL_kobra",
+            "AK_107_GL_pso",
+            "AK_107_pso",
+            "AKS_74_kobra",
+            "AKS_74_pso",
+			"m8_carbineGL",
+			"m8_SAW",
+			"BAF_L85A2_UGL_Holo",
+			"BAF_L85A2_UGL_SUSAT",
+			"BAF_L85A2_RIS_ACOG",
+			"BAF_L85A2_UGL_ACOG",
+			"BAF_L85A2_RIS_CWS",
+			"BAF_L86A2_ACOG",
+			"M4A3_RCO_GL_EP1"
 		},
 		{
-			0.05,
-			0.05,
-			0.01,
-			0.05,
-			0.05,
+			0.03,
 			0.03,
 			0.01,
-			0.05,
-			0.05,
-			0.05,
-			0.05,
 			0.03,
-			0.05,
-			0.02,
-			0.01,
-			0.05,
-			0.04,
-			0.01,
-			0.01,
-			0.04,
-			0.02,
-			0.04,
-			0.02,
-			0.04,
 			0.03,
+			0.03,
+			0.01,
+			0.03,
+			0.03,
+			0.03,
+			0.03,
+			0.03,
+			0.03,
+			0.02,
+			0.01,
+			0.03,
+			0.03,
+			0.01,
+			0.01,
 			0.04,
 			0.02,
-			0.05,
+			0.03,
 			0.02,
+			0.03,
+			0.03,
+			0.03,
+			0.02,
+			0.03,
+			0.02,
+			0.01,
+			0.01,
+            //new items
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
+			0.01,
 			0.01,
 			0.01
 		}
@@ -1008,20 +1070,28 @@ class CfgLoot {
 			"m240_scoped_EP1_DZE",
 			"M240_DZ",
 			"M249_EP1_DZ",
-			"Mk_48_DZ"
+			"Mk_48_DZ",
+            //new items
+            "BAF_L110AI_Aim",
+            "BAF_L7A2_GPMG",
+            "M249_TWS_EP1"
 		},
 		{
-			0.11,
-			0.11,
 			0.1,
 			0.1,
 			0.1,
 			0.1,
 			0.1,
 			0.1,
-			0.08,
+			0.1,
+			0.1,
+			0.07,
 			0.05,
 			0.05,
+            //new items
+            0.01,
+            0.01,
+            0.01
 		}
 	};
 	machinegunammo[] = {
@@ -1069,12 +1139,16 @@ class CfgLoot {
 		{
 			"Saiga12K",
 			"Remington870_lamp",
-			"M1014"
+			"M1014",
+            //new items
+            "AA12_PMC"
 		},
 		{
 			0.25,
 			0.35,
-			0.40
+			0.39,
+            //new items
+            0.01
 		}
 	};
 };
