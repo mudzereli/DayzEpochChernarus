@@ -1,4 +1,4 @@
-DZS_GAMEMODE = 1;
+DZS_GAMEMODE = 2;
 DZMSBodyTime = 300;
 DZMSBlacklistZones = [
     [[06325,07807,0],600], //stary
