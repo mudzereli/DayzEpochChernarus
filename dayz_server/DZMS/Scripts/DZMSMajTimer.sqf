@@ -9,7 +9,7 @@ private["_run","_timeDiff","_timeVar","_wait","_cntMis","_ranMis","_varName","_s
 _timeDiff = DZMSMajorMax - DZMSMajorMin;
 _timeVar = _timeDiff + DZMSMajorMin;
 
-diag_log text format ["[DZMS]: Major Mission Clock Starting!"];
+diag_log format ["[DZMS]: Major Mission Clock Starting!"];
 
 //Lets get the loop going
 _run = true;
@@ -28,6 +28,14 @@ while {_run} do
 	//Lets pick a mission
 	_ranMis = floor (random _cntMis);
 	_varName = DZMSMajorArray select _ranMis;
+    
+    // remove dead units from cleanup array
+    for "_i" from 0 to (count DZMSUnitsMajor) do {
+        if (!(alive (DZMSUnitsMajor select _i))) then {
+            DZMSUnitsMajor set [_i,-1];
+        };
+    };
+    DZMSUnitsMajor = DZMSUnitsMajor - [-1];
     
     // clean up all the existing units before starting a new one
     {
@@ -53,7 +61,7 @@ while {_run} do
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];
-	diag_log text format ["[DZMS]: Running Major Mission %1.",_varName];
+	diag_log format ["[DZMS]: Running Major Mission %1.",_varName];
 	
 	//Let's wait for it to finish or timeout
 	waitUntil {DZMSMajDone};

@@ -151,11 +151,11 @@ clearBackpackCargoGlobal _boxFin;
 [_boxFin] call DZMSProtectObj;
 
 //Wait until the player is within 30 meters and also meets the kill req
-[position _boxFin,"DZMSUnitsMajor"] call DZMSWaitMissionComp;
+[_boxFin,"DZMSUnitsMajor"] call DZMSWaitMissionComp;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The AN2 Cargo has been Secured by Survivors!", "PLAIN",6] call RE;
-diag_log text format["[DZMS]: Major SM2 AN2 Drop Mission has Ended."];
+diag_log format["[DZMS]: Major SM2 AN2 Drop Mission has Ended."];
 deleteMarker "DZMSMajMarker";
 deleteMarker "DZMSMajDot";
 
