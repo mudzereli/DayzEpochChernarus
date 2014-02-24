@@ -4,7 +4,7 @@
 */
 private["_run","_nul","_nil"];
 
-diag_log format ["[DZMS]: Mission Marker Loop for JIPs Starting!"];
+diag_log text format ["[DZMS]: Mission Marker Loop for JIPs Starting!"];
 
 //Lets define these
 if (isNil "DZMSMajCoords")then{DZMSMajCoords = [0,0,0];};
@@ -14,7 +14,7 @@ if (isNil "DZMSMinCoords")then{DZMSMinCoords = [0,0,0];};
 _run = true;
 while {_run} do
 {
-    [25,5] call DZMSSleep; // sleep 25 seconds
+	sleep 25; //Sleep 25 seconds
 	//If the marker exists (meaning the mission is active) lets delete it and re-add it
 	if (!(getMarkerColor "DZMSMajMarker" == "")) then {
 		deleteMarker "DZMSMajMarker";
