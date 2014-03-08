@@ -28,6 +28,17 @@ begin
 end//
 delimiter ;
 
+drop procedure if exists p_restore_object;
+delimiter //
+create procedure p_restore_object(in _OBJECTID text)
+comment 'Restores the object from the deleted objects table.'
+begin
+	select * from t_deleted_objects where OBJECTID = _OBJECTID;
+    insert into Object_DATA select * from t_deleted_objects where OBJECTID = _OBJECTID;
+	delete from t_deleted_objects where OBJECTID = _OBJECTID;
+end//
+delimiter ;
+
 drop procedure if exists p_teleport;
 delimiter //
 create procedure p_teleport(in _PLAYERUID text, in _WORLDSPACE text)
@@ -44,11 +55,11 @@ delimiter //
 create procedure p_view_expired_buildables(in _DAYS int, in _DELETE int)
 comment 'looks up a list of expired buildables based on days since owners last login'
 begin
-    select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742") order by PLAYERLASTLOGIN;
+    select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742") order by PLAYERLASTLOGIN;
         
     if _DELETE = 1 then
         drop temporary table if exists tt_objectid;
-        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742");
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742");
         insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
         delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
     end if;
@@ -57,21 +68,21 @@ delimiter ;
 
 drop procedure if exists p_view_expired_vehicles;
 delimiter //
-create procedure p_view_expired_vehicles(in _DAYS int, in _DELETE int)
+create procedure p_view_expired_vehicles(in _DELETE int)
 comment 'looks up a list of expired vehicles based on days since it was accessed'
 begin
-    select * from v_object_data where datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]")
+    select * from v_object_data where datediff(now(),LASTUPDATED) >= 7 and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]")
     union all
-    select * from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CATEGORY = "VEHICLE"
+    select * from v_object_data where datediff(now(),LASTUPDATED) >= 30 and CATEGORY = "VEHICLE"
     order by LASTUPDATED;
         
     if _DELETE = 1 then
         drop temporary table if exists tt_objectid;
-        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]") order by LASTUPDATED;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= 7 and CATEGORY = "VEHICLE" and OINVENTORY in ("[[[],[]],[[],[]],[[],[]]]","[]") order by LASTUPDATED;
         insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
         delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
         drop temporary table if exists tt_objectid;
-        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CATEGORY = "VEHICLE" order by LASTUPDATED;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= 30 and CATEGORY = "VEHICLE" order by LASTUPDATED;
         insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
         delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
     end if;
@@ -166,5 +177,21 @@ begin
         truncate table Player_LOGIN;
         insert into Player_LOGIN select * from bkPlayer_LOGIN;
     end if;
+end//
+delimiter ;
+
+drop procedure if exists p_build_daily_stats;
+delimiter //
+create procedure p_build_daily_stats()
+comment 'builds daily stat table that can be queried for data'
+begin
+    drop table if exists daily_stats;
+    create table daily_stats as
+    select count(*) as COUNT, "Character Deaths"   as METRIC, date(LASTLOGIN) as DATE from Character_DATA where datediff(now(),LASTLOGIN) <= 30 group by date(LASTLOGIN)
+    union all
+    select count(*) as COUNT, "Characters Created" as METRIC, date(DATESTAMP) as DATE from Character_DATA where datediff(now(),DATESTAMP) <= 30 group by date(DATESTAMP)
+    union all
+    select count(*) as COUNT, "New Players"        as METRIC, date(PLAYERLASTLOGIN) as DATE from v_player_data where datediff(now(),PLAYERLASTLOGIN) <= 30 and datediff(PLAYERFIRSTLOGIN,PLAYERLASTLOGIN) = 0 group by date(PLAYERLASTLOGIN)
+    ;
 end//
 delimiter ;
