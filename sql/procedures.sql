@@ -55,11 +55,16 @@ delimiter //
 create procedure p_view_expired_buildables(in _DAYS int, in _DELETE int)
 comment 'looks up a list of expired buildables based on days since owners last login'
 begin
-    select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742") order by PLAYERLASTLOGIN;
-        
+    select * from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742")
+    union all
+    select * from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CLASSNAME = "VaultStorageLocked"
+    order by PLAYERLASTLOGIN;
     if _DELETE = 1 then
         drop temporary table if exists tt_objectid;
         create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),PLAYERLASTLOGIN) >= _DAYS and datediff(now(),LASTUPDATED) >= _DAYS and CATEGORY = "DEPLOYABLE" and PLAYERUID not in ("147943494","155036742");
+        insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
+        create temporary table tt_objectid as select OBJECTID from v_object_data where datediff(now(),LASTUPDATED) >= (_DAYS * 2) and CLASSNAME = "VaultStorageLocked";
         insert ignore into t_deleted_objects select a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
         delete a.* from Object_DATA a inner join tt_objectid b on a.OBJECTID = b.OBJECTID;
     end if;
