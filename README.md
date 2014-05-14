@@ -36,5 +36,6 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 9. Open the downloaded ZIP file and copy the contents of  the **dayz_mission** directory to the **[SERVER INSTALL PATH]\MPMissions\DayZ\_Epoch\_11.Chernarus** directory that you just deleted the contents of.
 10. Navigate to **[SERVER INSTALL PATH]\@DayZ\_Epoch\_Server\addons** and delete the contents of this folder.
 11. Open the downloaded ZIP file and copy the entire **dayz_server** directory (including the directory) to the **[SERVER INSTALL PATH]\@DayZ\_Epoch\_Server\addons** directory.
-12. If you have **[INFISTAR](http://dayzantihack.com/)** then copy it into the **[SERVER INSTALL PATH]\@DayZ\_Epoch\_Server\addons\dayz\_server\addons\antihack** folder
-13. Use your favorite **[PBO Manager](http://www.armaholic.com/page.php?id=16369)** to pack the entire **dayz_server** folder that you just extracted.
+12. Edit the config files in **[SERVER INSTALL PATH]\MPMissions\DayZ_Epoch_11.Chernarus\config**
+13. If you have **[INFISTAR](http://dayzantihack.com/)** then copy it into the **[SERVER INSTALL PATH]\@DayZ\_Epoch\_Server\addons\dayz\_server\addons\antihack** folder
+14. Use your favorite **[PBO Manager](http://www.armaholic.com/page.php?id=16369)** to pack the entire **dayz_server** folder that you just extracted.

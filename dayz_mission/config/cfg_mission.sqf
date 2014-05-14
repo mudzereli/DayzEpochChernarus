@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZ_GAMEMODE = 0;
+DZ_GAMEMODE = 1;
 
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
@@ -333,13 +333,13 @@ call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
 if (DZ_GAMEMODE == -1) then {DZ_GAMEMODE = floor(random 3);};
 switch (DZ_GAMEMODE) do {
     case 1: {
-        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones"];
+        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones","newspawn","refuel","safezones"];
         DZ_LOAD_SARGE_AI = true;
         DZE_BuildOnRoads = true;
         dayz_fullMoonNights = false;
         DZ_NEWSPAWN_PICK_CLASS = false;
         DZ_REFUEL_AUTOMATIC = false;
-        DZ_LOOTCHANCE_MULTIPLIER = 0.5;
+        DZ_LOOTCHANCE_MULTIPLIER = 0.3;
         MaxVehicleLimit = 30;
         DefaultMagazines = []; 
         DefaultWeapons = ["ItemFlashlight"]; 
