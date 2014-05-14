@@ -29,17 +29,16 @@ INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["LandRover_MG_TK_EP1_DZE",1]' ,9999,'[3,"ItemGoldBar10oz",1]'        ,'[1,"ItemGoldBar10oz",1]'        ,0,534     ,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'      ,9999,'[5,"ItemGoldBar10oz",1]'        ,'[2,"ItemGoldBar10oz",1]'        ,0,479     ,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BAF_Jackal2_L2A1_W",1]'      ,9999,'[5,"ItemGoldBar10oz",1]'        ,'[2,"ItemGoldBar10oz",1]'        ,0,534     ,'trade_any_vehicle');
-/* add extreme military vehicles *
+/* add extreme military vehicles */
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'  ,9999,'[2,"ItemBriefcase100oz",1]'    ,'[1,"ItemBriefcase100oz",1]'   ,0,479    ,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["HMMWV_M998_crows_M2_DES_EP1",1]'  ,9999,'[2,"ItemBriefcase100oz",1]'    ,'[1,"ItemBriefcase100oz",1]'   ,0,534    ,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BRDM2_HQ_Gue",1]'                 ,9999,'[2,"ItemBriefcase100oz",1]'    ,'[1,"ItemBriefcase100oz",1]'   ,0,479    ,'trade_any_vehicle');
 INSERT INTO `Traders_DATA` (`item`, `qty`, `buy`, `sell`, `order`, `tid`, `afile`) VALUES ('["BRDM2_HQ_Gue",1]'                 ,9999,'[2,"ItemBriefcase100oz",1]'    ,'[1,"ItemBriefcase100oz",1]'   ,0,534    ,'trade_any_vehicle');
-/* */
 /* add cinder blocks */
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 508, afile from traders_data where id = 7490;
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 530, afile from traders_data where id = 7490;
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 662, afile from traders_data where id = 7490;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 508, afile from Traders_DATA where id = 7490;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 530, afile from Traders_DATA where id = 7490;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 662, afile from Traders_DATA where id = 7490;
 /* add mortar buckets */
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 508, afile from traders_data where id = 7492;
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 530, afile from traders_data where id = 7492;
-insert into traders_data (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 662, afile from traders_data where id = 7492;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 508, afile from Traders_DATA where id = 7492;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 530, afile from Traders_DATA where id = 7492;
+insert into Traders_DATA (item, qty, buy, sell, `order`, tid, afile) select item, qty, buy, sell, `order`, 662, afile from Traders_DATA where id = 7492;
