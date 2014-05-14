@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZS_GAMEMODE = 0;
+DZS_GAMEMODE = 1;
 
 /* try to load infistar files if this is set to true */
 DZ_INFISTAR_ENABLED = true;
@@ -15,7 +15,7 @@ DZ_SERVER_ADDONS = ["indestructible","cleanup"];
 //### DYNAMIC VEHICLES
 //########################################################################################
 
-DZ_DYNAMIC_VEHICLE_MULTIPLIER = 2;
+DZ_DYNAMIC_VEHICLE_MULTIPLIER = 1;
 
 //########################################################################################
 //### INDESTRUCTIBLE BASES
