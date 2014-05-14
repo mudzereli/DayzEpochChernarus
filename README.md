@@ -5,14 +5,7 @@
 _A **DAY-Z** server package meant to be played as a single-player game._
 
 ----------
-
-##CORE FEATURES
-
-- **Building**
-	* Includes SNAP Building
-- **Complex AI**
-
-##SCRIPTS
+##CORE FEATURES/SCRIPTS
 - **DZAI** - AI
 - **SARGE** - AI
 - **DZMS** - AI/Missions
