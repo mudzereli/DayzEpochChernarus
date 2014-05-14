@@ -43,8 +43,12 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 
 ##FUTURE GOALS
 - **Character Progression**
-	* Tweak AI & loot spawns so that best loot is @ NW of map and worst loot is @ SE of map.
-- **Vendor Nerfs**
-	* Vendors should spawn random 0-2 of items instead of full stock. Stock should update once every X hours.
+	* Tweak AI difficulty/loot & loot spawns so that best loot is @ NW of map and worst loot is @ SE of map.
+	* Tweak missions to have 2-6 AI and a cache of loot that is relative in difficulty (1-3 TIER 2 Guns, rarely 1 TIER 1 gun)
+- **Vendor Tweaks**
+	* Vendors should only RARELY sell good guns/vehicles instead of full stock. Stock should update once every X hours. This should encourage players to visit vendors and check for rare spawned loot.
+	* Vendors should ALWAYS sell building supplies. This should encourage players to find and SELL loot and BUY building supplies.
 - **Larger Variety of Spawned Guns/Vehicles**
-
+- **UI Tweaks**
+	* UI shouldn't show # of players online since it's irrelevant.
+	* UI should show your CITY not exact LOCATION.
