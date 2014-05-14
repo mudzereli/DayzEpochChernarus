@@ -365,7 +365,7 @@ SAR_sniper_surv_skills = [
 // a general note: you CAN use either rifles OR pistols. Do not use both. AI will get stuck after switching weapons.
 
 // potential weapon list for leaders
-SAR_leader_weapon_list = ["M4A1","M4A3_CCO_EP1","AK_47_M"];
+SAR_leader_weapon_list = ["M16A2","AK_74"];
 SAR_leader_pistol_list = [];  // do NOT populate, Arma still has a bug that renders AI unresponsive after switching to the sidearm
 
 // potential item list for leaders -> Item / Chance 1 - 100
@@ -373,7 +373,7 @@ SAR_leader_items = [["ItemSodaCoke",75],["FoodCanBakedBeans",60]];
 SAR_leader_tools =  [["ItemMap",50],["ItemCompass",30],["Binocular_Vector",5],["NVGoggles",5],["ItemRadio",100]];
 
 //potential weapon list for riflemen
-SAR_rifleman_weapon_list = ["M16A2","Winchester1866","AK_74","LeeEnfield","M1014"];
+SAR_rifleman_weapon_list = ["Winchester1866","LeeEnfield","M1014"];
 SAR_rifleman_pistol_list = [];   // do NOT populate, Arma still has a bug that renders AI unresponsive after switching to the sidearm
 
 // potential item list for riflemen
@@ -381,7 +381,7 @@ SAR_rifleman_items = [["ItemSodaCoke",75],["FoodCanBakedBeans",60]];
 SAR_rifleman_tools = [["ItemMap",50],["ItemCompass",30]];
 
 //potential weapon list for snipers
-SAR_sniper_weapon_list = ["M4A1_Aim","SVD_CAMO","Huntingrifle"];
+SAR_sniper_weapon_list = ["LeeEnfield","Huntingrifle"];
 SAR_sniper_pistol_list = [];  // do NOT populate, Arma still has a bug that renders AI unresponsive after switching to the sidearm
 
 // potential item list for snipers

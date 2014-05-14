@@ -17,6 +17,9 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 - **TakeClothes** - Roleplay/Clothing
 - **ZombieTruck** - Fun/Zombie Testing
 - **Suicide** - Quickly End Life
+- **Safezones** - Prevents AI from ganking in trader cities
+- **Loot Tweaks** - Can easily customize loot spawns via config. By default less loot spawns since there are less players to compete with.
+- **More Types of Guns/Vehicles** - Configs have been altered to make more guns and vehicles available through natural spawns.
 
 ##REQUIREMENTS
 - **MYSQL Database Access** - Can host on your own PC or separate PC or try **[FreeMYSQLHosting.net](http://www.freemysqlhosting.net/)** or **[db4free.net](http://www.db4free.net/)**
@@ -48,7 +51,3 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 - **Vendor Tweaks**
 	* Vendors should only RARELY sell good guns/vehicles instead of full stock. Stock should update once every X hours. This should encourage players to visit vendors and check for rare spawned loot.
 	* Vendors should ALWAYS sell building supplies. This should encourage players to find and SELL loot and BUY building supplies.
-- **Larger Variety of Spawned Guns/Vehicles**
-- **UI Tweaks**
-	* UI shouldn't show # of players online since it's irrelevant.
-	* UI should show your CITY not exact LOCATION.

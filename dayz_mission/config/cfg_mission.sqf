@@ -2,49 +2,51 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
-/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZ_GAMEMODE = 1;
-
 /* addons from these folders will be loaded */
-DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus","craftvehicles","keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
+DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus",/*"craftvehicles",*/"keyhandler",/*"newspawn",*/"refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
 DZ_LOAD_SARGE_AI = false;
 
 //########################################################################################
-//### EPOCH CONFIG
+//### EPOCH CONFIG -- DON'T TOUCH THIS PART UNLESS YOU ARE SURE OF WHAT YOU ARE DOING
 //########################################################################################
 dayZ_instance =	1742;
 dayzHiveRequest = [];
 initialized = false;
 dayz_previousID = 0;
-
+DZE_teleport = [99999,99999,99999,99999,99999]; 
+dayz_MapArea = 14000; // Default = 10000
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];
-//disable radio messages to be heard and shown in the left lower corner of the screen
+DZE_BuildingLimit = 9999;
+DZE_MissionLootTable = true;
+DZE_BackpackGuard = false;
+DZE_ForceNameTags = true;
+dayz_minpos = -1; 
+dayz_maxpos = 16000;
+
+//########################################################################################
+//### EPOCH CONFIG
+//########################################################################################
+
+// disable radio messages to be heard and shown in the left lower corner of the screen
 enableRadio true;
-// May prevent "how are you civillian?" messages from NPC
+// may prevent "how are you civillian?" messages from NPC
 enableSentences false;
 
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
-MaxVehicleLimit = 1000; // Default = 50
+MaxVehicleLimit = 30; // Default = 50
 MaxDynamicDebris = 100; // Default = 100
-dayz_MapArea = 14000; // Default = 10000
-dayz_maxLocalZombies = 15; // Default = 30
-DZE_teleport = [99999,99999,99999,99999,99999]; 
-DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
-DefaultWeapons = ["ItemFlashlight","Makarov"]; 
+dayz_maxLocalZombies = 30; // Default = 30
+
+// this is the gear you get when you respawn
+DefaultMagazines = ["ItemBandage","ItemPainkiller"]; 
+DefaultWeapons = ["ItemFlashlight"]; 
 DefaultBackpack = "CZ_VestPouch_EP1"; 
-DZE_BuildingLimit = 9999;
-DZE_MissionLootTable = true;
-DZE_BackpackGuard = false;
-DZE_ForceNameTags = true;
 
 dayz_paraSpawn = false;
-
-dayz_minpos = -1; 
-dayz_maxpos = 16000;
 
 dayz_sellDistance_vehicle = 10;
 dayz_sellDistance_boat = 30;
@@ -53,10 +55,9 @@ dayz_sellDistance_air = 40;
 dayz_maxAnimals = 5; // Default: 8
 dayz_tameDogs = true;
 DynamicVehicleDamageLow = 0; // Default: 0
-DynamicVehicleDamageHigh = 100; // Default: 100
+DynamicVehicleDamageHigh = 30; // Default: 100
 
-DZE_BuildOnRoads = false; // Default: False
-
+DZE_BuildOnRoads = true; // Default: False
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 
@@ -65,7 +66,7 @@ dayz_fullMoonNights = true;
 //########################################################################################
 
 /* multiplier for loot chance */
-DZ_LOOTCHANCE_MULTIPLIER = 1;
+DZ_LOOTCHANCE_MULTIPLIER = 0.3; // default: 1
 
 //########################################################################################
 //### SELF BLOODBAG
@@ -90,7 +91,7 @@ DZ_BLOODBAG_INFECTION_CAN_DAMAGE = true;
 DZ_BLOODBAG_INFECTION_DAMAGE = 1000;
 
 /* Whether the player can get humanity from giving self a bloodbag (True = On | False = off) */
-DZ_BLOODBAG_CAN_GAIN_HUMANITY = false;
+DZ_BLOODBAG_CAN_GAIN_HUMANITY = true;
 
 /* Amount of humanity to give player if _humanityBool is true (250 is default for normal bloodbags) */
 DZ_BLOODBAG_GAIN_HUMANITY = 50;
@@ -109,7 +110,7 @@ DZ_BUILDPLUS_PLOT_DIAMETER = 30;
 DZ_BUILDPLUS_PREVIEW_CHANGE_DIST = 10;
 
 /* All crafting only takes one stage (default = false)?  */
-DZ_BUILDPLUS_SINGLE_STAGE_CRAFTING = true;
+DZ_BUILDPLUS_SINGLE_STAGE_CRAFTING = false;
 
 /* Allow Player To Build Plot In Their Own Plot? (default = false)  */
 DZ_BUILDPLUS_PLOT_IN_PLOT = true;
@@ -166,27 +167,11 @@ DZ_VEHICLE_CRAFT_RECIPES = [
 DZ_NEWSPAWN_DONATOR_TABLE = 
 [
 	/* 	PLAYERNAME                   PLAYERUID    SPAWN POINT	 LOADOUT       SKIN     */
-	[	"Evan",                  "134594118",      [],         true,        true      ],
-	[	"(KMS) iTyphlosion",                  "144292230",      [],         true,        true      ],
-	[	"PyroMatick",                  "150615686",      [],         true,        true      ],
-	[	"Livid",                  "144292230",      [],         true,        true      ],
-	[	"Beauman",                  "163696262",      [],         true,        true      ],
-	[	"Kensington",                  "167076486",      [],         true,        true      ],
-	[	"Pvt. Fagtron",                  "168254086",      [],         true,        true      ],
-	[	"mudzereli",                  "38130182",      [],         true,        true      ],
-	[	"NossaT",                  "50513926",      [],         true,        true      ],
-	[	"NikeFreek",                  "88930246",      [],         true,        true      ],
-	[	"BigCores",                  "93026246",      [],         true,        true      ],
-	[	"Barkity",                  "40113734",      [],         true,        true      ],
-	[	"[BTY]Neux",                  "15708166",      [],         true,        true      ],
-	[	"Bekool813",                  "236779846",      [],         true,        true      ],
-	[	"JustGoNow",                  "129213126",      [],         true,        true      ],
-	[	"Khan_ARG",                  "103418886",      [],         true,        true      ],
 	[	"Example",                  "000000000",      [],         true,        true      ]
 ];
 
 /* should players be able to choose a class or not? */
-DZ_NEWSPAWN_PICK_CLASS = true;
+DZ_NEWSPAWN_PICK_CLASS = false;
 
 /* should all players be able to choose a skin? */
 DZ_NEWSPAWN_ALL_SKINS = false;
@@ -202,10 +187,10 @@ DZ_RESPAWN_VEHICLE_CLASS = "NONE";
 DZ_REFUEL_TICK_INTERVAL = 1;
 
 /* How much % fuel to add per tick (default 0.005)*/
-DZ_REFUEL_AMOUNT_PER_TICK = 0.02;
+DZ_REFUEL_AMOUNT_PER_TICK = 0.01;
 
 /* Should vehicles automatically refuel without using an action menu? */
-DZ_REFUEL_AUTOMATIC = true;
+DZ_REFUEL_AUTOMATIC = false;
 
 //########################################################################################
 //### DEADZONES
@@ -213,7 +198,7 @@ DZ_REFUEL_AUTOMATIC = true;
 
 AGN_deadZoneMessages = true;                                //Should messages be displayed?
 AGN_safeZone_Vehicles_DisableMountedGuns = true;			//Should players not be able to shoot bullets/projectiles from mounted guns?
-AGN_safeZone_Players_DisableWeaponFiring = true;			//Should players not be able to shoot bullets/projectiles from their weapon(s)?
+AGN_safeZone_Players_DisableWeaponFiring = false;			//Should players not be able to shoot bullets/projectiles from their weapon(s)?
 
 //########################################################################################
 //### SAFEZONES
@@ -315,7 +300,7 @@ DZ_SPAWN_LOOT_DEFAULT_MULTIPLIER = 1;
 DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 1;
 
 /* multiplier for supply loot */
-DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 1;
+DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
 
 //########################################################################################
 //### SARGE CONFIG
@@ -326,35 +311,3 @@ call compile preprocessFileLineNumbers "config\SAR_config.sqf";
 //### OVERRIDES
 //########################################################################################
 call compile preprocessFileLineNumbers "config\cfg_mission_override.sqf";
-
-//########################################################################################
-//### GAMEMODE OVERRIDES
-//########################################################################################
-if (DZ_GAMEMODE == -1) then {DZ_GAMEMODE = floor(random 3);};
-switch (DZ_GAMEMODE) do {
-    case 1: {
-        DZ_MISSION_ADDONS = DZ_MISSION_ADDONS - ["craftvehicles","deadzones","newspawn","refuel","safezones"];
-        DZ_LOAD_SARGE_AI = true;
-        DZE_BuildOnRoads = true;
-        dayz_fullMoonNights = false;
-        DZ_NEWSPAWN_PICK_CLASS = false;
-        DZ_REFUEL_AUTOMATIC = false;
-        DZ_LOOTCHANCE_MULTIPLIER = 0.3;
-        MaxVehicleLimit = 30;
-        DefaultMagazines = []; 
-        DefaultWeapons = ["ItemFlashlight"]; 
-        DefaultBackpack = "CZ_VestPouch_EP1";
-    };
-    case 2: {
-        DZ_LOAD_SARGE_AI = true;
-        DynamicVehicleDamageHigh = 0;
-        dayz_maxLocalZombies = 50;
-        MaxVehicleLimit = 1000;
-        MaxHeliCrashes= 10;
-        DZ_RESPAWN_VEHICLE_CLASS = "MMT_Civ";
-        DZ_SPAWN_LOOT_MULTIPLIER = 2;
-        DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 2;
-        DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 3;
-        DZ_LOOTCHANCE_MULTIPLIER = 3;
-    };
-};
