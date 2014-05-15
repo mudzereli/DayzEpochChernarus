@@ -1,6 +1,6 @@
 CREATE EVENT `e_update_quantities`
 	ON SCHEDULE
-		EVERY 3 HOUR STARTS '2014-05-14 08:45:18'
+		EVERY 1 HOUR STARTS '2014-05-14 08:45:18'
 	ON COMPLETION PRESERVE
 	ENABLE
 	COMMENT 'update qtys to more of a rare item system (except building supplies)'

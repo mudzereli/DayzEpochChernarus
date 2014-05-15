@@ -20,7 +20,11 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 - **Safezones** - Prevents AI from ganking in trader cities
 - **Loot Tweaks** - Can easily customize loot spawns via config. By default less loot spawns since there are less players to compete with.
 - **More Types of Guns/Vehicles** - Configs have been altered to make more guns and vehicles available through natural spawns.
-- **Vendor Tweaks** - Vendors now RARELY sell items other than building supplies, so be sure to check them occasionally. This does not apply to building supplies.
+- **Vendor Tweaks** - Vendors now RARELY sell items other than building supplies. This does not apply to building supplies. The stock updates every hour. 
+	+ There is also a new color coding system so you can tell if an item is in stock or not.
+		* <font color="3366ff">**vendor has this item in stock**</font>
+		* <font color="33cc33">**you have this item**</font>
+		* <font color="33cccc">**you have this item and vendor has this item in stock**</font>
 
 ##REQUIREMENTS
 - **MYSQL Database Access** - Can host on your own PC or separate PC or try **[FreeMYSQLHosting.net](http://www.freemysqlhosting.net/)** or **[db4free.net](http://www.db4free.net/)**

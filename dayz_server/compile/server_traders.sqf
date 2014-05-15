@@ -9,6 +9,8 @@ _clientID = owner _character;
 // add cacheing
 _retrader = call compile format["ServerTcache_%1;",_traderid];
 
+_retrader = nil;
+
 if(isNil "_retrader") then {
 	
 	_retrader = [];
