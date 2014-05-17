@@ -40,8 +40,8 @@ MaxDynamicDebris = 100; // Default = 100
 dayz_maxLocalZombies = 50; // Default = 30
 
 // this is the gear you get when you respawn
-DefaultMagazines = ["ItemBandage","ItemPainkiller"]; 
-DefaultWeapons = ["ItemFlashlight"]; 
+DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
+DefaultWeapons = ["Makarov","ItemFlashlight"]; 
 DefaultBackpack = "CZ_VestPouch_EP1"; 
 
 dayz_paraSpawn = false;
