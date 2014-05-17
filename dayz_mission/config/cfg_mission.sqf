@@ -37,7 +37,7 @@ spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 30; // Default = 50
 MaxDynamicDebris = 100; // Default = 100
-dayz_maxLocalZombies = 50; // Default = 30
+dayz_maxLocalZombies = 5; // Default = 30
 
 // this is the gear you get when you respawn
 DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
