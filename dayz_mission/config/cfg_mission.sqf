@@ -3,7 +3,7 @@
 //########################################################################################
 
 /* addons from these folders will be loaded */
-DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus",/*"craftvehicles",*/"keyhandler",/*"newspawn",*/"refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
+DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus",/*"craftvehicles",*/"keyhandler","newspawn","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
 //########################################################################################
 //### EPOCH CONFIG -- DON'T TOUCH THIS PART UNLESS YOU ARE SURE OF WHAT YOU ARE DOING
@@ -64,7 +64,7 @@ dayz_fullMoonNights = true;
 //########################################################################################
 
 /* multiplier for loot chance */
-DZ_LOOTCHANCE_MULTIPLIER = 0.3; // default: 1
+DZ_LOOTCHANCE_MULTIPLIER = 0.75; // default: 1
 
 //########################################################################################
 //### SELF BLOODBAG
@@ -175,7 +175,7 @@ DZ_NEWSPAWN_PICK_CLASS = false;
 DZ_NEWSPAWN_ALL_SKINS = false;
 
 /* what vehicle should players spawn with? default = "NONE" */
-DZ_RESPAWN_VEHICLE_CLASS = "NONE";
+DZ_RESPAWN_VEHICLE_CLASS = "MMT_Civ";
 
 //########################################################################################
 //### REFUEL
