@@ -34,10 +34,10 @@ _baseDist = 200;
 _distVariance = 50;
 _vehPlayer = vehicle _targetPlayer;
 if (_vehPlayer isKindOf "Man") then {
-	_dirVariance = if ((random 1) < 0.90) then {100} else {157.5};
+	_dirVariance = 100;
 	//_distVariance = _distVariance + 50;
 } else {
-	_dirVariance = if ((random 1) < 0.85) then {67.5} else {135};
+	_dirVariance = 67.5;
 	_baseDist = _baseDist - 25;
 };
 
@@ -63,7 +63,7 @@ _totalAI = switch (true) do {
 	case default {1 + floor(random 3)};
 };
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	private["_marker"];
 	_marker = format["trigger_%1",_trigger];
 	//_marker setMarkerPos _playerPos;

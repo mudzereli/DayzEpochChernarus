@@ -32,7 +32,7 @@ _triggerPos = getPosATL _trigger;
 _locationArray = _trigger getVariable ["locationArray",[]];	
 if ((count _locationArray) == 0) then {
 	_spawnPositions = [];
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		_tMarker = createMarker [str(_trigger), (getPosATL _trigger)];
 		_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
 		_tMarker setMarkerType "Defend";
@@ -42,13 +42,13 @@ if ((count _locationArray) == 0) then {
 	};
 	//If no markers specified in position array, then generate spawn points using building positions (search for buildings within 250m. generate a maximum of 150 positions).
 	if ((count _positionArray) == 0) then {
-		private["_nearbldgs","_nearbldgCount","_spawnPoints"];
+		private["_nearbldgs","_spawnPoints"];
 		_spawnPoints = 0;
 		_nearbldgs = _triggerPos nearObjects ["HouseBase",250];
-		_nearbldgCount = count _nearbldgs;
-		if (_nearbldgCount > 0) then {
+		if ((count _nearbldgs) > 0) then {
 			{
-				if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then {
+				//if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then {
+				if !((typeOf _x) in DZAI_ignoredObjects) then {
 					_spawnPositions set [(count _spawnPositions),(getPosATL _x)];
 					_spawnPoints = _spawnPoints + 1;
 				};
@@ -66,7 +66,7 @@ if ((count _locationArray) == 0) then {
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from marker positions (spawnBandits).";};
 	};
 } else {
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		_tMarker = str (_trigger);
 		if ((getMarkerColor _tMarker) == "") then {
 			_tMarker = createMarker [_tMarker, (getPosATL _trigger)];

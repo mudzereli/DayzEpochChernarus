@@ -22,8 +22,8 @@ if (_damage > 0.4) then {
 			_partdamage = (_unithealth select 1) + (_damage/2);
 			_unithealth set [1,_partdamage];	//Record leg damage internally
 			if ((_partdamage >= 1) && {!(_unithealth select 2)}) then {
+				_nul = _unit spawn {_this setHit["legs",1]};
 				[nil,_unit,rSAY,["z_fracture_1",40]] call RE;
-				_unit setHit["legs",1];
 				_unithealth set [2,true];
 			}; //Break legs when enough damage taken
 		};

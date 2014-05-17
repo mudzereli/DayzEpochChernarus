@@ -24,10 +24,19 @@ _trader_markers = switch (toLower worldName) do {
 	case default {[]};
 };
 
+_scanTargets = if (!isNil "serverTraders") then {serverTraders} else {["CAManBase"]};
+
 for "_i" from 0 to ((count _trader_markers) - 1) do {
 	_traderPos = (getMarkerPos (_trader_markers select _i));
 	if (((_traderPos select 0) != 0) && {((_traderPos select 1) != 0)}) then {
-		_blacklist = createLocation ["Strategic",_traderPos,250,250];
+		if (DZAI_dynAISpawns) then {_blacklist = createLocation ["Strategic",_traderPos,250,250];};
+		_nearbyUnits = _traderPos nearEntities [_scanTargets,250];
+		{
+			if ((local _x) && {!simulationEnabled _x}) then {
+				_x setCaptive true;
+				diag_log format ["DEBUG :: SetCaptive applied to unit %1 at %2.",(typeOf _x),(mapGridPosition _x)];
+			};
+		} forEach _nearbyUnits;
 	};
 	sleep 0.01;
 };

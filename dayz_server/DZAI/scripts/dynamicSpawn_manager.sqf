@@ -1,7 +1,7 @@
 /*
 	DZAI Dynamic Spawn Manager
 	
-	Last updated: 7:23 PM 1/25/2014
+	Last updated: 6:45 PM 2/28/2014
 */
 
 if (DZAI_debugLevel > 0) then {diag_log "Starting DZAI Dynamic Spawn Manager in 5 minutes.";};
@@ -43,7 +43,6 @@ while {true} do {
 					_index = (count _playerUIDs);
 					_playerUIDs set [_index,_playerUID];
 					_timestamps set [_index,time];
-					//_playerData set [_index,[time,getPosATL _x,0]]
 				};
 				//diag_log format ["DZAI Debug: Found a player at %1 (%2).",mapGridPosition _x,name _x];
 			};
@@ -57,13 +56,18 @@ while {true} do {
 		
 		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Preparing to spawn dynamic triggers using selection probability limit %1, %2 dynamic spawns are possible.",(1/_chanceAdjust),_maxSpawnsPossible];};
 
-		while {((_maxSpawnsPossible - _activeDynamicSpawns) > 0) && ((count _allPlayers) > 0)} do {	//_spawns: Have we created enough spawns? _allPlayers: Are there enough players to create spawns for?
+		while {_allPlayers = _allPlayers - [objNull]; (((_maxSpawnsPossible - _activeDynamicSpawns) > 0) && {(count _allPlayers) > 0})} do {	//_spawns: Have we created enough spawns? _allPlayers: Are there enough players to create spawns for?
 			_time = diag_tickTime;
 			_player = _allPlayers call BIS_fnc_selectRandom2;
-			_playername = name _player;
 			//[_player,"DEBUG :: Selected for dynamic spawn."] call DZAI_radioSend;
-			if ((!isNull _player) && {((random _chanceAdjust) < 1)}) then {
+			if ((alive _player) && {((random _chanceAdjust) < 1)}) then {
+				_playername = name _player;
 				_index = _playerUIDs find (getPlayerUID _player);
+				if (_index < 0) then {	//Failsafe: Add player UID at last minute if not found
+					_index = (count _playerUIDs);
+					_playerUIDs set [_index,(getPlayerUID _player)];
+					_timestamps set [_index,time];
+				};
 				_lastSpawned = _timestamps select _index;
 				_spawnChance = (0.10 max ((time - _lastSpawned) / _maxSpawnTime));
 				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Player %1 has %2 probability of generating dynamic spawn.",_playername,_spawnChance];};
@@ -86,7 +90,7 @@ while {true} do {
 						_trigger setVariable ["targetplayer",_player];
 						_trigActStatements = format ["0 = [225,thisTrigger,%1] call fnc_spawnBandits_dynamic;",_spawnChance];
 						_trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_trigActStatements, "[thisTrigger] spawn fnc_despawnBandits_dynamic;"];
-						if (!isNil "DZAI_debugMarkers") then {
+						if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 							private ["_markername","_marker"];
 							_markername = format["trigger_%1",_trigger];
 							_marker = createMarker[_markername,(getPosATL _trigger)];
@@ -96,7 +100,7 @@ while {true} do {
 							_marker setMarkerSize [600, 600];
 							_marker setMarkerAlpha 0;
 						};
-						if ((DZAI_curHeliPatrols > 0)&&{((count DZAI_reinforcePlaces) < DZAI_curHeliPatrols)}) then {
+						if (((count DZAI_reinforcePlaces) < DZAI_curHeliPatrols) && {(random 1) < DZAI_heliReinforceChance}) then {
 							DZAI_reinforcePlaces set [(count DZAI_reinforcePlaces),_playerPos];
 							if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Sending AI helicopter patrol to search for %1.",_playername];};
 						};
@@ -109,7 +113,7 @@ while {true} do {
 					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Dynamic spawn probability check failed for player %1.",_playername];};
 				};
 			} else {
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cancel dynamic spawn check for player %1 (Reason: Probability reduction or Player logout).",_playername]};
+				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cancel dynamic spawn check for player %1 (Reason: Probability reduction or Player death).",_player]};
 			};
 			_allPlayers = _allPlayers - [_player];
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Processed a spawning probability check in %1 seconds.",diag_tickTime - _time]};

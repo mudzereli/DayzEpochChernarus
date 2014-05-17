@@ -1,5 +1,5 @@
 /*
-	
+	NOTE: HOTFIXED FILE, INTENDED FOR USE WITH EPOCH 1.0.4.2a ONLY.
 	
 	Description:
 	
@@ -22,7 +22,7 @@ for "_i" from 1 to _amount do {
 	_startPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),false,[1,300]] call SHK_pos;
 	
 	//Create the patrol group
-	_unitGroup = createGroup resistance;
+	_unitGroup = createGroup east;
 	//diag_log format ["Created group %1",_unitGroup];
 	
 	//Create vehicle crew

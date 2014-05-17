@@ -1,4 +1,6 @@
 /*
+	NOTE: HOTFIXED FILE, INTENDED FOR USE WITH EPOCH 1.0.4.2a ONLY.
+
 	spawn_heliPatrol
 	
 	Description:
@@ -23,7 +25,7 @@ for "_i" from 1 to _amount do {
 	//_startPos = ["DZAI_centerMarker",true] call SHK_pos;
 	
 	//Create the patrol group
-	_unitGroup = createGroup resistance;
+	_unitGroup = createGroup east;
 	//diag_log format ["Created group %1",_unitGroup];
 	
 	//Create helicopter crew

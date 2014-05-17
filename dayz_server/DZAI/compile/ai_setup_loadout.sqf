@@ -100,6 +100,7 @@ _unit addWeapon _weapon;
 _unit selectWeapon _weapon;
 _unit addBackpack _backpack;
 if ((getNumber (configFile >> "CfgWeapons" >> _weapon >> "type")) == 2) then {_unit setVariable ["CanGivePistol",false]};
+if ((getNumber (configFile >> "CfgMagazines" >> _magazine >> "count")) < 8) then {_unit addMagazine _magazine};
 if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Created weapon %1 and backpack %3 for AI with weapongrade %2. (fn_unitSelectWeapon)",_weapon,_weapongrade,_backpack];};
 
 //diag_log format ["DEBUG :: Counted %1 tools in _gadgetsArray.",(count _gadgetsArray)];
@@ -116,9 +117,9 @@ for "_i" from 0 to ((count _gadgetsArray) - 1) do {
 
 //If unit has weapongrade 2 or 3 and was not given NVGs, give the unit temporary NVGs which will be removed at death. Set DZAI_tempNVGs to true in variables config to enable temporary NVGs.
 if (DZAI_tempNVGs) then {
-	if (!(_unit hasWeapon "NVGoggles") && (_weapongrade > 0) && (daytime < 6 || daytime > 20)) then {
+	if (!(_unit hasWeapon "NVGoggles") && {(_weapongrade > 0)} && {(daytime < 6 || daytime > 20)}) then {
 		_unit addWeapon "NVGoggles";
-		_unit setVariable["removeNVG",1,false];
+		_unit setVariable["removeNVG",1];
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Generated temporary NVGs for AI.";};
 	};
 };

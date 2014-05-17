@@ -1,4 +1,6 @@
 /*
+	NOTE: HOTFIXED FILE, INTENDED FOR USE WITH EPOCH 1.0.4.2a ONLY.
+	
 	DZAI Server Initialization File
 	
 	Description: Handles startup process for DZAI. Does not contain any values intended for modification.
@@ -29,7 +31,7 @@ call compile preprocessFileLineNumbers format ["%1\init\dzai_config.sqf",DZAI_di
 call compile preprocessFileLineNumbers format ["%1\init\dzai_functions.sqf",DZAI_directory];
 
 //Load DZAI classname tables
-call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\default\default_classnames.sqf",DZAI_directory];
+call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\global_classnames.sqf",DZAI_directory];
 
 //Set internal-use variables
 DZAI_weaponGrades = [-1,0,1,2,3];							//All possible weapon grades (does not include custom weapon grades). A "weapon grade" is a tiered classification of gear. -1: Civilian (Low-grade), 0: Civilian, 1: Military, 2: MilitarySpecial, 3: Heli Crash. Weapon grade also influences the general skill level of the AI unit.
@@ -58,6 +60,7 @@ DZAI_checkedClassnames = [[],[],[]];						//Classnames verified - Weapons/Magazi
 //Set side relations
 createcenter east;
 createcenter resistance;
+/*
 if (DZAI_freeForAll) then {
         //Free For All mode - All AI groups are hostile to each other.
         east setFriend [resistance, 0];
@@ -67,10 +70,12 @@ if (DZAI_freeForAll) then {
         //Normal settings - All AI groups are friendly to each other.
         east setFriend [resistance, 1];
         resistance setFriend [east, 1];        
-};
+};*/
+east setFriend [resistance, 0];
+resistance setFriend [east, 0];     
 east setFriend [west, 0];        
-resistance setFriend [west, 0];
-west setFriend [resistance, 0];
+resistance setFriend [west, 1];
+west setFriend [resistance, 1];
 west setFriend [east, 0];
 
 //Detect DayZ mod variant being used.
@@ -118,18 +123,16 @@ if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","l
 	"DZAI_centerMarker" setMarkerSize [7000, 7000];
 	if (DZAI_modName == "epoch") then {
 		call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\epoch\dayz_epoch.sqf",DZAI_directory];
+		DZAI_banditTypes = DZAI_banditTypes - ["Bandit2_DZ"];
 	};
 	if (DZAI_staticAI) then {[] execVM format ["%1\scripts\setup_autoStaticSpawns.sqf",DZAI_directory];};
 };
-
-//Detect DDOPP Taser Addon
-DZAI_taserAI = (!isNil "DDOPP_taser_handleHit");
 
 //Continue loading required DZAI script files
 [] execVM format ['%1\scripts\DZAI_scheduler.sqf',DZAI_directory];
 
 //Report DZAI startup settings to RPT log
-diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. ModName: %3. DZAI_dynamicWeaponList: %4. VerifyTables: %5.",DZAI_debugLevel,(!isNil "DZAI_debugMarkers"),DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
+diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. ModName: %3. DZAI_dynamicWeaponList: %4. VerifyTables: %5.",DZAI_debugLevel,((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}),DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
 diag_log format ["[DZAI] AI spawn settings: Static: %1. Dynamic: %2. Air: %3. Land: %4.",DZAI_staticAI,DZAI_dynAISpawns,(DZAI_maxHeliPatrols>0),(DZAI_maxLandPatrols>0)];
 diag_log format ["[DZAI] AI behavior settings: DZAI_findKiller: %1. DZAI_tempNVGs: %2. DZAI_weaponNoise: %3. DZAI_zombieEnemy: %4. DZAI_freeForAll: %5",DZAI_findKiller,DZAI_tempNVGs,DZAI_weaponNoise,DZAI_zombieEnemy,DZAI_freeForAll];
 diag_log format ["[DZAI] DZAI loading completed in %1 seconds.",(diag_tickTime - _startTime)];

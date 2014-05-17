@@ -34,7 +34,7 @@ if (DZAI_staticAI) then {
 
 if (DZAI_dynAISpawns) then {
 	fnc_spawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawnBandits_dynamicV2.sqf",DZAI_directory];
-	fnc_despawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits_dynamicV2.sqf",DZAI_directory];
+	fnc_despawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits_dynamic.sqf",DZAI_directory];
 	DZAI_dyn_huntPlayer = compile preprocessFileLineNumbers format ["%1\compile\fn_seekPlayer.sqf",DZAI_directory];
 	DZAI_AI_killed_dynamic = compile preprocessFileLineNumbers format ["%1\compile\ai_killed_dynamic.sqf",DZAI_directory];
 };
@@ -43,11 +43,11 @@ if (DZAI_findKiller) then {
 	DZAI_huntKiller = compile preprocessFileLineNumbers format ["%1\compile\fn_findKiller.sqf",DZAI_directory];
 };
 
-if (isNil "DZAI_debugMarkers") then {
-	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply.sqf",DZAI_directory];
-} else {
+if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply_debug.sqf",DZAI_directory];
 	DZAI_updateSpawnMarker = compile preprocessFileLineNumbers format ["%1\compile\fn_refreshmarker.sqf",DZAI_directory];
+} else {
+	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply.sqf",DZAI_directory];
 };
 
 //Compile zombie aggro functions
@@ -58,10 +58,10 @@ if (DZAI_zombieEnemy && {DZAI_weaponNoise}) then { // Optional Zed-to-AI aggro f
 
 //Helicopter patrol scripts
 if (DZAI_maxHeliPatrols > 0) then {
-	if (isNil "DZAI_debugMarkers") then {
-		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply.sqf",DZAI_directory];
-	} else {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply_debug.sqf",DZAI_directory];
+	} else {
+		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply.sqf",DZAI_directory];
 	};
 	DZAI_spawnHeliPatrol = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawn_heliPatrol.sqf",DZAI_directory];
 	DZAI_airLanding = compile preprocessFileLineNumbers format ["%1\compile\heli_airlanding.sqf",DZAI_directory];
@@ -74,15 +74,15 @@ if (DZAI_maxHeliPatrols > 0) then {
 
 //Land vehicle patrol scripts
 if (DZAI_maxLandPatrols > 0) then {
-	if (isNil "DZAI_debugMarkers") then {
-		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm.sqf",DZAI_directory];
-	} else {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm_debug.sqf",DZAI_directory];
+	} else {
+		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm.sqf",DZAI_directory];
 	};
 	DZAI_spawnVehPatrol	= compile preprocessFileLineNumbers format ["%1\spawn_functions\spawn_vehpatrol.sqf",DZAI_directory];
 	DZAI_vehGetOut = compile preprocessFileLineNumbers format ["%1\compile\veh_getout.sqf",DZAI_directory];
 	DZAI_vHandleDamage = compile preprocessFileLineNumbers format ["%1\compile\veh_handledamage.sqf",DZAI_directory];
-	DZAI_vehDestroyed = compile preprocessFileLineNumbers format ["%1\spawn_functions\veh_destroyed.sqf",DZAI_directory];
+	DZAI_vehDestroyed = compile preprocessFileLineNumbers format ["%1\compile\veh_destroyed.sqf",DZAI_directory];
 	DZAI_vehPatrol = compile preprocessFileLineNumbers format ["%1\compile\veh_randompatrol.sqf",DZAI_directory];
 };
 
@@ -186,25 +186,6 @@ DZAI_deathFlies = {
 	_this enableSimulation false;
 };
 
-//Returns probabilities of generating different grades of weapons based on equipType value
-/*
-DZAI_getGradeChances = {
-	private ["_equipType", "_gradeChances"];
-	_equipType = _this select 0;
-
-	_gradeChances = switch (_equipType) do {
-		case -1: {DZAI_gradeChancesNewbie};
-		case 0: {DZAI_gradeChances0};
-		case 1: {DZAI_gradeChances1};
-		case 2: {DZAI_gradeChances2};
-		case 3: {DZAI_gradeChances3};
-		case default {DZAI_gradeChancesDyn};
-	};
-	
-	_gradeChances
-};
-*/
-
 //Convert server uptime in seconds to formatted time (days/hours/minutes/seconds)
 DZAI_getUptime = {
 	private ["_iS","_oS","_oM","_oH","_oD"];
@@ -253,9 +234,9 @@ DZAI_unconscious = {
 
 	if (alive _unit) then {
 		_nul = [objNull, _unit, rSWITCHMOVE, "amovppnemrunsnonwnondf"] call RE;
-		_unit enableAI "FSM";
-		sleep 0.5;
 		_unit switchMove "amovppnemrunsnonwnondf";
+		sleep 1.5;
+		_unit enableAI "FSM";
 		//diag_log "DEBUG :: AI unit is conscious.";
 		_unit setVariable ["unconscious",false];
 	};
@@ -376,7 +357,7 @@ DZAI_shuffleWP = {
 	_newWPPos = _locationArray call BIS_fnc_selectRandom2;
 	//diag_log format ["DEBUG :: Chosen position: %1.",_newWPPos];
 	_wp = (currentWaypoint _unitGroup);
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		private["_markername"];
 		_markername = format ["[%1,%2]",_unitGroup,_wp];
 		//diag_log format ["DEBUG :: Relocating marker %1.",_markername];
@@ -480,21 +461,21 @@ DZAI_checkClassname = {
 
 	switch (toLower _checkType) do {
 		case "weapon": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 0)) then {
 				_config = "CfgWeapons";
 				_banString = "bin\config.bin/CfgWeapons/FakeWeapon";
 				_configIndex = 0;
 			};
 		};
 		case "magazine": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 1)) then {
 				_config = "CfgMagazines";
 				_banString = "bin\config.bin/CfgMagazines/FakeMagazine";
 				_configIndex = 1;
 			};
 		};
 		case "vehicle": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 2)) then {
 				_config = "CfgVehicles";
 				_banString = "bin\config.bin/CfgVehicles/Banned";
 				_configIndex = 2;
@@ -524,7 +505,7 @@ DZAI_abortDynSpawn = {
 	DZAI_dynTriggerArray = DZAI_dynTriggerArray - [_trigger];
 	//DZAI_actDynTrigs = DZAI_actDynTrigs - 1;
 	//DZAI_curDynTrigs = DZAI_curDynTrigs - 1;
-	if (!isNil "DZAI_debugMarkers") then {deleteMarker format["trigger_%1",_trigger]};
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {deleteMarker format["trigger_%1",_trigger]};
 
 	deleteVehicle _trigger;
 	
@@ -546,7 +527,7 @@ DZAI_abortDynSpawn = {
 };*/
 
 DZAI_updateUnitCount = {
-	if ((typeName _this) == "SCALAR") then {
+	if (((typeName _this) == "SCALAR") && {(_this >= 0)}) then {
 		DZAI_numAIUnits = _this;
 		true
 	} else {

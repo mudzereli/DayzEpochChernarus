@@ -1,4 +1,6 @@
 /*
+	NOTE: HOTFIXED FILE, INTENDED FOR USE WITH EPOCH 1.0.4.2a ONLY.
+	
 	spawnBandits_custom
 	
 	Usage: 
@@ -26,7 +28,7 @@ if (count _grpArray > 0) exitWith {if (DZAI_debugLevel > 0) then {diag_log forma
 _triggerPos = getPosATL _trigger;
 if (_totalAI == 0) then {_totalAI = 1};
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	_tMarker = str (_trigger);
 	if ((getMarkerColor _tMarker) == "") then {
 		_tMarker = createMarker [_tMarker, (getPosATL _trigger)];
@@ -48,7 +50,7 @@ _startTime = diag_tickTime;
 private ["_unitGroup","_spawnPos","_totalAI"];
 
 _spawnPos = [(getPosATL _trigger),random (_patrolDist),random(360),false] call SHK_pos;
-_unitGroup = [_totalAI,(createGroup resistance),_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
+_unitGroup = [_totalAI,(createGroup east),_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
 
 //Set group variables
 _unitGroup setVariable ["unitType","static"];
