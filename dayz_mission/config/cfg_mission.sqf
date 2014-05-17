@@ -5,8 +5,6 @@
 /* addons from these folders will be loaded */
 DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus",/*"craftvehicles",*/"keyhandler",/*"newspawn",*/"refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
 
-DZ_LOAD_SARGE_AI = false;
-
 //########################################################################################
 //### EPOCH CONFIG -- DON'T TOUCH THIS PART UNLESS YOU ARE SURE OF WHAT YOU ARE DOING
 //########################################################################################
@@ -301,11 +299,6 @@ DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 1;
 
 /* multiplier for supply loot */
 DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
-
-//########################################################################################
-//### SARGE CONFIG
-//########################################################################################
-call compile preprocessFileLineNumbers "config\SAR_config.sqf";
 
 //########################################################################################
 //### OVERRIDES
