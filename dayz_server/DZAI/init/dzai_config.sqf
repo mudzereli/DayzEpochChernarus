@@ -54,7 +54,7 @@ DZAI_modName = "";
 
 //Enable or disable zombie attraction to AI weapon sounds. No effect if DZAI_zombieEnemy is set to false. Enabling this option may impact server performance as a script is run for each AI bullet fired.
 //Note: AI cannot be attacked or damaged by zombies.(Default: false)		
-DZAI_weaponNoise = false;
+DZAI_weaponNoise = true;
 
 //(Affects AI vehicles only) Sets frequency of vehicle ammo/fuel check. Decreasing this value may impact server performance. (Default: 15)											
 DZAI_refreshRate = 15;	
@@ -67,7 +67,7 @@ DZAI_zombieEnemy = true;
 
 //Enable or disable "Free For All" mode. If FFA mode is enabled, all AI groups will be hostile to each other. (default: false)
 //WARNING: This option will affect ALL AI spawned, including those spawned from other addons that include AI. Not recommended to enable if using other addons with AI.
-DZAI_freeForAll = false;
+DZAI_freeForAll = true;
 
 //If enabled, AI group will attempt to track down player responsible for killing a group member. Players with radios will be given text warnings if they are being pursued (Default: true)
 DZAI_findKiller = true;	
@@ -76,7 +76,7 @@ DZAI_findKiller = true;
 DZAI_tempNVGs = false;	
 
 //Amount of humanity to reward player for killing an AI unit (Default: 0)									
-DZAI_humanityGain = 0;										
+DZAI_humanityGain = 50;										
 
 //If enabled, players with radios will be given text warnings if they are being pursued by AI groups. (Default: true)
 DZAI_radioMsgs = true;
@@ -124,7 +124,7 @@ DZAI_dynDespawnWait = 120;
 --------------------------------------------------------------------------------------------------------------------*/		
 
 //Maximum number of active AI air vehicle patrols. Set at 0 to disable (Default: 0).							
-DZAI_maxHeliPatrols = 0;
+DZAI_maxHeliPatrols = 3;
 
 //Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
 DZAI_respawnTMinA = 600;
@@ -160,7 +160,7 @@ DZAI_airWeapons = [
 --------------------------------------------------------------------------------------------------------------------*/	
 
 //Maximum number of active AI land vehicle patrols. Set at 0 to disable (Default: 0).	
-DZAI_maxLandPatrols = 0;
+DZAI_maxLandPatrols = 15;
 
 //Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
 DZAI_respawnTMinL = 600;
@@ -200,19 +200,19 @@ DZAI_launcherLevels = [1,2,3];
 --------------------------------------------------------------------------------------------------------------------*/
 
 //Number of selections of medical items (Inventory)
-DZAI_invmedicals = 1;
+DZAI_invmedicals = 0;
 
 //Number of selections of edible items (Inventory) 										
-DZAI_invedibles = 1;	
+DZAI_invedibles = 0;	
 
 //Number of selections of medical items (Backpack)									
-DZAI_bpmedicals = 1; 	
+DZAI_bpmedicals = 0; 	
 
 //Number of selections of edible items (Backpack)									
-DZAI_bpedibles = 1;	
+DZAI_bpedibles = 0;	
 
 //Maximum number of items to select from DZAI_MiscItemS table.										
-DZAI_numMiscItemS = 3;						
+DZAI_numMiscItemS = 1;						
 
 //Maximum number of items to select from DZAI_MiscItemL table.				
 DZAI_numMiscItemL = 1;										
@@ -253,7 +253,7 @@ DZAI_gradeChances2 = [0.00,0.20,0.60,0.15,0.05];
 DZAI_gradeChances3 = [0.00,0.00,0.50,0.38,0.12];	
 
 //Weapongrade chances for AI spawned from dynamic triggers.				
-DZAI_gradeChancesDyn = [0.00,0.00,0.88,0.09,0.03];				
+DZAI_gradeChancesDyn = [0.00,0.90,0.10,0.00,0.00];		
 
 //Weapongrade chances for dead AI ejected from destroyed helicopter patrols.					
 DZAI_gradeChancesHeli = [0.00,0.00,0.40,0.43,0.17];	
