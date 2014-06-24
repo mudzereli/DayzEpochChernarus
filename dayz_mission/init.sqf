@@ -101,6 +101,8 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
+//########## BEGIN MODIFIED CODE: LOAD EXTERNAL SCRIPTS
+
 //########## TOWING ADDON FROM THE BOX
 [] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
 
@@ -109,6 +111,7 @@ local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnloc
 spawn_loot = compile preprocessFileLineNumbers "overwrites\spawn_loot.sqf";
 building_spawnLoot = compile preprocessFileLineNumbers "overwrites\building_spawnLoot.sqf";
 call compile preprocessFileLineNumbers "overwrites\player_traderMenuHive.sqf";
+player_spawnCheck = compile preprocessFileLineNumbers "overwrites\player_spawnCheck.sqf";
 
 //########## ADDONS
 {
@@ -116,3 +119,5 @@ call compile preprocessFileLineNumbers "overwrites\player_traderMenuHive.sqf";
     call compile preprocessFileLineNumbers format["addons\%1\init.sqf",_x];
     diag_log text format["Loaded Addon: %1",_x];
 } forEach DZ_MISSION_ADDONS;
+
+//########## END MODIFIED CODE: LOAD EXTERNAL SCRIPTS

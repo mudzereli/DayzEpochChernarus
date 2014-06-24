@@ -2,19 +2,23 @@
 //### MAIN CONFIG OPTIONS
 //########################################################################################
 
-/* 0 = DEFAULT, 1 = SOLO, 2 = OUTBREAK, -1 = RANDOM */
-DZS_GAMEMODE = 1;
-
 /* try to load infistar files if this is set to true */
 DZ_INFISTAR_ENABLED = true;
 
 /* load init.sqf files from the following addon folders */
 DZ_SERVER_ADDONS = ["indestructible","cleanup"];
 
+/* should the DZAI addon be enabled ? */
+DZ_LOAD_DZAI = true;
+
+/* should the DZMS mission system be enabled ? */
+DZ_LOAD_DZMS = true;
+
 //########################################################################################
 //### DYNAMIC VEHICLES
 //########################################################################################
 
+/* if you are having trouble with not enough vehicles spawning even after changing the max vehicle spawn count, then adjust this number */
 DZ_DYNAMIC_VEHICLE_MULTIPLIER = 1;
 
 //########################################################################################
@@ -38,20 +42,3 @@ call compile preprocessFileLineNumbers "z\addons\dayz_server\config\dzai_config.
 //### OVERRIDES
 //########################################################################################
 call compile preprocessFileLineNumbers "z\addons\dayz_server\config\cfg_server_override.sqf";
-
-//########################################################################################
-//### GAMEMODE
-//########################################################################################
-if (DZS_GAMEMODE == -1) then {DZS_GAMEMODE = floor(random 3);};
-switch(DZS_GAMEMODE) do {
-    case 1: {
-        DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
-        DZ_DYNAMIC_VEHICLE_MULTIPLIER = 1;
-        DZAI_maxHeliPatrols = 2;
-    };
-    case 2: {
-        DZ_SERVER_ADDONS = DZ_SERVER_ADDONS - ["indestructible"];
-        DZ_DYNAMIC_VEHICLE_MULTIPLIER = 4;
-        DZAI_maxHeliPatrols = 4;
-    };
-};

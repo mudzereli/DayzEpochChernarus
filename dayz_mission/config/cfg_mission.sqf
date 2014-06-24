@@ -35,9 +35,9 @@ enableSentences false;
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
-MaxVehicleLimit = 30; // Default = 50
+MaxVehicleLimit = 50; // Default = 50
 MaxDynamicDebris = 100; // Default = 100
-dayz_maxLocalZombies = 5; // Default = 30
+dayz_maxLocalZombies = 30; // Default = 30
 
 // this is the gear you get when you respawn
 DefaultMagazines = ["ItemBandage","ItemPainkiller","8Rnd_9x18_Makarov","8Rnd_9x18_Makarov"]; 
@@ -52,10 +52,10 @@ dayz_sellDistance_air = 40;
 
 dayz_maxAnimals = 5; // Default: 8
 dayz_tameDogs = true;
-DynamicVehicleDamageLow = 60; // Default: 0
-DynamicVehicleDamageHigh = 90; // Default: 100
+DynamicVehicleDamageLow = 0; // Default: 0
+DynamicVehicleDamageHigh = 100; // Default: 100
 
-DZE_BuildOnRoads = true; // Default: False
+DZE_BuildOnRoads = false; // Default: False
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 
@@ -64,7 +64,7 @@ dayz_fullMoonNights = true;
 //########################################################################################
 
 /* multiplier for loot chance */
-DZ_LOOTCHANCE_MULTIPLIER = 0.75; // default: 1
+DZ_LOOTCHANCE_MULTIPLIER = 1; // default: 1
 
 //########################################################################################
 //### SELF BLOODBAG
@@ -92,7 +92,7 @@ DZ_BLOODBAG_INFECTION_DAMAGE = 1000;
 DZ_BLOODBAG_CAN_GAIN_HUMANITY = true;
 
 /* Amount of humanity to give player if _humanityBool is true (250 is default for normal bloodbags) */
-DZ_BLOODBAG_GAIN_HUMANITY = 50;
+DZ_BLOODBAG_GAIN_HUMANITY = 75;
 
 //########################################################################################
 //### BUILDPLUS
@@ -111,7 +111,7 @@ DZ_BUILDPLUS_PREVIEW_CHANGE_DIST = 10;
 DZ_BUILDPLUS_SINGLE_STAGE_CRAFTING = false;
 
 /* Allow Player To Build Plot In Their Own Plot? (default = false)  */
-DZ_BUILDPLUS_PLOT_IN_PLOT = true;
+DZ_BUILDPLUS_PLOT_IN_PLOT = false;
 
 /* Players can build these items without a plot pole */
 DZ_BUILDPLUS_NO_PLOT_ITEMS = [
@@ -136,7 +136,7 @@ DZ_BUILDPLUS_NO_PLOT_ITEMS = [
 ];
 
 /* these players can build anywhere */
-DZ_BUILDPLUS_ADMINS = ["38130182"];
+DZ_BUILDPLUS_ADMINS = [];
 
 //########################################################################################
 //### CRAFT VEHICLES
@@ -298,7 +298,17 @@ DZ_SPAWN_LOOT_DEFAULT_MULTIPLIER = 1;
 DZ_SPAWN_LOOT_WEAPON_MAG_MULTIPLIER = 1;
 
 /* multiplier for supply loot */
-DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 2;
+DZ_SPAWN_LOOT_SUPPLIES_MULTIPLIER = 1;
+
+//########################################################################################
+//### OVERWRITES
+//########################################################################################
+
+/* should loot spawn while players are in vehicles ? */
+DZ_SPAWN_LOOT_IN_VEHICLE = false; // false
+
+/* what is the [min,max] range for a player to spawn loot around them ? */
+DZ_LOOT_SPAWN_RANGE = [30,120]; // [30,120]
 
 //########################################################################################
 //### OVERRIDES

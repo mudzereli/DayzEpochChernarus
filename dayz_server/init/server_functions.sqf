@@ -1,9 +1,11 @@
 //########## BEGIN INSERTED CODE: CONFIG FILE AND ANTIHACK LOAD
+
 diag_log text "loading config...";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\config\cfg_server.sqf";
 diag_log text "loading antihack if enabled...";
 if (DZ_INFISTAR_ENABLED) then { [] execVM "\z\addons\dayz_server\addons\antihack\AH.sqf"; };
 diag_log text "loading server...";
+
 //########## END INSERTED CODE: CONFIG FILE AND ANTIHACK LOAD
 
 waituntil {!isnil "bis_fnc_init"};
@@ -942,11 +944,17 @@ server_setLocalObjVars = {
 };
 
 //########## BEGIN INSERTED CODE: LOAD ALL ADDONS
+
 {
     diag_log text format["Loading Addon: %1",_x];
     call compile preprocessFileLineNumbers format["\z\addons\dayz_server\addons\%1\init.sqf",_x];
     diag_log text format["Loaded Addon: %1",_x];
 } forEach DZ_SERVER_ADDONS;
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-[] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
+if(DZ_LOAD_DZAI) then {
+    call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+};
+if(DZ_LOAD_DZMS) then {
+    [] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
+};
+
 //########## END INSERTED CODE: LOAD ALL ADDONS
