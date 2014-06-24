@@ -2,12 +2,12 @@
 
 ----------
 
-_A **DAY-Z** server package meant to be played as a single-player game._
+_A customizable **DAY-Z** server package._
 
 ----------
 ##CORE FEATURES/SCRIPTS
+- **CUSTOM CONFIGURATION OPTIONS**
 - **DZAI** - AI
-- **SARGE** - AI
 - **DZMS** - AI/Missions
 - **Snap Build** - Better Building
 - **Indestructible Tier 2 Bases** - No Maintenance
@@ -26,6 +26,14 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 		* <font color="33cc33">**you have this item**</font>
 		* <font color="33cccc">**you have this item and vendor has this item in stock**</font>
 
+#HOSTED SERVER INSTALL (VILAYER/DAYZ.ST/etc):
+	- replace the loading screen in dayz_mission/overwrites with your own image
+	- edit the configs in dayz_mission/config and dayz_server/config
+	- replace your MISSION FILES with the files in dayz_mission -- depending on your host you may have to pack this as a PBO (see below for instructions on that)
+	- replace your SERVER FILES with the files in dayz_server -- depending on your host you may have to pack this as a PBO (see below for instructions on that)
+	- 
+#LOCAL SERVER INSTALL (YOUR COMPUTER):
+---
 ##REQUIREMENTS
 - **MYSQL Database Access** - Can host on your own PC or separate PC or try **[FreeMYSQLHosting.net](http://www.freemysqlhosting.net/)** or **[db4free.net](http://www.db4free.net/)**
 - A computer powerful enough to run both DAYZ and the DAYZ server (or a separate computer to run the DAYZ server)
@@ -48,8 +56,3 @@ _A **DAY-Z** server package meant to be played as a single-player game._
 13. If you have **[INFISTAR](http://dayzantihack.com/)** then copy it into the **[SERVER INSTALL PATH]\@DayZ\_Epoch\_Server\addons\dayz\_server\addons\antihack** folder
 14. Use your favorite **[PBO Manager](http://www.armaholic.com/page.php?id=16369)** to pack the entire **dayz_server** folder that you just extracted.
 15. Start up the server and enjoy!
-
-##FUTURE GOALS
-- **Character Progression**
-	* Tweak AI difficulty/loot & loot spawns so that best loot is @ NW of map and worst loot is @ SE of map.
-	* Tweak missions to have 2-6 AI and a cache of loot that is relative in difficulty (1-3 TIER 2 Guns, rarely 1 TIER 1 gun)
