@@ -16,5 +16,5 @@ call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_SI_Zeleno
 call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_bash.sqf";
 call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_btcc.sqf";
 call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_klen.sqf";
-//call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_neaf.sqf";
+call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_neaf.sqf";
 call compile preprocessFileLineNumbers "addons\buildings\locations\GOC_TE_stary.sqf";
