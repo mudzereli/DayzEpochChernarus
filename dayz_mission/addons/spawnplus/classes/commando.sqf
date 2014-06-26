@@ -1,10 +1,10 @@
-DZ_NEWSPAWN_CREATION_STAGE = 2;
+DZ_SPAWNPLUS_CREATION_STAGE = 2;
 titleText ["Selecting class...", "PLAIN DOWN", 3];
 //remove items
 removeAllWeapons player;
 removeAllItems   player;
 player addBackpack "DZ_Patrol_Pack_EP1";
-if (DZ_NEWSPAWN_DONATOR_LOADOUT) then {
+if (DZ_SPAWNPLUS_DONATOR_LOADOUT) then {
     removeBackpack   player;
 	//add backpack
 	player addBackpack "CZ_VestPouch_EP1";

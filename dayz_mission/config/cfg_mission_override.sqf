@@ -1,3 +1,6 @@
+
+DZ_MISSION_ADDONS = ["bloodbag","buildings","buildplus",/*"craftvehicles",*/"keyhandler","spawnplus","refuel","deadzones","safezones","suicide","takeclothes","zombietruck"];
+
 //############ THESE ARE SOME GOOD SETTINGS TO TEST AND PLAY BY YOURSELF! :P
 dayz_maxLocalZombies = 3;
 MaxVehicleLimit = 30; 

@@ -1,5 +1,5 @@
 waitUntil {!dialog};
-diag_log text "NEWSPAWN: building skin 1 menu...";
+diag_log text "SPAWNPLUS: building skin 1 menu...";
 DonatorSkins1 =
 [
     ["",true],
@@ -19,7 +19,7 @@ DonatorSkins1 =
     [""              ,[0]           ,""                           ,-1,[["expression",""]],"1","1"],
 	["Exit"          ,[DIK_EQL]     ,""                           ,-5,[["expression",""]],"1","1"]
 ];
-diag_log text "NEWSPAWN: building skin 2 menu...";
+diag_log text "SPAWNPLUS: building skin 2 menu...";
 DonatorSkins2 =
 [
     ["",true],
@@ -39,7 +39,7 @@ DonatorSkins2 =
     [""                ,[0]           ,""                           ,-1,[["expression",""]],"1","1"],
 	["Exit"            ,[DIK_EQL]     ,""                           ,-5,[["expression",""]],"1","1"]
 ];
-diag_log text "NEWSPAWN: building skin 3 menu...";
+diag_log text "SPAWNPLUS: building skin 3 menu...";
 DonatorSkins3 =
 [
     ["",true],
@@ -59,7 +59,7 @@ DonatorSkins3 =
     [""              ,[0]           ,""                           ,-1,[["expression",""]],"1","1"],
 	["Exit"          ,[DIK_EQL]     ,""                           ,-5,[["expression",""]],"1","1"]
 ];
-diag_log text "NEWSPAWN: building skin 4 menu...";
+diag_log text "SPAWNPLUS: building skin 4 menu...";
 DonatorSkins4 =
 [
     ["",true],
@@ -78,5 +78,5 @@ DonatorSkins4 =
     [""            ,[0]           ,""                           ,-1,[["expression",""]],"1","1"],
 	["Exit"        ,[DIK_EQL]     ,""                           ,-5,[["expression",""]],"1","1"]
 ];
-diag_log text "NEWSPAWN: showing skin menu...";
+diag_log text "SPAWNPLUS: showing skin menu...";
 showCommandingMenu "#USER:DonatorSkins1";
