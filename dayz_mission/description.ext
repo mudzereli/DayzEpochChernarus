@@ -13,8 +13,13 @@ briefing = 0;
 debriefing = 0;
 
 onPauseScript = "";
+//### BEGIN MODIFIED CODE: change loading screen
+
 //loadScreen = "\z\addons\dayz_code\gui\dayz_logo_ca.paa";
+
 loadScreen = "overwrites\loadscreen.jpg";
+
+//### END MODIFIED CODE: change loading screen
 
 class Header
 {
@@ -155,5 +160,10 @@ class DayZ_loadingScreen
 		};
 	};
 };
+
+//### BEGIN MODIFIED CODE: addon hpp files
+
 #include "addons\buildplus\points.hpp"
 #include "overwrites\CfgBuildingLoot\CfgBuildingLoot.hpp"
+
+//### END MODIFIED CODE: addon hpp files
