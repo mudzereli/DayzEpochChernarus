@@ -7,6 +7,7 @@ cutText ["","BLACK OUT"];
 enableSaving [false, false];
 
 //########## BEGIN MODIFIED CODE: LOAD CONFIG FILE
+
 call compile preprocessFileLineNumbers "config\cfg_mission.sqf";
 
 /*
@@ -93,7 +94,6 @@ if (!isDedicated) then {
     
 	//Lights
 	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-	
 };
 
 //Start Dynamic Weather
@@ -107,10 +107,15 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 [] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
 
 //########## OVERWRITES
+
+//this makes it so locked vehicles cant be towed
 local_lockUnlock = compile preprocessFileLineNumbers "overwrites\local_lockUnlock.sqf";
+
+//these are modified to add variables for spawning loot
 spawn_loot = compile preprocessFileLineNumbers "overwrites\spawn_loot.sqf";
 building_spawnLoot = compile preprocessFileLineNumbers "overwrites\building_spawnLoot.sqf";
-//call compile preprocessFileLineNumbers "overwrites\player_traderMenuHive.sqf";
+
+// this is modified to add variables for spawning zombies
 player_spawnCheck = compile preprocessFileLineNumbers "overwrites\player_spawnCheck.sqf";
 
 //########## ADDONS
